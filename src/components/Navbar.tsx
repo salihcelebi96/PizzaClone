@@ -1,15 +1,13 @@
+import React from 'react';
 import Logo from "../assets/logo/pizzaLogo.svg";
 import { FaRegCircleUser } from "react-icons/fa6";
 import "../css/navbar.css";
 
-
-const navbar:React.FC = () => {
+const Navbar: React.FC = () => {
   return (
-    
-    <div className="flex justify-center items-center gap-24 h-16 font-semibold cursor-pointer border  text-lg ">
-      <div className="">
+    <div className="flex justify-center items-center gap-24 h-16 font-semibold cursor-pointer border text-lg">
+      <div>
         <img src={Logo} alt="" />
-        
       </div>
       <div>
         <ul className="flex gap-5 ">
@@ -20,12 +18,12 @@ const navbar:React.FC = () => {
           <li className="nav-item">Restoranlar</li>
         </ul>
       </div>
-      <div className="flex items-center  gap-2 ">
+      <div className="flex items-center gap-2">
         <FaRegCircleUser />
         <h1>Giriş Yap</h1>
       </div>
     </div>
-  )
+  );
 }
 
-export default navbar
+export default Navbar;

@@ -1,4 +1,4 @@
-import Slide from "../components/Slide";
+import Slide from "../components/SlideComp";
 import Option from "../components/Options";
 
 const Home:React.FC = () => {

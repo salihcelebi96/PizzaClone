@@ -22,16 +22,16 @@ const Slide = () => {
   const slideImages = [foto1, foto2, foto3, foto4];
 
   return (
-    <div className=' flex justify-center h-1/2  w-screen'>
-      <div className="slide-container my-5    w-3/4  ">
+    <div className=' flex justify-center    my-5  w-screen'>
+      <div className="slide-container my-5  bg-gray-500 h-[300px]    w-full  ">
         <Slider {...settings}>
           {slideImages.map((slideImage, index) => (
-            <div key={index}>
+            <div className='h-full ' key={index}>
               <img
-              className='full'
+              className='h-[300px]  '
                 src={slideImage}
                 alt={`Slide ${index + 1}`}
-                style={{ width: '100%', height: 'auto' }}
+                
               />
             </div>
           ))}
