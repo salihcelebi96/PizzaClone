@@ -28,16 +28,15 @@ const Pizza: React.FC = () => {
 
   return (
     <div>
-      <h1>Pizza Menu</h1>
+      
       <ul>
         {data.map((item) => (
           <li key={item._id}>
             <strong>{item.tür}</strong>
             <ul>
-              <li>Large: {item.fiyatlar.büyük}</li>
-              <li>Medium: {item.fiyatlar.orta}</li>
+              
               <li>Small: {item.fiyatlar.küçük}</li>
-              <li><img  className='w-40' src={item.url} alt={item.tür}  /></li>
+              <li><img src={item.url} alt={item.tür} style={{ maxWidth: '100%', height: 'auto' }} /></li>
             </ul>
           </li>
         ))}

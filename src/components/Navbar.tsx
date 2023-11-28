@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from "../assets/logo/pizzaLogo.svg";
 import { FaRegCircleUser } from "react-icons/fa6";
 import "../css/navbar.css";
@@ -10,12 +11,12 @@ const Navbar: React.FC = () => {
         <img src={Logo} alt="" />
       </div>
       <div>
-        <ul className="flex gap-5 ">
-          <li className="nav-item">Kampanyalar</li>
-          <li className="nav-item">Pizzalar</li>
-          <li className="nav-item">WingStreet</li>
-          <li className="nav-item">Yan Ürünler</li>
-          <li className="nav-item">Restoranlar</li>
+        <ul className="flex gap-5">
+          <li className="nav-item"><Link to="/kampanyalar">Kampanyalar</Link></li>
+          <li className="nav-item"><Link to="/pizzalar">Pizzalar</Link></li>
+          <li className="nav-item"><Link to="/wingstreet">WingStreet</Link></li>
+          <li className="nav-item"><Link to="/yan-urunler">Yan Ürünler</Link></li>
+          <li className="nav-item"><Link to="/restoranlar">Restoranlar</Link></li>
         </ul>
       </div>
       <div className="flex items-center gap-2">

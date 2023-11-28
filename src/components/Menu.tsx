@@ -30,7 +30,7 @@ const Menu: React.FC = () => {
 
         <div className=' '>
 
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between px-2  items-center'>
                 <div className='w-12 h-12 flex  '>
                     <div className='p-5 text-black' onClick={handleMenuToggle}>
                         <AiOutlineMenu />
@@ -71,7 +71,7 @@ const Menu: React.FC = () => {
                     <img src={Logo} alt="" />
                 </div>
 
-                <div>
+                <div className=''>
                     <FaRegCircleUser size={24} />
          
                 </div>
