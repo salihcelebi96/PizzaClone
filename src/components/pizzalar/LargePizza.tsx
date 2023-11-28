@@ -32,14 +32,14 @@ const Pizza: React.FC = () => {
 
             <ul className='grid   sm:grid-cols-2 mx-10   md:grid-cols-4 justify-center gap-5'>
                 {data.map((item) => (
-                    <div className='border   hover:scale-110 duration-300  '>
+                    <div className='border   hover:scale-105 duration-300  '>
 
                         <div className=' h-64 items-center flex justify-center p-2 my-2'>
                             <li className=' text-center' key={item._id}>
                                 <strong>{item.tür}</strong>
                                 <ul>
 
-                                    <li>Large: {item.fiyatlar.büyük}</li>
+                                    <li>Large: {item.fiyatlar.büyük} TL</li>
                                     <li><img src={item.url} alt={item.tür} className='w-40' /></li>
                                 </ul>
                             </li>
