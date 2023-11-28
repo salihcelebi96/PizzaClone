@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import { Link } from "react-router-dom";
 
 interface IDataItem {
   _id: string;
@@ -28,20 +29,36 @@ const Pizza: React.FC = () => {
 
   return (
     <div>
-      
-      <ul>
+
+    <ul className='grid   sm:grid-cols-2 mx-5   md:grid-cols-4 justify-center gap-5'>
         {data.map((item) => (
-          <li key={item._id}>
-            <strong>{item.tür}</strong>
-            <ul>
-              
-              <li>Small: {item.fiyatlar.orta}</li>
-              <li><img src={item.url} alt={item.tür} style={{ maxWidth: '100%', height: 'auto' }} /></li>
-            </ul>
-          </li>
+            <div className='border'>
+
+                <div className=' h-64 items-center flex justify-center p-2 my-2'>
+                    <li className=' text-center' key={item._id}>
+                        <strong>{item.tür}</strong>
+                        <ul>
+
+                            <li>Large: {item.fiyatlar.büyük}</li>
+                            <li><img src={item.url} alt={item.tür} className='w-40' /></li>
+                        </ul>
+                    </li>
+                    
+
+
+                </div>
+                <div className='border p-1 px-3  flex justify-center hover:bg-red-400 bg-red-600 text-white'>
+                        <Link to="/sepet" >Sipariş Ver</Link>
+                </div>
+
+
+            </div>
+
+
+
         ))}
-      </ul>
-    </div>
+    </ul>
+</div>
   );
 };
 

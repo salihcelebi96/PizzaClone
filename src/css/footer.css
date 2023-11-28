@@ -21,3 +21,16 @@ ul li:hover{
   .icon-container > *:hover {
     color: red; 
   }
+
+
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
