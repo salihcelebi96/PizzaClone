@@ -15,7 +15,7 @@ const Pizza :React.FC= () => {
 
   return (
     <div>
-      <div className="mb-1 ">
+      <div className="mb-5 ">
         <select className="border outline-none" name="" id="" value={option} onChange={(e)=>handleSelect(e.target.value)}>
           {options.map((option,index) => (
             <option key={index} value={option}>
