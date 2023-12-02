@@ -12,14 +12,14 @@ import { CiYoutube } from "react-icons/ci";
 const Footer: React.FC = () => {
 
     const googleStore = "https://play.google.com/store/apps/details?id=tr.com.pizzahut";
-    
+
 
 
 
 
 
     return (
-        
+
         <div className='h-[470px]  footer-container   flex justify-center items-center flex-col bg-black text-white'>
             <div className='flex   gap-10 '>
                 <div className='w-[284px] h-[169px]  flex flex-col  justify-between '>
@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
 
 
 
-        </div>
+        </div> 
     )
 }
 

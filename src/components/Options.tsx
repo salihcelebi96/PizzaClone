@@ -5,9 +5,11 @@ import pizzalar from "../assets/options/pizzalarImg.png";
 import tatlılar from "../assets/options/tatlıImg.png";
 import wings from "../assets/options/wingstreetImg.png";
 import yanurunler from "../assets/options/yanurnImg.png";
+import {Link} from "react-router-dom";
 
 const Image = [ kampanyalar,pizzalar,wings,yanurunler, tatlılar,drinks];
 const option =["Kampanyalar", "Pizzalar", "WingStreet","Yan Ürünler", "Tatlılar", "İçecekler"];
+
 const compact = Image.map((img, index) => ({
     image: img,
     optionText: option[index],
@@ -20,8 +22,11 @@ const Options:React.FC = () => {
         <div className='grid    grid-cols-6   '>
       {compact.map((item, index) => (
         <div className='gap-5 hover:scale-110     hover:text-red-600 duration-500' key={index}>
+          <Link to={`/${item.optionText}`}>
           <img className='px-1' src={item.image} alt={item.optionText} />
           <p className='text-center font-semibold'>{item.optionText}</p>
+          </Link>
+          
         </div>
       ))}
     </div>

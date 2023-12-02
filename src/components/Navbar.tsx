@@ -4,12 +4,13 @@ import Logo from "../assets/logo/pizzaLogo.svg";
 import { FaRegCircleUser } from "react-icons/fa6";
 import "../css/navbar.css";
 
+
 const Navbar: React.FC = () => {
   return (
     <div className="flex justify-center items-center gap-24 h-16 font-semibold cursor-pointer border text-lg">
-      <div>
-        <img src={Logo} alt="" />
-      </div>
+      <Link to="/">
+      <img src={Logo} alt="" />
+    </Link>
       <div>
         <ul className="flex gap-5">
           <li className="nav-item"><Link to="/kampanyalar">Kampanyalar</Link></li>
