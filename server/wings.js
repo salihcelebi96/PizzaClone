@@ -5,43 +5,57 @@ const cors = require('cors');
 const app = express();
 const port = 3002;
 
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.gar7gdm.mongodb.net/PizzaHut', {
+const corsOptions = {
+  origin: 'http://127.0.0.1:3000/wings', // İstemcinin bulunduğu adres
+  methods: 'GET', // Sadece GET isteklerine izin ver
+};
+
+app.use(cors(corsOptions));
+
+// MongoDB bağlantısı
+mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-
-
-
-
+// MongoDB şeması ve modeli
 const wingsSchema = new mongoose.Schema({
-  id:String,
   tür: {
     type: String,
     required: true,
   },
-  acıklama:{
+  fiyat: {
+    type: Number,
+    required: true,
+  },
+  acıklama: {
     type:String,
     required: true,
   },
-  fiyat: Number,
-  url:String,
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
-const Wing = mongoose.model('Wing', wingsSchema);
+// Model oluşturulurken veritabanı adını belirtin
+const Wings = mongoose.model('Wings', wingsSchema);
 
+// Express ortamı
 app.use(cors());
 app.use(express.json());
 
+// API endpoint'i
 app.get('/wings', async (req, res) => {
   try {
-    const data = await Wing.find();
+    const data = await Wings.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+// Sunucuyu başlat
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');

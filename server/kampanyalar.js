@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = 3003;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/pizzalar', // İstemcinin bulunduğu adres
+  origin: 'http://127.0.0.1:3000/kampanyalar', // İstemcinin bulunduğu adres
   methods: 'GET', // Sadece GET isteklerine izin ver
 };
 
@@ -19,24 +19,18 @@ mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb
 });
 
 // MongoDB şeması ve modeli
-const pizzaSchema = new mongoose.Schema({
+const kampanyaSchema = new mongoose.Schema({
   tür: {
     type: String,
     required: true,
   },
-  fiyatlar: {
-    büyük: {
-      type: Number,
-      required: true,
-    },
-    orta: {
-      type: Number,
-      required: true,
-    },
-    küçük: {
-      type: Number,
-      required: true,
-    },
+  fiyat: {
+    type: Number,
+    required: true,
+  },
+  acıklama: {
+    type:String,
+    required: true,
   },
   image: {
     type: String,
@@ -45,16 +39,16 @@ const pizzaSchema = new mongoose.Schema({
 });
 
 // Model oluşturulurken veritabanı adını belirtin
-const Pizza = mongoose.model('Pizza', pizzaSchema);
+const Kampanyalar = mongoose.model('Kampanyalar', kampanyaSchema);
 
 // Express ortamı
 app.use(cors());
 app.use(express.json());
 
 // API endpoint'i
-app.get('/pizza', async (req, res) => {
+app.get('/kampanyalar', async (req, res) => {
   try {
-    const data = await Pizza.find();
+    const data = await Kampanyalar.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });

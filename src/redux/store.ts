@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import pizzaReducer from '../reducers/PizzaSlice';
 import kampanyaSlice from '../reducers/kampanyaSlice';
 import WingsSlice from '../reducers/WingsSlice';
+import YanSlice from "../reducers/yanurunSlice";
 
 
 
@@ -10,7 +11,8 @@ const store = configureStore({
   reducer: {
    pizza:pizzaReducer,
    kampanya:kampanyaSlice,
-   wings:WingsSlice
+   wings:WingsSlice,
+   Yanurun:YanSlice,
     
     
   },

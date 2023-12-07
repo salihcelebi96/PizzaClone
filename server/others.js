@@ -2,35 +2,35 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
 const app = express();
-const port = 3003;
-
+const port = 3004;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/kampanyalar', // İstemcinin bulunduğu adres
+  origin: 'http://127.0.0.1:3000/yanurunler', // İstemcinin bulunduğu adres
   methods: 'GET', // Sadece GET isteklerine izin ver
 };
 
 app.use(cors(corsOptions));
 
-
 // MongoDB bağlantısı
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.gar7gdm.mongodb.net/PizzaHut', {
+mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 // MongoDB şeması ve modeli
-const KampanyaSchema = new mongoose.Schema({
-   tür: {
+const otherSchema = new mongoose.Schema({
+  tür: {
     type: String,
     required: true,
   },
   fiyat: {
-    type:Number,
-    required:true, 
-   
+    type: Number,
+    required: true,
+  },
+  acıklama: {
+    type:String,
+    required: true,
   },
   image: {
     type: String,
@@ -38,18 +38,17 @@ const KampanyaSchema = new mongoose.Schema({
   },
 });
 
-const Kampanya = mongoose.model('kampanya', KampanyaSchema);
-
-
+// Model oluşturulurken veritabanı adını belirtin
+const Others = mongoose.model('other', otherSchema);
 
 // Express ortamı
 app.use(cors());
 app.use(express.json());
 
 // API endpoint'i
-app.get('/kampanya', async (req, res) => {
+app.get('/others', async (req, res) => {
   try {
-    const data = await Kampanya.find();
+    const data = await Others.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
