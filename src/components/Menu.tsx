@@ -3,9 +3,20 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
+import Login from "../components/Login";
 
 
 const Menu: React.FC = () => {
+    const [isLoginOpen, setLoginOpen] = useState(false);
+
+    const openLogin = () => {
+        setLoginOpen(true);
+   };
+   const  closeLogin = () => {
+     setLoginOpen(false);
+ };
+
+
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -71,8 +82,13 @@ const Menu: React.FC = () => {
                     <img src={Logo} alt="" />
                 </div>
 
-                <div className=''>
+                <div onClick={openLogin} className=''>
                     <FaRegCircleUser size={24} />
+                    {isLoginOpen && (
+          <div>
+            <Login/>
+          </div>
+        )}
          
                 </div>
 

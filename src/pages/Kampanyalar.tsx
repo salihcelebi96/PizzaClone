@@ -22,7 +22,7 @@ const Kampanyalar :React.FC = () => {
 
       useEffect(() => {
 
-        axios.get< KampanyaData[]>('http://localhost:3003/kampanya')
+        axios.get< KampanyaData[]>('http://localhost:3003/kampanyalar')
             .then((response: AxiosResponse<KampanyaData[]>) => {
                 
                 dispatch(pushNewKampanya(response.data))

@@ -6,8 +6,8 @@ const app = express();
 const port = 3004;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/yanurunler', // İstemcinin bulunduğu adres
-  methods: 'GET', // Sadece GET isteklerine izin ver
+  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/icecekler'],
+  methods: 'GET', 
 };
 
 app.use(cors(corsOptions));
@@ -19,7 +19,7 @@ mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb
 });
 
 // MongoDB şeması ve modeli
-const otherSchema = new mongoose.Schema({
+const icecekSchema = new mongoose.Schema({
   tür: {
     type: String,
     required: true,
@@ -29,7 +29,7 @@ const otherSchema = new mongoose.Schema({
     required: true,
   },
   acıklama: {
-    type:String,
+    type: String,
     required: true,
   },
   image: {
@@ -39,16 +39,16 @@ const otherSchema = new mongoose.Schema({
 });
 
 // Model oluşturulurken veritabanı adını belirtin
-const Others = mongoose.model('other', otherSchema);
+const Icecekler = mongoose.model('icecek', icecekSchema);
 
 // Express ortamı
 app.use(cors());
 app.use(express.json());
 
 // API endpoint'i
-app.get('/others', async (req, res) => {
+app.get('/icecekler', async (req, res) => {
   try {
-    const data = await Others.find();
+    const data = await Icecekler.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
