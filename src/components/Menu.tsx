@@ -3,9 +3,9 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
-import LoginMenu from "../components/Footer";
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../redux/store';
+
+import {  useDispatch } from 'react-redux';
+
 import { loginOpen } from '../reducers/loginSlice';
 
 const Menu: React.FC = () => {
@@ -13,7 +13,7 @@ const Menu: React.FC = () => {
     const openLogin = () => {
         dispatch(loginOpen());
     };
-    const isLoginOpen = useSelector((state: RootState) => state.login.isAuthenticated)
+    
 
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -79,12 +79,8 @@ const Menu: React.FC = () => {
                 </div>
 
                 <div onClick={openLogin}>
-                    <FaRegCircleUser size={24} />
-                    {isLoginOpen && (
-                        <div>
-                            <LoginMenu />
-                        </div>
-                    )}
+                 <Link to="/login">  <FaRegCircleUser size={24} />  </Link>  
+                    
                 </div>
             </div>
         </div>
