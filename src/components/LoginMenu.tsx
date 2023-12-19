@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/login.css";
 import {logout} from "../reducers/loginSlice";
 import { useDispatch } from "react-redux";
 
 
-
 const Login: React.FC = () => {
-  const dispatch = useDispatch();
-  
-  const closeLogin = () => {
-     dispatch(logout());
-  }
  
-
+    const dispatch = useDispatch();
+  
+    const closeLogin = () => {
+       dispatch(logout());
+    }
+   
+  
   return (
     <div className="text-black ">
       <div className="bg-white  border-1 border-gray-400 absolute top-50 left-50 transform-translate-50-50 z-10 h-[500px] w-[400px] p-8 rounded-md">

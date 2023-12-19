@@ -1,0 +1,22 @@
+.text-black {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+ 
+}
+
+.link-arrow {
+  font-size: 18px;
+  margin-left: 2px;
+}
+.input-border{
+  border-width: 0.5px;
+  border-style: solid;
+  
+}
+
+.input-border:focus {
+  border-width: 0.5px;
+}
