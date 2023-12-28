@@ -3,8 +3,10 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
-
+import "../css/menu.css";
 import {  useDispatch } from 'react-redux';
+import googlePlay from "../assets/logo/googleplay.png";
+import appStore from "../assets/logo/appStore.png";
 
 import { loginOpen } from '../reducers/loginSlice';
 
@@ -40,30 +42,36 @@ const Menu: React.FC = () => {
             <div className='flex justify-between px-2 items-center'>
                 <div onClick={handleMenuToggle} className='flex my-5'>
                     <div>
-                        <AiOutlineMenu />
+                        <AiOutlineMenu size={20} />
                     </div>
                     <div className=''>
                         {menuOpen && (
-                            <div className='fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50' />
+                            <div className='sidebar fixed top-0 left-0 w-full   z-50' />
                         )}
                         {menuOpen && (
-                            <div className='fixed top-0 left-0 w-60  z-50' ref={menuRef}>
-                                <nav className='w-full'>
-                                    <ul className='flex w-full p-5 px-7 text-sm list-disc h-48 flex-col gap-3 sm:gap-10 lg:gap-10 bg-black text-white lg:text-2xl sm:text-xl'>
-                                        <li className='z-10'>
-                                            <Link className="navbar-link z-10" to="/kampanyalar">Kampanyalar</Link>
+                            <div className='sidebar  fixed top-0 left-0 w-60 h-screen bg-white  z-50' ref={menuRef}>
+                                <nav className='w-full h-full'>
+                                    <ul className='flex w-full p-5 px-7 text-sm list-disc h-full  flex-col    '>
+                                        <li className=' hover:text-black list-none   flex flex-col gap-4'>
+                                            <h1 className='text-base'>Uygulalamımzı İndirin</h1>
+                                            <Link className='' target='_blank'  to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>   
+                                            <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>  
+
                                         </li>
-                                        <li className='z-10'>
-                                            <Link className="navbar-link z-10" to="/pizzalar">Pizzalar</Link>
+                                        <li className='z-10 list-none  list'>
+                                            <Link className=" z-10" to="/kampanyalar">Kampanyalar</Link>
                                         </li>
-                                        <li className='z-10'>
-                                            <Link className="navbar-link z-10" to="/wingstreet">WingStreet</Link>
+                                        <li className='list-none list z-10'>
+                                            <Link className="z-10" to="/pizzalar">Pizzalar</Link>
                                         </li>
-                                        <li className='z-10'>
-                                            <Link className="navbar-link z-10" to="/yanurunler">Yan Ürünler</Link>
+                                        <li className= 'list-none list  list z-10'>
+                                            <Link className=" z-10" to="/wingstreet">WingStreet</Link>
                                         </li>
-                                        <li className='z-10'>
-                                            <Link className="navbar-link z-10" to="/restoranlar">Restoranlar</Link>
+                                        <li className='list-none  list  z-10'>
+                                            <Link className=" z-10" to="/yanurunler">Yan Ürünler</Link>
+                                        </li>
+                                        <li className='list-none list z-10'>
+                                            <Link className=" z-10" to="/restoranlar">Restoranlar</Link>
                                         </li>
                                     </ul>
                                 </nav>

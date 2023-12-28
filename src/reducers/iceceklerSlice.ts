@@ -16,10 +16,10 @@ const initialState: IceceklerState = {
 };
 
 const IceceklerSlice = createSlice({
-  name: 'icecekler', // Updated the name to 'icecekler'
+  name: 'icecekler', 
   initialState,
   reducers: {
-    pushNewIcecek: (state, action: PayloadAction<IceceklerData[]>) => { // Updated the action name to 'pushNewIcecek'
+    pushNewIcecek: (state, action: PayloadAction<IceceklerData[]>) => { 
       const newIcecek = action.payload.filter(newIcecek =>
         !state.icecekler.some(existingIcecek => existingIcecek._id === newIcecek._id)
       );
@@ -28,6 +28,6 @@ const IceceklerSlice = createSlice({
   },
 });
 
-export const { pushNewIcecek } = IceceklerSlice.actions; // Updated the action name to 'pushNewIcecek'
+export const { pushNewIcecek } = IceceklerSlice.actions; 
 
 export default IceceklerSlice.reducer;

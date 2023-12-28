@@ -10,6 +10,7 @@ import Tatlılar from "./pages/Tatlı";
 import Icecekler from "./pages/Icecekler";
 import Restoranlar from './pages/GoogleMap';
 import LoginMenu from "./pages/LoginMenu";
+import SignUp from './pages/SignUp';
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
         <Route path='/icecekler' element={<Icecekler/>}/>
         <Route path='/restoranlar' element={<Restoranlar/>}/>
         <Route path='/login' element={<LoginMenu />}/>
+        <Route path='/kayıtol' element={<SignUp />}/>
       </Routes>
       <Footer />
     </Router>

@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.list:hover {
+   color: red;
+   
+}
+.list {
+    font-size: larger;
+    
+    
+}
+
+.list-none {
+    border-bottom: 1px solid rgb(209, 206, 206);
+    padding: 1.5rem 0;
+  }
+  

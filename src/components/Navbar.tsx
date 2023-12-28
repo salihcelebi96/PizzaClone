@@ -9,6 +9,7 @@ import {loginOpen} from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
 
 
+
 const Navbar: React.FC = () => {
   
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const isLoginOpen = useSelector((state : RootState) => state.login.isAuthenticat
           <div className='overlay'>
              <div className=' '>
             
-             <Login   />
+             <Login  />
           </div>
           </div>
          
