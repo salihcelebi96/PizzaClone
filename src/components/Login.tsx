@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
+  
   const [password, setPassword] = useState("");
   
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Login: React.FC = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Invalid email");
+      console.log(password)
       return;
     }
     

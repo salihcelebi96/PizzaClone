@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,15 +16,20 @@ const SignUp: React.FC = () => {
     dispatch(signUpClose());
     navigate("/");
   }
-   
- 
+
+
 
 
 
   
+
+
+
+
   const [isChecked1, setIsChecked1] = useState<boolean>(false);
   const [isChecked2, setIsChecked2] = useState<boolean>(false);
   const [isChecked3, setIsChecked3] = useState<boolean>(false);
+  const [name,setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<any>("");
   const [phoneNumber, setPhoneNumber] = useState<number>();
@@ -51,6 +57,53 @@ const SignUp: React.FC = () => {
     setIsChecked3(!isChecked3);
   };
 
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue: string = e.target.value;
+
+    // Basit bir e-posta format kontrolü için regex
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (emailRegex.test(inputValue)) {
+      console.log('Geçerli e-posta adresi');
+      setEmail(inputValue);
+    } else {
+      console.log('Geçersiz e-posta adresi');
+    }
+  };
+
+
+
+
+  
+  const handleSignup = async () => {
+    try {
+      const response = await fetch('http://localhost:3006/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          phoneNumber,
+          isChecked1,
+          isChecked2,
+          isChecked3,
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Signup successful:', result);
+      } else {
+        console.error('Signup failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+    }
+  };
   
 
   return (
@@ -60,16 +113,35 @@ const SignUp: React.FC = () => {
           <h1 className=''>Kayıt Ol</h1> 
         </div>
         <div>
-          <input className='input ' type="text" placeholder="Ad Soyad" />
+          <input 
+          onChange={(e)=> setName(e.target.value)} 
+          className='input ' 
+          type="text" 
+          placeholder="Ad Soyad" />
+          
         </div>
         <div>
-          <input className='input' type="text" placeholder="E-Posta" />
+          <input onChange={handleEmailChange} 
+          className='input' 
+          type="text" 
+          placeholder="E-Posta" />
         </div>
         <div>
-          <input onChange={handlePhoneNumberChange} maxLength={10} minLength={10} value={phoneNumber} placeholder='Telefon Numarası' className='input ' type="text" />
+          <input onChange={handlePhoneNumberChange} 
+          maxLength={10} 
+          minLength={10} 
+          value={phoneNumber} 
+          placeholder='Telefon Numarası' 
+          className='input ' 
+          type="text" />
         </div>
         <div>
-          <input className='input' minLength={8} maxLength={16} type="text" placeholder="Şifre" />
+          <input onChange={(e)=> setPassword(e.target.value)} 
+          className='input' 
+          minLength={8} 
+          maxLength={16} 
+          type="text" 
+          placeholder="Şifre" />
         </div>
         <div className='flex flex-col gap-2'>
         <div>
@@ -114,8 +186,8 @@ const SignUp: React.FC = () => {
         </div>
         </div>
        
-        <div className='bg-red-500 hover:bg-red-600 border rounded-md w-full text-center p-3 text-white'>
-           <button className='font-semibold '>Kayıt Ol</button>
+        <div onClick={handleSignup} className='bg-red-500 hover:bg-red-600 border rounded-md w-full text-center p-3 text-white'>
+           <button className='font-semibold '  >Kayıt Ol</button>
         </div>
         <div>
           <p>Pizza Hut  <span className='text-red-600'>KVKK Aydınlatma Metni</span> </p>
