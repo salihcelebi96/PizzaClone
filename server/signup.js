@@ -24,7 +24,7 @@ db.once('open', function () {
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   password: String,
   isChecked1:Boolean,
   isChecked2:Boolean,
@@ -56,6 +56,23 @@ app.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+app.get('/users', async (req, res) => {
+    try {
+      // Tüm kullanıcıları MongoDB'den getir
+      const users = await User.find({});
+      
+      // Başarılı yanıt gönder
+      res.status(200).json({ users });
+    } catch (error) {
+      console.error('Error getting users:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+
+
+
 
 // Server'ı dinle
 app.listen(port, () => {

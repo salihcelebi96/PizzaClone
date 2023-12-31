@@ -21,29 +21,15 @@ const SignUp: React.FC = () => {
 
 
 
-  
-
-
-
-
   const [isChecked1, setIsChecked1] = useState<boolean>(false);
   const [isChecked2, setIsChecked2] = useState<boolean>(false);
   const [isChecked3, setIsChecked3] = useState<boolean>(false);
   const [name,setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<any>("");
-  const [phoneNumber, setPhoneNumber] = useState<number>();
+  const [phoneNumber, setPhoneNumber] = useState<string>();
   
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
-    const inputValue: string = e.target.value;
-
-    if (/^\d{,10}$/.test(inputValue)) {
-      setPhoneNumber(Number(inputValue));
-    } else {
-      console.log("Telefon numarası yanlış!");
-    }
-  };
+  
 
   const handleCheckboxChange1 = () => {
     setIsChecked1(!isChecked1);
@@ -58,26 +44,42 @@ const SignUp: React.FC = () => {
   };
 
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue: string = e.target.value;
-
-    // Basit bir e-posta format kontrolü için regex
-    const emailRegex = /^\S+@\S+\.\S+$/;
-
-    if (emailRegex.test(inputValue)) {
-      console.log('Geçerli e-posta adresi');
-      setEmail(inputValue);
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
+  
+    if (/^\d{10}$/.test(e.target.value)) {
+      setPhoneNumber(e.target.value);
     } else {
-      console.log('Geçersiz e-posta adresi');
+      setPhoneNumber("");
+      console.log("Telefon numarası 10 haneli olmalıdır.");
     }
   };
+  
+
+
+  //salih celebi@gmail.com 5448169518 salih123
 
 
 
 
   
   const handleSignup = async () => {
-    try {
+
+      try {
+        if(!name || !email || !password || !phoneNumber || !isChecked1 || !isChecked2 || !isChecked3 ) {
+          console.log("Eksik veya hatalı giriş")
+          return;
+        }
+
+        const emailRegex = /^\S+@\S+\.\S+$/;
+        if (!emailRegex.test(email)) {
+          console.log("geçersiz e-posta")
+          return;
+        }
+
+        
+
+
       const response = await fetch('http://localhost:3006/signup', {
         method: 'POST',
         headers: {
@@ -121,16 +123,17 @@ const SignUp: React.FC = () => {
           
         </div>
         <div>
-          <input onChange={handleEmailChange} 
+          <input onChange={(e) => setEmail(e.target.value)} 
           className='input' 
           type="text" 
           placeholder="E-Posta" />
         </div>
         <div>
-          <input onChange={handlePhoneNumberChange} 
+          <input 
+          onChange={handlePhoneNumberChange} 
           maxLength={10} 
           minLength={10} 
-          value={phoneNumber} 
+          
           placeholder='Telefon Numarası' 
           className='input ' 
           type="text" />
