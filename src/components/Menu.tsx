@@ -4,18 +4,27 @@ import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
 import "../css/menu.css";
-import {  useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
-
-import { loginOpen } from '../reducers/loginSlice';
+import { RootState } from '../redux/store';
+import {loginOpen,userLoginFalse } from "../reducers/loginSlice";
 
 const Menu: React.FC = () => {
+    const userLogin = useSelector((state : RootState) => state.login.userLogin);
     const dispatch = useDispatch();
+   
+   
+   
     const openLogin = () => {
-        dispatch(loginOpen());
+        if(!userLogin){
+            dispatch(loginOpen());
+        }else{
+            dispatch(userLoginFalse());
+        }
+        
     };
-    
+
 
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -54,8 +63,8 @@ const Menu: React.FC = () => {
                                     <ul className='flex w-full p-5 px-7 text-sm list-disc h-full  flex-col    '>
                                         <li className=' hover:text-black list-none   flex flex-col gap-4'>
                                             <h1 className='text-base'>Uygulalamımzı İndirin</h1>
-                                            <Link className='' target='_blank'  to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>   
-                                            <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>  
+                                            <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
+                                            <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
 
                                         </li>
                                         <li className='z-10 list-none  list'>
@@ -64,7 +73,7 @@ const Menu: React.FC = () => {
                                         <li className='list-none list z-10'>
                                             <Link className="z-10" to="/pizzalar">Pizzalar</Link>
                                         </li>
-                                        <li className= 'list-none list  list z-10'>
+                                        <li className='list-none list  list z-10'>
                                             <Link className=" z-10" to="/wingstreet">WingStreet</Link>
                                         </li>
                                         <li className='list-none  list  z-10'>
@@ -87,8 +96,8 @@ const Menu: React.FC = () => {
                 </div>
 
                 <div onClick={openLogin}>
-                 <Link to="/login">  <FaRegCircleUser size={24} />  </Link>  
-                    
+                    <Link to="/login">  <FaRegCircleUser size={24} />  </Link>
+
                 </div>
             </div>
         </div>

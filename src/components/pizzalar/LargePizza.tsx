@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { RootState } from '../../redux/store';
 import { IDataItem } from '../../reducers/PizzaSlice';
+import { pushNewItems} from "../../reducers/sepetSlice";
 
 const Pizza: React.FC = () => {
   const data = useSelector((state: RootState) => state.pizza.pizzas);

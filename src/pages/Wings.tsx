@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { pushNewWings } from '../reducers/WingsSlice';
 import { RootState } from '../redux/store';
 import {Link} from "react-router-dom";
-
+import { pushNewItems} from "../reducers/sepetSlice";
 
 const Wings: React.FC = () => {
   const dispatch = useDispatch();

@@ -9,13 +9,6 @@ import axios from 'axios';
 
 
 
-// const token = localStorage.getItem("token");
-// if (token !== null) {
-//   const decodedToken = jwt_decode(token);
-//   // Geri kalan kodlar...
-// } else {
-//   console.error("Token not found");
-// }
 
 
 

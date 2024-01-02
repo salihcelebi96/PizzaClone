@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
-
+import { pushNewItems} from "../reducers/sepetSlice";
 interface IDataItem {
   _id: string;
   tür: string;
