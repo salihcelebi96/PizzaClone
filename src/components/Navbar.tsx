@@ -5,7 +5,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import "../css/navbar.css";
 import Login from "./Login";
 import { useDispatch, useSelector } from 'react-redux';
-import {loginOpen} from "../reducers/loginSlice";
+import {loginOpen , userLoginFalse} from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
 
 
@@ -20,10 +20,20 @@ const Navbar: React.FC = () => {
   };
 
 const isLoginOpen = useSelector((state : RootState) => state.login.isAuthenticated)
+const userLogin = useSelector((state : RootState) => state.login.userLogin);
 
-
-
-
+const userLoginHandle = () => {
+  dispatch(userLoginFalse())
+}
+const toggleUserLogin = () => {
+  if (userLogin) {
+    // If user is logged in, log them out
+    userLoginHandle();
+  } else {
+    // If user is not logged in, open login
+    openLogin();
+  }
+};
 
   return (
     <div className="flex justify-center items-center gap-24 h-16 font-semibold cursor-pointer border text-lg">
@@ -44,7 +54,7 @@ const isLoginOpen = useSelector((state : RootState) => state.login.isAuthenticat
 
 
       <div className="flex items-center gap-2">
-        <div className='flex gap-2 items-center' onClick={openLogin}>
+        <div className='flex gap-2 items-center' onClick={toggleUserLogin}>
         <FaRegCircleUser />
         {isLoginOpen && (
           <h1>Giriş Yap</h1>
@@ -60,7 +70,7 @@ const isLoginOpen = useSelector((state : RootState) => state.login.isAuthenticat
           </div>
          
         ) :(
-          <h1 onClick={openLogin}>Giriş Yap</h1>
+          userLogin ? <h1 onClick={userLoginHandle}>Çıkış Yap</h1> : <h1 onClick={openLogin}>Giriş Yap</h1>
         ) }
 
       </div>
