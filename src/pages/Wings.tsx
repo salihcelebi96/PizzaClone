@@ -50,7 +50,7 @@ const Wings: React.FC = () => {
   const data = useSelector((state: RootState) => state.wings.wings)
 
   return (
-    <div className='grid sm:grid-cols-2 text-xl font-semibold  m-10 md:grid-cols-4 justify-center gap-5'>
+    <div className='grid sm:grid-cols-2 text-xl font-semibold  m-16 md:grid-cols-4 justify-center gap-5'>
     {data.map((item: WingsData) => (
       <div className='border hover:scale-105 duration-300' key={item.id}>
         <div className='h-64 items-center flex justify-center p-2 my-2'>
