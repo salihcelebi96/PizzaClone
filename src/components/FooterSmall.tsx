@@ -18,7 +18,7 @@ const FooterSmall: React.FC = () => {
 
     return (
 
-        <div className='h-auto   flex justify-center gap-5 items-center flex-col bg-black text-white'>
+        <div className='h-auto    flex justify-center gap-5 items-center flex-col bg-black text-white'>
             <div>
                 <div className='flex justify-center mt-2 flex-col items-center'>
                     <div className=''>

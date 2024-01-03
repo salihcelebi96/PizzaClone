@@ -6,6 +6,7 @@ import WingsSlice from '../reducers/WingsSlice';
 import IceceklerSlice from "../reducers/iceceklerSlice";
 import tatlıSlice from '../reducers/tatlıSlice';
 import loginSlice from '../reducers/loginSlice';
+import sepetSlice from "../reducers/sepetSlice";
 
 
 
@@ -17,7 +18,7 @@ const store = configureStore({
    icecekler:IceceklerSlice,
    tatlılar:tatlıSlice,
    login:loginSlice,
-    
+   sepet:sepetSlice, 
     
   },
 });

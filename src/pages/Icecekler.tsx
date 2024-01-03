@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { IceceklerData  } from '../reducers/iceceklerSlice';
 import axios, { AxiosResponse } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,9 +7,34 @@ import { RootState } from '../redux/store';
 import { Link } from 'react-router-dom';
 import { tatlıData } from '../reducers/tatlıSlice';
 import { pushNewTatlı } from '../reducers/tatlıSlice';
+import { pushNewItems,SepetData} from "../reducers/sepetSlice";
+
 
 const Icecekler: React.FC = () => {
   const dispatch = useDispatch();
+  const [sepet, setSepet] = useState<string>("");
+
+
+  const handleBasket = (item: IceceklerData) => {
+    const newSepetData: SepetData = {
+      _id: item._id,
+      tür: item.tür,
+      fiyatlar: item.fiyat,
+      url: item.url,
+    };
+
+    
+    dispatch(pushNewItems([newSepetData]));
+
+    
+    setSepet("Yeni veri eklendi");
+  };
+
+  
+
+
+
+
 
   useEffect(() => {
     axios
@@ -65,8 +90,8 @@ const Icecekler: React.FC = () => {
               <div>{item.fiyat} TL</div>
             </div>
           </div>
-          <div className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
-            <Link to='/sepet'>Sipariş Ver</Link>
+          <div onClick={()=> handleBasket(item)} className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
+            <Link className='w-full h-full text-center' to='/sepet'>Sipariş Ver</Link>
           </div>
         </div>
       ))}

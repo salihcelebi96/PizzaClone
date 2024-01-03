@@ -1,11 +1,29 @@
-import { useSelector} from 'react-redux';
+import { useState } from 'react';
+import { useSelector,useDispatch} from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Link } from "react-router-dom";
 import { IDataItem } from '../../reducers/PizzaSlice';
-import { pushNewItems} from "../../reducers/sepetSlice";
+import { pushNewItems,SepetData} from "../../reducers/sepetSlice";
 
 const Pizza: React.FC = () => {
   const data = useSelector((state : RootState) => state.pizza.pizzas)
+  const [sepet, setSepet] = useState<string>("");
+  const dispatch = useDispatch();
+  const handleBasket = (item: IDataItem) => {
+    const newSepetData: SepetData = {
+      _id: item._id,
+      tür: item.tür,
+      fiyatlar: item.fiyatlar.küçük,
+      url: item.url,
+    };
+
+    // Dispatch the newSepetData to the Redux store
+    dispatch(pushNewItems([newSepetData]));
+
+    // Set sepet or perform any other action if needed
+    setSepet("Yeni veri eklendi");
+  };
+
 
   return (
     <div className='grid sm:grid-cols-2 text-xl font-semibold mx-10 md:grid-cols-4 justify-center gap-5'>
@@ -18,8 +36,10 @@ const Pizza: React.FC = () => {
             <div>{item.fiyatlar.küçük} TL</div>
           </div>
         </div>
-        <div className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
-          <Link to="/sepet">Sipariş Ver</Link>
+        <div  
+        onClick={() => handleBasket(item)} 
+        className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
+          <Link className='w-full h-full text-center' to="/sepet">Sipariş Ver</Link>
         </div>
       </div>
     ))}

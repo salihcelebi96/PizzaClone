@@ -1,14 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { WingsData } from "../reducers/WingsSlice";
 import axios, { AxiosResponse } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { pushNewWings } from '../reducers/WingsSlice';
 import { RootState } from '../redux/store';
 import {Link} from "react-router-dom";
-import { pushNewItems} from "../reducers/sepetSlice";
+import { pushNewItems, SepetData} from "../reducers/sepetSlice";
 
 const Wings: React.FC = () => {
   const dispatch = useDispatch();
+  const [sepet, setSepet] = useState<string>("");
+  
+  
+  const handleBasket = (item: WingsData) => {
+    const newSepetData: SepetData = {
+      _id: item.id,
+      tür: item.tür,
+      fiyatlar: item.Fiyat,
+      url: item.Url,
+    };
+
+   
+    dispatch(pushNewItems([newSepetData]));
+
+    
+    setSepet("Yeni veri eklendi");
+  };
+
+
+
+
+
+
 
 
   useEffect(() => {
@@ -42,8 +65,8 @@ const Wings: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
-          <Link to="/sepet">Sipariş Ver</Link>
+        <div onClick={()=> handleBasket(item)} className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
+          <Link className='w-full h-full text-center' to="/sepet">Sipariş Ver</Link>
         </div>
       </div>
     ))}

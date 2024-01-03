@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface SepetData {
   _id: string;
   tür: string;
-  fiyatlar: number;
+  fiyatlar: number,
   url: string;
 }
 

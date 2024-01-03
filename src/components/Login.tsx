@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);
-      navigate('/'); // Redirect to a protected route
+      navigate('/'); 
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
   
 
   useEffect(() => {
-    // userLogin durumu değiştiğinde yapılacak işlemler
+    
     if (userLogin) {
       dispatch(logout());
       dispatch(userLoginTrue());

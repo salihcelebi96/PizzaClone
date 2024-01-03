@@ -27,10 +27,10 @@ const userLoginHandle = () => {
 }
 const toggleUserLogin = () => {
   if (userLogin) {
-    // If user is logged in, log them out
+    
     userLoginHandle();
   } else {
-    // If user is not logged in, open login
+    
     openLogin();
   }
 };
