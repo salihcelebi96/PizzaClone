@@ -4,6 +4,7 @@ import { RootState } from '../redux/store';
 import { SepetData } from '../reducers/sepetSlice';
 import { FaTrash } from 'react-icons/fa';
 import { deleteItems } from '../reducers/sepetSlice';
+import "../css/sepet.css";
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
@@ -14,28 +15,51 @@ const Sepet: React.FC = () => {
     dispatch(deleteItems([itemId]));
   };
 
+  const ToplamPrice = () => {
+    // Calculate the total price by summing up prices of all items
+    const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
+    return totalPrice.toFixed(2); // Format the total price with two decimal places
+  };
+
   return (
-    <div>
-      <div className='grid sm:grid-cols-2 my-5 text-xl  font-semibold mx-10 md:grid-cols-4 justify-center '>
+    <div className=' flex '>
+      <div className='grid sm:grid-cols-1 my-5 text-md sm:text-sm lg:text-xl grid-rows-4 font-semibold mx-10 md:grid-cols-1 w-full justify-center '>
         {data.map((item: SepetData) => (
-          <div className='' key={item._id}>
+          <div className='flex-container' key={item._id}>
             <div className='flex p-2 my-2 '>
-              <div className='flex items-center'>
-                <div>{item.tür}</div>
-                <div>
-                  <img src={item.url} alt={item.tür} className='w-40' />
-                </div>
-                <div>
-                  {item.fiyatlar} TL
+              <div className='flex  justify-between w-full gap-5'>
+                <div className='flex items-center gap-5'>
+                  <div>
+                    <img src={item.url} alt={item.tür} className='w-40' />
                   </div>
+                  <div>
+                    {item.tür}
+                  </div>
+
+                </div>
+
+                <div className='flex gap-6 items-center'>
+                  <div>
+                    {item.fiyatlar} TL
+                  </div>
+                  <div className='text-red-600'>
+                    <FaTrash onClick={() => handleDelete(item._id)} className='cursor-pointer ' />
+                  </div>
+                </div>
+
               </div>
-              <div>
-                <FaTrash onClick={() => handleDelete(item._id)} className='cursor-pointer ml-2' />
-              </div>
+
+
             </div>
+
           </div>
         ))}
+        <div
+          className=' flex justify-end px-6 gap-2'>
+          <p className='text-red-500'>Toplam:</p>    {ToplamPrice()} TL
+        </div>
       </div>
+
     </div>
   );
 };

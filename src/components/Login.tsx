@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import {  useNavigate,Link } from "react-router-dom";
 import "../css/login.css";
-import { logout, signUpOpen,userLoginTrue } from "../reducers/loginSlice";
-import { useDispatch } from "react-redux";
+import { logout, signUpOpen, userLoginTrue } from "../reducers/loginSlice";
+import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
+import { RootState } from "../redux/store";
+import LoginSign from "./LoginSign";
 
 
 
@@ -20,14 +22,18 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
-  const dispatch = useDispatch();
-  const navigate =  useNavigate();
   
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const handleSignUp = () => {
-    dispatch(signUpOpen());
     dispatch(logout());
+    dispatch(signUpOpen());
+    
+    
   };
+  
 
   const handleLogin = async () => {
     try {
@@ -35,7 +41,7 @@ const Login: React.FC = () => {
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -44,18 +50,18 @@ const Login: React.FC = () => {
   const fetchProtectedData = async () => {
     try {
       const token = localStorage.getItem("token");
-  
+
       if (!token) {
         console.error("Token not found");
         return;
       }
-  
+
       const response = await fetch("http://localhost:3006/protected", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log("Protected data:", data);
@@ -66,7 +72,7 @@ const Login: React.FC = () => {
       console.error("Error during fetch:", error);
     }
   };
-  
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -74,19 +80,19 @@ const Login: React.FC = () => {
     setuserLogin(false);
     console.log("Logout successful");
   };
-  
+
 
   useEffect(() => {
-    
+
     if (userLogin) {
       dispatch(logout());
       dispatch(userLoginTrue());
       console.log("Login successful");
     }
   }, [userLogin]);
-  
 
- 
+
+
 
   const closeLogin = () => {
     dispatch(logout());
@@ -126,19 +132,19 @@ const Login: React.FC = () => {
         <div className="text-center py-5">
           <h1>
             Hesabın yok mu?{" "}
-            <Link
-              to="/kayıtol"
-              onClick={handleSignUp}
-              className="text-red-600 link-arrow"
-            >
+            <Link to="/kayıtol"
+              onClick={() => handleSignUp()}
+              className="text-red-600 link-arrow">
               Kayıt Ol&gt;{" "}
             </Link>
-          </h1>
+           </h1>
         </div>
         <div className="absolute text-red-600  top-0 right-2 text-3xl">
           <button onClick={closeLogin}> x </button>
         </div>
       </div>
+      
+     
     </div>
   );
 };
