@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
           {sepetLength === 0 ? null : (
-            <div className='text-sm absolute top-0 right-0 border rounded-full text-white bg-red-600 px-1'>
+            <div className='text-sm absolute top-0 right-0 border rounded-full text-white bg-red-600 px-2'>
               {sepetLength}
             </div>
           )}

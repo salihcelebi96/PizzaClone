@@ -4,25 +4,30 @@ import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
 import "../css/menu.css";
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
-import {loginOpen,userLoginFalse } from "../reducers/loginSlice";
+import { loginOpen, userLoginFalse } from "../reducers/loginSlice";
+import { BsFillBasketFill } from "react-icons/bs";
+
+
 
 const Menu: React.FC = () => {
-    const userLogin = useSelector((state : RootState) => state.login.userLogin);
+    const userLogin = useSelector((state: RootState) => state.login.userLogin);
     const dispatch = useDispatch();
-   
-   
-   
+    const sepet = useSelector((state: RootState) => state.sepet.items);
+
+    const sepetLength = sepet.length;
+
+
     const openLogin = () => {
-        if(!userLogin){
+        if (!userLogin) {
             dispatch(loginOpen());
-        }else{
+        } else {
             dispatch(userLoginFalse());
         }
-        
+
     };
 
 
@@ -95,8 +100,23 @@ const Menu: React.FC = () => {
                     </Link>
                 </div>
 
+                
+                <div className='flex justify-center items-center relative gap-5 p-4'>
                 <div onClick={openLogin}>
                     <Link to="/login">  <FaRegCircleUser size={24} />  </Link>
+
+                </div>
+
+                    <div>
+                        <Link to="/sepet">
+                            <BsFillBasketFill size={22} />
+                        </Link>
+                    </div>
+                    {sepetLength === 0 ? null : (
+                        <div className='text-sm absolute top-0 right-0 border rounded-full text-white bg-red-600 px-2'>
+                            {sepetLength}
+                        </div>
+                    )}
 
                 </div>
             </div>

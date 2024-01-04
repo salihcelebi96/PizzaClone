@@ -5,10 +5,12 @@ import { SepetData } from '../reducers/sepetSlice';
 import { FaTrash } from 'react-icons/fa';
 import { deleteItems } from '../reducers/sepetSlice';
 import "../css/sepet.css";
+import { useNavigate } from 'react-router-dom';
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (itemId: string) => {
     // Use arrow function here and fix the argument to deleteItems
@@ -18,12 +20,20 @@ const Sepet: React.FC = () => {
   const ToplamPrice = () => {
     // Calculate the total price by summing up prices of all items
     const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
+    
+    if (totalPrice === 0) {
+      navigate("/");
+    }
+  
     return totalPrice.toFixed(2); // Format the total price with two decimal places
   };
+  
+
+ 
 
   return (
-    <div className=' flex '>
-      <div className='grid sm:grid-cols-1 my-5 text-md sm:text-sm lg:text-xl grid-rows-4 font-semibold mx-10 md:grid-cols-1 w-full justify-center '>
+    <div className=' flex  h-screen'>
+      <div className='grid  sm:grid-cols-1 my-5 text-md sm:text-sm lg:text-xl grid-rows-4 font-semibold mx-10 md:grid-cols-1 w-full justify-center '>
         {data.map((item: SepetData) => (
           <div className='flex-container' key={item._id}>
             <div className='flex p-2 my-2 '>
