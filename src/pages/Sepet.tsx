@@ -5,7 +5,7 @@ import { SepetData } from '../reducers/sepetSlice';
 import { FaTrash } from 'react-icons/fa';
 import { deleteItems } from '../reducers/sepetSlice';
 import "../css/sepet.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
@@ -18,18 +18,20 @@ const Sepet: React.FC = () => {
   };
 
   const ToplamPrice = () => {
-    // Calculate the total price by summing up prices of all items
-    const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
     
+    const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
+
     if (totalPrice === 0) {
       navigate("/");
     }
-  
-    return totalPrice.toFixed(2); // Format the total price with two decimal places
+
+    return totalPrice.toFixed(2); 
   };
+
   
 
- 
+
+
 
   return (
     <div className=' flex  h-screen'>
@@ -64,10 +66,16 @@ const Sepet: React.FC = () => {
 
           </div>
         ))}
-        <div
-          className=' flex justify-end px-6 gap-2'>
-          <p className='text-red-500'>Toplam:</p>    {ToplamPrice()} TL
+        <div>
+          <div
+            className=' flex justify-end px-6 gap-2'>
+            <p className='text-red-500'>Toplam: {ToplamPrice()} TL</p>    
+          </div>
+          <div className=' flex justify-end   px-6 gap-2'>
+            <Link className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl' to="/payment" > Siparişi Tamamla </Link>
+          </div>
         </div>
+
       </div>
 
     </div>

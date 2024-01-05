@@ -12,6 +12,7 @@ import Restoranlar from './pages/GoogleMap';
 import LoginMenu from "./pages/LoginMenu";
 import SignUp from './pages/SignUp';
 import Sepet from "./pages/Sepet";
+import Payment from './pages/Payment';
 
 const App = () => {
 
@@ -37,6 +38,7 @@ const App = () => {
         <Route path='/login' element={<LoginMenu />}/>
         <Route path='/kayıtol' element={<SignUp />}/>
         <Route path='/sepet' element={<Sepet />}/>
+        <Route path='/payment' element={<Payment />}/>
       </Routes>
       <Footer />
     </Router>

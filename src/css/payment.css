@@ -1,0 +1,15 @@
+.input {
+    width: 14rem;
+}
+
+.inputCard {
+   width: 29rem;
+   border: 1px solid #ccc;
+   padding: 7px;
+   margin-top: 7px;
+   
+}
+
+.credit-card {
+    transition: background-color  1s ease-in-out;
+}
