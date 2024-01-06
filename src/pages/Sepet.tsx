@@ -9,6 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
+  const userLogin = useSelector((state :RootState) => state.login.userLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,18 +19,23 @@ const Sepet: React.FC = () => {
   };
 
   const ToplamPrice = () => {
-    
+    console.log(userLogin);
     const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
 
     if (totalPrice === 0) {
       navigate("/");
+      
     }
 
     return totalPrice.toFixed(2); 
   };
 
+  const handleBasket = () => {
+    if(userLogin){
+      navigate("/payment");
+    }
+  }
   
-
 
 
 
@@ -72,7 +78,9 @@ const Sepet: React.FC = () => {
             <p className='text-red-500'>Toplam: {ToplamPrice()} TL</p>    
           </div>
           <div className=' flex justify-end   px-6 gap-2'>
-            <Link className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl' to="/payment" > Siparişi Tamamla </Link>
+            <button onClick={handleBasket}  disabled={!userLogin} className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl'  >
+                 Siparişi Tamamla 
+              </button>
           </div>
         </div>
 

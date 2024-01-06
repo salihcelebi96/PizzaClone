@@ -32,6 +32,7 @@ const Login: React.FC = () => {
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);
+      dispatch(userLoginTrue());
       navigate('/'); 
       console.log("login başarılı gibimsi")
       
@@ -91,9 +92,9 @@ const Login: React.FC = () => {
 
  
 
-  const closeLogin = () => {
-    dispatch(logout());
-  };
+  // const closeLogin = () => {
+  //   dispatch(logout());
+  // };
 
 
 

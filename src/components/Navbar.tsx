@@ -38,10 +38,7 @@ const Navbar: React.FC = () => {
     if (userLogin) {
 
       userLoginHandle();
-    } else {
-
-      openLogin();
-    }
+    } 
   };
 
   return (

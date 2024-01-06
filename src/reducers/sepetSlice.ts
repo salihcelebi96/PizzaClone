@@ -1,4 +1,8 @@
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+
+
 
 export interface SepetData {
   _id: string;
@@ -20,6 +24,7 @@ const sepetSlice = createSlice({
   initialState,
   reducers: {
     pushNewItems: (state, action: PayloadAction<SepetData[]>) => {
+      
       const newItems = action.payload.filter(newItem =>
         !state.items.some(existingItem => existingItem._id === newItem._id)
       );
