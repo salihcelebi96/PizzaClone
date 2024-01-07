@@ -6,7 +6,7 @@ const app = express();
 const port = 3008;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // Sadece bir kez kullanılmalı.
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
@@ -50,11 +50,8 @@ app.get('/payment', async (req, res) => {
 app.post('/payment', async (req, res) => {
   try {
     const { name, lastDate, cvc, cardNumber, totalPrice } = req.body;
-
     const newPayment = new Payments({ name, lastDate, cvc, cardNumber, totalPrice });
-    
     await newPayment.save();
-
     res.status(201).json({ message: 'Payment saved successfully!' });
   } catch (error) {
     console.error('Error during payment:', error);
@@ -62,6 +59,7 @@ app.post('/payment', async (req, res) => {
   }
 });
 
+// Sunucuyu başlat
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');
