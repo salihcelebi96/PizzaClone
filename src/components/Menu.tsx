@@ -10,7 +10,8 @@ import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
 import { loginOpen, userLoginFalse } from "../reducers/loginSlice";
 import { BsFillBasketFill } from "react-icons/bs";
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Menu: React.FC = () => {
@@ -19,7 +20,7 @@ const Menu: React.FC = () => {
     const sepet = useSelector((state: RootState) => state.sepet.items);
     const navigate = useNavigate();
     const sepetLength = sepet.length;
-
+    const notify = () => toast("Çıkış Yapıldı !");
 
     const openLogin = () => {
         if (!userLogin) {
@@ -27,7 +28,7 @@ const Menu: React.FC = () => {
             navigate("/login");
         } else {
             dispatch(userLoginFalse());
-            
+            notify();
         }
 
     };

@@ -8,7 +8,7 @@ import Login from "./LoginSign";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginOpen, userLoginFalse, signUpClose } from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
 
   const isLoginOpen = useSelector((state: RootState) => state.login.isAuthenticated)
   const userLogin = useSelector((state: RootState) => state.login.userLogin);
-  const isSignUp = useSelector((state: RootState) => state.login.isSignUp);
+  // const isSignUp = useSelector((state: RootState) => state.login.isSignUp);
   const sepet = useSelector((state: RootState) => state.sepet.items);
 
   const sepetLength = sepet.length;

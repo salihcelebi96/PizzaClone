@@ -126,7 +126,7 @@ const Payment: React.FC = () => {
       navigate("/");
       notify();
       dispatch(emptySepet());
-
+      console.log(validCard);
 
 
     } else {

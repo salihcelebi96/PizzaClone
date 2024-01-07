@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import "../css/login.css";
 import { logout, signUpOpen,userLoginFalse,userLoginTrue } from "../reducers/loginSlice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from 'axios';
-import { set } from "mongoose";
-import { RootState } from "../redux/store";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Login: React.FC = () => {
-  const [user, setUser] = useState<string[] | null>(null);
+  // const [user, setUser] = useState<string[] | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
-  
-
+  const notify = () => toast("Giriş Yapıldı !");
+ 
 
   const dispatch = useDispatch();
   const navigate =  useNavigate();
@@ -33,8 +34,11 @@ const Login: React.FC = () => {
       localStorage.setItem('token', token);
       setuserLogin(true);
       dispatch(userLoginTrue());
+      notify();
       navigate('/'); 
       console.log("login başarılı gibimsi")
+      fetchProtectedData();
+
       
     } catch (error) {
       console.error('Login failed:', error);
@@ -68,12 +72,13 @@ const Login: React.FC = () => {
   };
   
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    setuserLogin(false);
-    console.log("Logout successful");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setUser(null);
+  //   setuserLogin(false);
+  //   console.log("Logout successful");
+  //   console.log(user);
+  // };
   
 
   useEffect(() => {
@@ -82,6 +87,7 @@ const Login: React.FC = () => {
       dispatch(logout());
       dispatch(userLoginTrue());
       console.log("Login successful");
+      
     }else{
       dispatch((userLoginFalse()));
       console.log("userLogin false çalıştımmss");

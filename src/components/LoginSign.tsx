@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUp from '../pages/SignUp';
 import Login from '../components/Login';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const LoginSign: React.FC = () => {

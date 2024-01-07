@@ -4,24 +4,19 @@ import "../css/login.css";
 import { logout, signUpOpen, userLoginTrue } from "../reducers/loginSlice";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
-
-
-
-
-
-
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 
 
 const Login: React.FC = () => {
-  const [user, setUser] = useState<string[] | null>(null);
+  //  const [user, setUser] = useState<string[] | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
-  
+  const notify = () => toast("Giriş Yapıldı !");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,18 +28,6 @@ const Login: React.FC = () => {
     
   };
   
-
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:3006/login', { email, password });
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-      setuserLogin(true);
-      navigate('/');
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
 
   const fetchProtectedData = async () => {
     try {
@@ -73,12 +56,36 @@ const Login: React.FC = () => {
   };
 
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    setuserLogin(false);
-    console.log("Logout successful");
+
+
+
+
+
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3006/login', { email, password });
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      setuserLogin(true);
+      notify();
+      navigate('/');
+      fetchProtectedData();
+      
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
+
+  
+
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setUser(null);
+  //   setuserLogin(false);
+  //   console.log("Logout successful");
+  // };
 
 
   useEffect(() => {
