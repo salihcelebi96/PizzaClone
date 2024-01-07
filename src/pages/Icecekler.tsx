@@ -25,7 +25,7 @@ const Icecekler: React.FC = () => {
 
     
     dispatch(pushNewItems([newSepetData]));
-
+    console.log(sepet);
     
     setSepet("Yeni veri eklendi");
   };
