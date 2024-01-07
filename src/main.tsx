@@ -4,13 +4,14 @@ import App from './App'
 import './index.css'
 import store from "./redux/store";
 import {Provider} from "react-redux";
-
+import { ToastContainer } from 'react-toastify';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store as any}>
     <React.StrictMode>
     <App />
+    <ToastContainer/>
   </React.StrictMode>
 
   </Provider>

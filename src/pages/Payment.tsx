@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import Chip from "../assets/logo/credit-card.png";
 import Visa from "../assets/logo/visa2.png";
@@ -7,8 +7,19 @@ import MasterCard from "../assets/logo/mastercard_logo.jpg";
 import "../css/payment.css";
 import CardBack from "../components/CardBack";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {emptySepet} from "../reducers/sepetSlice";
+
+
+
+
 
 const Payment: React.FC = () => {
+  const notify = () => toast("Sipariş Verildi !");
+  const dispatch = useDispatch();
+
+
   
   const [cardNumber, setCardNumber] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -95,7 +106,9 @@ const Payment: React.FC = () => {
     if (cardNumber.length === 16 && name && lastDate && cvc.length === 3  ) {
           setValidCard(true);
           navigate("/");
-          alert("Ödeme Başarılı !! ")
+          notify();
+          dispatch(emptySepet());
+          
             
     }else{
       alert("Hatalı veya eksik bilgi girdiniz");

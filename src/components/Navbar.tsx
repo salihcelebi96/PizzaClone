@@ -8,10 +8,13 @@ import Login from "./LoginSign";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginOpen, userLoginFalse, signUpClose } from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const Navbar: React.FC = () => {
+  const notify = () => toast("Çıkış Yapıldı !");
 
   const dispatch = useDispatch();
 
@@ -32,7 +35,9 @@ const Navbar: React.FC = () => {
 
 
   const userLoginHandle = () => {
-    dispatch(userLoginFalse())
+    dispatch(userLoginFalse());
+    notify();
+    
   }
   const toggleUserLogin = () => {
     if (userLogin) {

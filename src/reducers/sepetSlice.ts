@@ -34,9 +34,12 @@ const sepetSlice = createSlice({
       const idsToDelete = action.payload;
       state.items = state.items.filter(item => !idsToDelete.includes(item._id));
     },
+    emptySepet: (state) => {
+      state.items = [];
+    },
   },
 });
 
-export const { pushNewItems, deleteItems } = sepetSlice.actions;
+export const { pushNewItems, deleteItems,emptySepet } = sepetSlice.actions;
 
 export default sepetSlice.reducer;
