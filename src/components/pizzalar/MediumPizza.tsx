@@ -18,10 +18,10 @@ const Pizza: React.FC = () => {
       url: item.url,
     };
 
-    // Dispatch the newSepetData to the Redux store
+    
     dispatch(pushNewItems([newSepetData]));
-
-    // Set sepet or perform any other action if needed
+    console.log(sepet);
+    
     setSepet("Yeni veri eklendi");
   };
 

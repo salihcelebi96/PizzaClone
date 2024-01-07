@@ -5,7 +5,7 @@ import { SepetData } from '../reducers/sepetSlice';
 import { FaTrash } from 'react-icons/fa';
 import { deleteItems } from '../reducers/sepetSlice';
 import "../css/sepet.css";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);

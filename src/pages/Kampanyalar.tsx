@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react"
+import { useEffect} from "react"
 import {pushNewKampanya} from "../reducers/kampanyaSlice"
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosResponse } from 'axios';
@@ -8,7 +8,7 @@ import { pushNewItems, SepetData} from "../reducers/sepetSlice";
 
 const Kampanyalar :React.FC = () => {
     const data = useSelector((state : RootState) => state.kampanya.kampanya);
-    const [sepet, setSepet] = useState<string>("");
+    // const [sepet, setSepet] = useState<string>("");
     const dispatch = useDispatch();
     
     interface KampanyaData {
@@ -27,6 +27,7 @@ const Kampanyalar :React.FC = () => {
 
           }
           dispatch(pushNewItems([newSepetData]));
+          
       }
 
        
