@@ -6,8 +6,8 @@ const app = express();
 const port = 3001;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/pizzalar', 
-  methods: 'GET', 
+  origin: 'http://127.0.0.1:3000/pizzalar',
+  methods: ['GET', 'POST'],
 };
 
 app.use(cors(corsOptions));
@@ -60,6 +60,39 @@ app.get('/pizza', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.post("/pizza", async (req, res) => {
+  try {
+    const { tür, fiyatlar, image } = req.body;
+    if (
+      !fiyatlar ||
+      typeof fiyatlar !== "object" ||
+      !fiyatlar.büyük ||
+      !fiyatlar.orta ||
+      !fiyatlar.küçük
+    ) {
+      return res.status(400).json({ error: "Invalid fiyatlar structure" });
+    }
+     
+
+
+    const newPizza = new Pizza({
+      tür,
+      fiyatlar,
+      image,
+    });
+    const savedPizza = await newPizza.save();
+    res.status(201).json(savedPizza);
+  } catch (error) {
+    res.status(500).json({ error: "internal Server Error" });
+  }
+});
+
+
+
+
+
+
 
 
 app.listen(port, () => {

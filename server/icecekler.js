@@ -7,7 +7,7 @@ const port = 3004;
 
 const corsOptions = {
   origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/icecekler'],
-  methods: 'GET', 
+  methods: ['GET', 'POST'],
 };
 
 app.use(cors(corsOptions));
@@ -54,6 +54,36 @@ app.get('/icecekler', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+
+app.post('/icecekler', async (req, res) => { 
+  try {
+    const { tür, fiyat, aciklama, image } = req.body; 
+
+    const newIcecek = new Icecekler({
+      tür,
+      fiyat,
+      aciklama, 
+      image,
+    });
+
+    const savedIcecek = await newIcecek.save();
+    res.status(201).json(savedIcecek);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
 
 
 app.listen(port, () => {

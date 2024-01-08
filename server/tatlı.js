@@ -7,7 +7,7 @@ const port = 3005;
 
 const corsOptions = {
   origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/tatlılar'], // Updated to use 'tatli'
-  methods: 'GET',
+  methods: ['GET', 'POST'],
 };
 
 app.use(cors(corsOptions));
@@ -35,20 +35,39 @@ const tatliSchema = new mongoose.Schema({
 });
 
 
-const Tatlilar = mongoose.model('tatli', tatliSchema); 
+const Tatlilar = mongoose.model('tatli', tatliSchema);
 
 
 app.use(express.json());
 
 
-app.get('/tatlilar', async (req, res) => { 
+app.get('/tatlilar', async (req, res) => {
   try {
-    const data = await Tatlilar.find(); 
+    const data = await Tatlilar.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.post('/tatlilar', async (req, res) => {
+  try {
+    const { tür, fiyat, image } = req.body;
+
+    const newTatlı = new Tatlilar({
+      tür,
+      fiyat,
+      image,
+    });
+
+    const savedTatlı = await newTatlı.save();
+    res.status(201).json(savedTatlı);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 
 
 app.listen(port, () => {

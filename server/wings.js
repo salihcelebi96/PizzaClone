@@ -7,7 +7,7 @@ const port = 3002;
 
 const corsOptions = {
   origin: 'http://127.0.0.1:3000/wings', 
-  methods: 'GET', 
+  methods: ['GET', 'POST'],
 };
 
 app.use(cors(corsOptions));
@@ -54,6 +54,35 @@ app.get('/wings', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+
+
+app.post('/wings', async (req, res) => {
+  try {
+    const { tür, fiyat, acıklama,  image } = req.body;
+
+    const newWings = new Wings({
+      tür,
+      fiyat,
+      acıklama,
+      image,
+    });
+
+    const savedWings = await newWings.save();
+    res.status(201).json(savedWings);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
+
+
 
 
 app.listen(port, () => {
