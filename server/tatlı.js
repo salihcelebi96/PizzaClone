@@ -34,24 +34,23 @@ const tatliSchema = new mongoose.Schema({
   },
 });
 
-// Model oluşturulurken veritabanı adını belirtin
-const Tatlilar = mongoose.model('tatli', tatliSchema); // Updated model name to 'Tatlilar'
 
-// Express ortamı
-app.use(cors());
+const Tatlilar = mongoose.model('tatli', tatliSchema); 
+
+
 app.use(express.json());
 
-// API endpoint'i
-app.get('/tatlilar', async (req, res) => { // Updated endpoint to '/tatlilar'
+
+app.get('/tatlilar', async (req, res) => { 
   try {
-    const data = await Tatlilar.find(); // Updated to use 'Tatlilar'
+    const data = await Tatlilar.find(); 
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Sunucuyu başlat
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');

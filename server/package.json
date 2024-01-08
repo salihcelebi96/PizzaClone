@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"nodemon pizza.js\" \"nodemon wings.js\" \"nodemon icecekler.js\" \"nodemon kampanyalar.js\" \"nodemon tatlı.js\"   \"nodemon loginJwt.js\"   \"nodemon payment.js\"    "
+    "start": "concurrently \"nodemon pizza.js\" \"nodemon wings.js\" \"nodemon icecekler.js\" \"nodemon kampanyalar.js\" \"nodemon tatlı.js\"   \"nodemon loginJwt.js\"   \"nodemon admin.js\"   \"nodemon payment.js\"  "
   },
   "keywords": [],
   "author": "",

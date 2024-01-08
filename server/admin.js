@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = 4000;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/pizzalar', 
-  methods: 'GET', 
+  origin: ['http://127.0.0.1:5173/admin'], 
+  methods: 'GET',
 };
 
 app.use(cors(corsOptions));
@@ -19,42 +19,29 @@ mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb
 });
 
 
-const pizzaSchema = new mongoose.Schema({
-  tür: {
-    type: String,
-    required: true,
-  },
-  fiyatlar: {
-    büyük: {
-      type: Number,
+const adminSchema = new mongoose.Schema({
+    email: {
+      type: String, 
       required: true,
     },
-    orta: {
-      type: Number,
+    password: {
+      type: String, 
       required: true,
     },
-    küçük: {
-      type: Number,
-      required: true,
-    },
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-});
+  });
+  
 
 
-const Pizza = mongoose.model('Pizza', pizzaSchema);
+const admins = mongoose.model('admin',adminSchema); 
 
+// Express ortamı
 
-app.use(cors());
 app.use(express.json());
 
-
-app.get('/pizza', async (req, res) => {
+// API endpoint'i
+app.get('/admin', async (req, res) => { 
   try {
-    const data = await Pizza.find();
+    const data = await admins.find(); 
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });

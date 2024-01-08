@@ -6,19 +6,19 @@ const app = express();
 const port = 3003;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/kampanyalar', // İstemcinin bulunduğu adres
-  methods: 'GET', // Sadece GET isteklerine izin ver
+  origin: 'http://127.0.0.1:3000/kampanyalar', 
+  methods: 'GET', 
 };
 
 app.use(cors(corsOptions));
 
-// MongoDB bağlantısı
+
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// MongoDB şeması ve modeli
+
 const kampanyaSchema = new mongoose.Schema({
   tür: {
     type: String,
@@ -38,14 +38,14 @@ const kampanyaSchema = new mongoose.Schema({
   },
 });
 
-// Model oluşturulurken veritabanı adını belirtin
+
 const Kampanyalar = mongoose.model('Kampanyalar', kampanyaSchema);
 
-// Express ortamı
+
 app.use(cors());
 app.use(express.json());
 
-// API endpoint'i
+
 app.get('/kampanyalar', async (req, res) => {
   try {
     const data = await Kampanyalar.find();
@@ -55,7 +55,7 @@ app.get('/kampanyalar', async (req, res) => {
   }
 });
 
-// Sunucuyu başlat
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');

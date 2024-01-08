@@ -12,13 +12,13 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// MongoDB bağlantısı
+
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// MongoDB şeması ve modeli
+
 const icecekSchema = new mongoose.Schema({
   tür: {
     type: String,
@@ -38,14 +38,14 @@ const icecekSchema = new mongoose.Schema({
   },
 });
 
-// Model oluşturulurken veritabanı adını belirtin
+
 const Icecekler = mongoose.model('icecek', icecekSchema);
 
-// Express ortamı
-app.use(cors());
+
+
 app.use(express.json());
 
-// API endpoint'i
+
 app.get('/icecekler', async (req, res) => {
   try {
     const data = await Icecekler.find();
@@ -55,7 +55,7 @@ app.get('/icecekler', async (req, res) => {
   }
 });
 
-// Sunucuyu başlat
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');

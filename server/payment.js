@@ -6,7 +6,7 @@ const app = express();
 const port = 3008;
 
 app.use(cors());
-app.use(express.json()); // Sadece bir kez kullanılmalı.
+app.use(express.json()); 
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
@@ -59,7 +59,7 @@ app.post('/payment', async (req, res) => {
   }
 });
 
-// Sunucuyu başlat
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');

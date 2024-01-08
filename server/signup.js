@@ -7,20 +7,20 @@ const app = express();
 const port = 3006;
 app.use(cors());
 
-// MongoDB'ye bağlan
+
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 
-// MongoDB bağlantı hatası kontrolü
+
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function () {
   console.log('MongoDB connected successfully');
 });
 
-// Kullanıcı şemasını oluştur
+
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -31,13 +31,13 @@ const userSchema = new mongoose.Schema({
   isChecked3:Boolean
 });
 
-// Kullanıcı modelini oluştur
+
 const User = mongoose.model('User', userSchema);
 
-// JSON verilerini işlemek için body-parser middleware'ini kullan
+
 app.use(bodyParser.json());
 
-// Kullanıcı kaydı (signup) endpoint'i
+
 app.post('/signup', async (req, res) => {
   try {
     // Gelen verileri al

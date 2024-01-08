@@ -9,6 +9,8 @@ const AdminPage: React.FC = () => {
 
     const handlePasswordChange = () => {
        setShowPassword(!showPassword);
+       console.log(email);
+       console.log(password);
     }
 
 
@@ -24,7 +26,7 @@ const AdminPage: React.FC = () => {
                     </div>
                     <div className='flex relative  flex-col gap-2'>
                         <label htmlFor="">Şifre</label>
-                        <input onChange={(e)=> e.target.value} className='input' type={showPassword ? "text" : "password"} />
+                        <input onChange={(e)=> setPassword(e.target.value)} className='input' type={showPassword ? "text" : "password"} />
                         <button onClick={handlePasswordChange} className='absolute text-green-600 bottom-3 right-1'> <IoEyeSharp size={24} />  </button>
                     </div>
                 </div>
