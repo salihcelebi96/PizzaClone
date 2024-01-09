@@ -14,6 +14,7 @@ import SignUp from './pages/SignUp';
 import Sepet from "./pages/Sepet";
 import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
+import Manager from './pages/Manager';
 
 const App = () => {
 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='/sepet' element={<Sepet />}/>
         <Route path='/payment' element={<Payment />}/>
         <Route path='/admin' element={<AdminPage />}/>
+        <Route path='/manager' element={<Manager />}/>
       </Routes>
       <Footer />
     </Router>

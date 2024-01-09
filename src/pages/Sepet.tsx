@@ -6,12 +6,19 @@ import { FaTrash } from 'react-icons/fa';
 import { deleteItems } from '../reducers/sepetSlice';
 import "../css/sepet.css";
 import { useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Sepet: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
   const userLogin = useSelector((state :RootState) => state.login.userLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const notify = () => toast("Giriş Yapmalısınız !");
+
+
+
+
 
   const handleDelete = (itemId: string) => {
     // Use arrow function here and fix the argument to deleteItems
@@ -33,6 +40,8 @@ const Sepet: React.FC = () => {
   const handleBasket = () => {
     if(userLogin){
       navigate("/payment");
+    }else{
+      notify();
     }
   }
   
@@ -78,7 +87,7 @@ const Sepet: React.FC = () => {
             <p className='text-red-500'>Toplam: {ToplamPrice()} TL</p>    
           </div>
           <div className=' flex justify-end   px-6 gap-2'>
-            <button onClick={handleBasket}  disabled={!userLogin} className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl'  >
+            <button onClick={handleBasket}   className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl'  >
                  Siparişi Tamamla 
               </button>
           </div>
