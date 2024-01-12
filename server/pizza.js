@@ -1,23 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 const port = 3001;
 
-const corsOptions = {
-  origin: 'http://127.0.0.1:3000/pizzalar',
-  methods: ['GET', 'POST'],
-};
-
-app.use(cors(corsOptions));
-
+app.use(cors());
+app.use(fileUpload());
+app.use(express.json());
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
 
 const pizzaSchema = new mongoose.Schema({
   tür: {
@@ -30,27 +26,21 @@ const pizzaSchema = new mongoose.Schema({
       required: true,
     },
     orta: {
-      type: Number,
+      type:  Number,
       required: true,
     },
     küçük: {
-      type: Number,
+      type:  Number,
       required: true,
     },
   },
-  image: {
-    type: String,
+  url: {
+    type: String, // Resmi URL olarak sakla
     required: true,
   },
 });
 
-
 const Pizza = mongoose.model('Pizza', pizzaSchema);
-
-
-app.use(cors());
-app.use(express.json());
-
 
 app.get('/pizza', async (req, res) => {
   try {
@@ -61,39 +51,22 @@ app.get('/pizza', async (req, res) => {
   }
 });
 
-app.post("/pizza", async (req, res) => {
+app.post('/pizza', async (req, res) => {
+  const { url, tür, fiyatlar } = req.body;
   try {
-    const { tür, fiyatlar, image } = req.body;
-    if (
-      !fiyatlar ||
-      typeof fiyatlar !== "object" ||
-      !fiyatlar.büyük ||
-      !fiyatlar.orta ||
-      !fiyatlar.küçük
-    ) {
-      return res.status(400).json({ error: "Invalid fiyatlar structure" });
-    }
-     
-
-
-    const newPizza = new Pizza({
+    // Create a new pizza document directly using create
+    const savedPizza = await Pizza.create({
       tür,
       fiyatlar,
-      image,
+      url,
     });
-    const savedPizza = await newPizza.save();
+
     res.status(201).json(savedPizza);
   } catch (error) {
-    res.status(500).json({ error: "internal Server Error" });
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 });
-
-
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

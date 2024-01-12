@@ -21,9 +21,11 @@ const IceceklerData: React.FC = () => {
         }
     };
 
-    const handleFileChange = (e: any) => {
-        const file = e.target.files[0];
-        // Dosya seçildikçe yapılacak işlemler
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+            setIceceklerData((prevData: any) => ({ ...prevData, image: file }));
+        }
     };
 
     return (
@@ -62,8 +64,8 @@ const IceceklerData: React.FC = () => {
                     <label className='w-28'>Image</label>
                     <input className='input border-none' type="file" onChange={handleFileChange} />
                 </div>
-                <div className='flex justify-center'>
-                    <button onClick={IceceklerPost} className='border p-1 rounded-lg text-white bg-green-600'>İçecek Gönder</button>
+                <div className='absolute left-0 bottom-0 w-full'>
+                    <button onClick={IceceklerPost} className='border hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600'>İçecek Gönder</button>
                 </div>
             </div>
         </div>

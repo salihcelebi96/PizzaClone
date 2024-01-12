@@ -6,7 +6,7 @@ const app = express();
 const port = 3004;
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/icecekler'],
+  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/icecekler',"http://127.0.0.1:5173/manager"],
   methods: ['GET', 'POST'],
 };
 

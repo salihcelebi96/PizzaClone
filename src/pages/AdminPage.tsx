@@ -53,7 +53,7 @@ const AdminPage: React.FC = () => {
         setAdminLogin(true);
         dispatch(adminLoginTrue);
         console.log("admin", adminLogin );
-        navigate("/administration");
+        navigate("/manager");
     }else{
         console.log("false adminn");
     }

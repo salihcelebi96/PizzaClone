@@ -25,7 +25,7 @@ const WingData: React.FC = () => {
 
     const handleFileChange = (e: any) => {
         const file = e.target.files[0];
-
+        setWingData({ ...wingData, image: file });
     };
 
 
@@ -65,8 +65,8 @@ const WingData: React.FC = () => {
                     <label className='w-28'>Image</label>
                     <input className='input border-none' type="file" onChange={handleFileChange} />
                 </div>
-                <div className='flex justify-center'>
-                    <button onClick={WingPost} className='border p-1 rounded-lg text-white bg-green-600'>Kanat Gönder</button>
+                <div  onClick={WingPost} className='absolute left-0 bottom-0 w-full'>
+                    <button className='border w-full p-1 rounded-lg text-white  font-semibold hover:bg-green-400  bg-green-600'>Kanat Gönder</button>
                 </div>
             </div>
         </div>

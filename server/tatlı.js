@@ -6,7 +6,7 @@ const app = express();
 const port = 3005;
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/tatlılar'], // Updated to use 'tatli'
+  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/tatlılar', "http://127.0.0.1:5173/manager"], // Updated to use 'tatli'
   methods: ['GET', 'POST'],
 };
 

@@ -6,7 +6,7 @@ const app = express();
 const port = 3002;
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:3000/wings', 
+  origin: ['http://127.0.0.1:3000/wings', "http://127.0.0.1:5173/manager"], 
   methods: ['GET', 'POST'],
 };
 

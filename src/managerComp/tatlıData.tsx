@@ -22,7 +22,7 @@ const TatliData: React.FC = () => {
 
     const handleFileChange = (e: any) => {
         const file = e.target.files[0];
-        // Dosya seçildikçe yapılacak işlemler
+        setTatliData({ ...tatliData, image: file });
     };
 
     return (
@@ -50,8 +50,8 @@ const TatliData: React.FC = () => {
                     <label className='w-28'>Image</label>
                     <input className='input border-none' type="file" onChange={handleFileChange} />
                 </div>
-                <div className='flex justify-center'>
-                    <button onClick={TatliPost} className='border p-1 rounded-lg text-white bg-green-600'>Tatlı Gönder</button>
+                <div className='absolute left-0 w-full bottom-0 '>
+                    <button onClick={TatliPost} className='border w-full hover:bg-green-400 font-semibold p-1 rounded-lg text-white bg-green-600'>Tatlı Gönder</button>
                 </div>
             </div>
         </div>
