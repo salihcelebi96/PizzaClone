@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Axios'u import et
+import axios from 'axios'; 
 import "../css/manager.css";
 
 interface PizzaDataState {
@@ -58,7 +58,7 @@ const PizzaData: React.FC = () => {
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const base64String = reader.result as string;
-      setImage(base64String); // Set the base64 string to the image state
+      setImage(base64String); 
     };
     reader.onerror = (error) => {
       console.log(error);

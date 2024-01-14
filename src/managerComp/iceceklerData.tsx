@@ -2,35 +2,58 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/manager.css";
 
+interface IcecekDataState {
+    tür: string;
+    fiyat: number;
+    image: string;
+}
+
 const IceceklerData: React.FC = () => {
-    const [iceceklerData, setIceceklerData] = useState({
+    const [image, setImage] = useState<string>("");
+    const [iceceklerData, setIceceklerData] = useState<IcecekDataState>({
         tür: '',
         fiyat: 0,
-        aciklama: '',
-        image: '',
+        image: ""
     });
 
-    const IceceklerPost = async () => {
+    const icecekPost = async () => {
         try {
-            const apiUrl = 'http://localhost:3004/icecekler';
-            const response = await axios.post(apiUrl, iceceklerData);
+            const apiUrl = "http://localhost:3004/icecekler";
 
-            console.log('Server Response:', response.data);
+            const postData = {
+                tür: iceceklerData.tür,
+                fiyat: iceceklerData.fiyat,  // Corrected property name
+                url: image || ""
+            };
+
+            const response = await axios.post(apiUrl, postData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            });
+
+            console.log("Server Response:", response.data);
         } catch (error: any) {
             console.error('Error:', error.message);
         }
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0];
-        if (file) {
-            setIceceklerData((prevData: any) => ({ ...prevData, image: file }));
-        }
+    const convertToBase64 = (e: any) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            const base64String = reader.result as string;
+            setImage(base64String);
+        };
+        reader.onerror = (error) => {
+            console.log(error);
+        };
     };
 
     return (
         <div className=''>
-            <div className='h-[500px] relative  border flex flex-col gap-5  p-5  '>
+            <div className='h-[500px] relative border flex flex-col gap-5 p-5'>
                 <div className='labelStyle'>
                     <label className='w-28'>İçecek Türü</label>
                     <input
@@ -50,22 +73,14 @@ const IceceklerData: React.FC = () => {
                             onChange={(e) => setIceceklerData({ ...iceceklerData, fiyat: parseFloat(e.target.value) })}
                         />
                     </div>
-                    <div className='labelStyle'>
-                        <label className='w-28'>Açıklama</label>
-                        <input
-                            className='input'
-                            type="text"
-                            value={iceceklerData.aciklama}
-                            onChange={(e) => setIceceklerData({ ...iceceklerData, aciklama: e.target.value })}
-                        />
-                    </div>
+
                 </div>
                 <div className='labelStyle'>
                     <label className='w-28'>Image</label>
-                    <input className='input border-none' type="file" onChange={handleFileChange} />
+                    <input className='input border-none' type="file" onChange={convertToBase64} />
                 </div>
                 <div className='absolute left-0 bottom-0 w-full'>
-                    <button onClick={IceceklerPost} className='border hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600'>İçecek Gönder</button>
+                    <button onClick={icecekPost} className='border hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600'>İçecek Gönder</button>
                 </div>
             </div>
         </div>

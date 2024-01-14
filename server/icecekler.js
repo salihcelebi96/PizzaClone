@@ -5,12 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 3004;
 
-const corsOptions = {
-  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/icecekler',"http://127.0.0.1:5173/manager"],
-  methods: ['GET', 'POST'],
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
@@ -28,11 +25,8 @@ const icecekSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  acıklama: {
-    type: String,
-    required: true,
-  },
-  image: {
+
+  url: {
     type: String,
     required: true,
   },
@@ -58,17 +52,16 @@ app.get('/icecekler', async (req, res) => {
 
 
 app.post('/icecekler', async (req, res) => { 
+  const { tür, fiyat,  url } = req.body; 
   try {
-    const { tür, fiyat, aciklama, image } = req.body; 
+    
 
-    const newIcecek = new Icecekler({
+    const savedIcecek = await Icecekler.create({
       tür,
       fiyat,
-      aciklama, 
-      image,
+      url,
+      
     });
-
-    const savedIcecek = await newIcecek.save();
     res.status(201).json(savedIcecek);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });

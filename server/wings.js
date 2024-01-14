@@ -5,12 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 3002;
 
-const corsOptions = {
-  origin: ['http://127.0.0.1:3000/wings', "http://127.0.0.1:5173/manager"], 
-  methods: ['GET', 'POST'],
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
@@ -24,15 +21,15 @@ const wingsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  fiyat: {
+  Fiyat: {
     type: Number,
     required: true,
   },
-  acıklama: {
+  Açıklama: {
     type:String,
     required: true,
   },
-  image: {
+  Url: {
     type: String,
     required: true,
   },
@@ -60,13 +57,13 @@ app.get('/wings', async (req, res) => {
 
 app.post('/wings', async (req, res) => {
   try {
-    const { tür, fiyat, acıklama,  image } = req.body;
+    const { tür, Fiyat, Açıklama,  Url } = req.body;
 
     const newWings = new Wings({
       tür,
-      fiyat,
-      acıklama,
-      image,
+      Fiyat,
+      Açıklama,
+      Url,
     });
 
     const savedWings = await newWings.save();
@@ -75,7 +72,6 @@ app.post('/wings', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 
 

@@ -5,12 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 3005;
 
-const corsOptions = {
-  origin: ['http://127.0.0.1:3000/yanurunler', 'http://127.0.0.1:3000/tatlılar', "http://127.0.0.1:5173/manager"], // Updated to use 'tatli'
-  methods: ['GET', 'POST'],
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 // MongoDB bağlantısı
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
@@ -28,7 +25,7 @@ const tatliSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  image: {
+  url: {
     type: String,
     required: true,
   },
@@ -52,12 +49,12 @@ app.get('/tatlilar', async (req, res) => {
 
 app.post('/tatlilar', async (req, res) => {
   try {
-    const { tür, fiyat, image } = req.body;
+    const { tür, fiyat, url } = req.body;
 
     const newTatlı = new Tatlilar({
       tür,
       fiyat,
-      image,
+      url,
     });
 
     const savedTatlı = await newTatlı.save();

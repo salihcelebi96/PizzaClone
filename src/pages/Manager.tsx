@@ -12,9 +12,9 @@ const Manager :React.FC = () => {
         </div>
         <div className='h-screen grid lg:grid-cols-4 sm:grid-cols-1  m-7 gap-5'>
        <PizzaData/>
-       {/* <WingData/>
+       <WingData/>
        <IceceklerData/>
-       <TatlıData/> */}
+       <TatlıData/>
     </div>
     </div>
     
