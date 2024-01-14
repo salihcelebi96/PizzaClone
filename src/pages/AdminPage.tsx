@@ -48,10 +48,14 @@ const AdminPage: React.FC = () => {
     
     
    const handleAdmin = () => {
-    const admin = adminData.find(admin => admin.email === email && admin.password === password);
+    const admin = adminData.find(
+        (admin) =>
+            admin.email.trim() === email.trim() &&
+            admin.password.trim() === password.trim()
+    );
     if(admin){
         setAdminLogin(true);
-        dispatch(adminLoginTrue);
+        dispatch(adminLoginTrue());
         console.log("admin", adminLogin );
         navigate("/manager");
     }else{

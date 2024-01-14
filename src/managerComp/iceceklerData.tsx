@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/manager.css";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IcecekDataState {
     tür: string;
@@ -15,7 +17,7 @@ const IceceklerData: React.FC = () => {
         fiyat: 0,
         image: ""
     });
-
+    const notify = () => toast("İçecek GÖderildi !");
     const icecekPost = async () => {
         try {
             const apiUrl = "http://localhost:3004/icecekler";
@@ -34,6 +36,7 @@ const IceceklerData: React.FC = () => {
             });
 
             console.log("Server Response:", response.data);
+            notify();
         } catch (error: any) {
             console.error('Error:', error.message);
         }

@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
+import {  useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 import Home from './pages/Home';
 import Navbar from "./pages/MenuComp";
 import Footer from "./components/FooterComp";
@@ -16,10 +18,12 @@ import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
 import Manager from './pages/Manager';
 
+
 const App = () => {
 
   
-
+const isAdminLogin = useSelector((state :  RootState) => state.admin.adminLogin);
+console.log(isAdminLogin, "app.tsx");
 
 
 
@@ -42,7 +46,7 @@ const App = () => {
         <Route path='/sepet' element={<Sepet />}/>
         <Route path='/payment' element={<Payment />}/>
         <Route path='/admin' element={<AdminPage />}/>
-        <Route path='/manager' element={<Manager />}/>
+        <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
       </Routes>
       <Footer />
     </Router>

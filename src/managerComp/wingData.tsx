@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/manager.css";
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 interface WingDataState {
     tür: string;
     Fiyat: number;
@@ -17,13 +18,14 @@ const WingData: React.FC = () => {
         Açıklama: '',
         Url: image || '',
     });
-
+    const notify = () => toast("Wings Gönderildi !");
     const handleWingPost = async () => {
         try {
             const apiUrl = 'http://localhost:3002/wings';
             const response = await axios.post(apiUrl, wingData);
 
             console.log('Server Response:', response.data);
+            notify();
         } catch (error: any) {
             console.error('Error:', error.message);
         }

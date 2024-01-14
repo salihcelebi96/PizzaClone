@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import "../css/manager.css";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface PizzaDataState {
   tür: string;
@@ -23,7 +25,7 @@ const PizzaData: React.FC = () => {
     },
     url: "",
   });
-
+  const notify = () => toast("Pizza Gönderildi !  ");
   const PizzaPost = async () => {
     try {
       const apiUrl = "http://localhost:3001/pizza";
@@ -46,6 +48,7 @@ const PizzaData: React.FC = () => {
       });
   
       console.log("Server Response:", response.data);
+      notify();
     } catch (error:any) {
       console.error('Error:', error.message);
     }

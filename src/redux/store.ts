@@ -7,6 +7,7 @@ import IceceklerSlice from "../reducers/iceceklerSlice";
 import tatlıSlice from '../reducers/tatlıSlice';
 import loginSlice from '../reducers/loginSlice';
 import sepetSlice from "../reducers/sepetSlice";
+import AdminSlice from "../reducers/adminSlice";
 
 
 
@@ -19,6 +20,7 @@ const store = configureStore({
    tatlılar:tatlıSlice,
    login:loginSlice,
    sepet:sepetSlice, 
+   admin:AdminSlice,
     
   },
 });
