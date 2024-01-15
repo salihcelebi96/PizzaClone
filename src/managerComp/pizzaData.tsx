@@ -115,7 +115,7 @@ const PizzaData: React.FC = () => {
           />
         </div>
         <div className='absolute left-0 bottom-0 w-full '>
-          <button onClick={PizzaPost} className=' hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600' >Pizza Gönder</button>
+          <button onClick={PizzaPost} className=' hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600' >Pizza Ekle</button>
         </div>
       </div>
     </div>

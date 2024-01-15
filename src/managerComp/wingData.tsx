@@ -83,7 +83,7 @@ const WingData: React.FC = () => {
                     <input className='input border-none' type="file" onChange={convertToBase64} />
                 </div>
                 <div onClick={handleWingPost} className='absolute left-0 bottom-0 w-full'>
-                    <button className='border w-full p-1 rounded-lg text-white font-semibold hover:bg-green-400 bg-green-600'>Kanat Gönder</button>
+                    <button className='border w-full p-1 rounded-lg text-white font-semibold hover:bg-green-400 bg-green-600'>Kanat Ekle</button>
                 </div>
             </div>
         </div>

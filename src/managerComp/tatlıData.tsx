@@ -81,7 +81,7 @@ const TatliData: React.FC = () => {
                     <input className='input border-none' type="file" onChange={convertToBase64} />
                 </div>
                 <div className='absolute left-0 w-full bottom-0'>
-                    <button onClick={handleTatliPost} className='border w-full hover:bg-green-400 font-semibold p-1 rounded-lg text-white bg-green-600'>Tatlı Gönder</button>
+                    <button onClick={handleTatliPost} className='border w-full hover:bg-green-400 font-semibold p-1 rounded-lg text-white bg-green-600'>Tatlı Ekle</button>
                 </div>
             </div>
         </div>

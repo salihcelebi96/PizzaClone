@@ -17,6 +17,7 @@ import Sepet from "./pages/Sepet";
 import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
 import Manager from './pages/Manager';
+import "./App.css";
 
 
 const App = () => {

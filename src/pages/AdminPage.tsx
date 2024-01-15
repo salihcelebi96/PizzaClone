@@ -47,22 +47,22 @@ const AdminPage: React.FC = () => {
     }, []);
     
     
-   const handleAdmin = () => {
-    const admin = adminData.find(
-        (admin) =>
-            admin.email.trim() === email.trim() &&
-            admin.password.trim() === password.trim()
-    );
-    if(admin){
-        setAdminLogin(true);
-        dispatch(adminLoginTrue());
-        console.log("admin", adminLogin );
-        navigate("/manager");
-    }else{
-        console.log("false adminn");
-    }
-
-   };
+    const handleAdmin = async () => {
+        const admin = adminData.find(
+            (admin) =>
+                admin.email.trim() === email.trim() &&
+                admin.password.trim() === password.trim()
+        );
+        if (admin) {
+            setAdminLogin(true);
+            dispatch(adminLoginTrue());
+            console.log("admin", adminLogin);
+            navigate("/manager");
+        } else {
+            console.log("false admin");
+        }
+    };
+    
 
     
 

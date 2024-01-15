@@ -83,7 +83,7 @@ const IceceklerData: React.FC = () => {
                     <input className='input border-none' type="file" onChange={convertToBase64} />
                 </div>
                 <div className='absolute left-0 bottom-0 w-full'>
-                    <button onClick={icecekPost} className='border hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600'>İçecek Gönder</button>
+                    <button onClick={icecekPost} className='border hover:bg-green-400 font-semibold w-full p-1 rounded-lg text-white bg-green-600'>İçecek Ekle</button>
                 </div>
             </div>
         </div>

@@ -5,12 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = 4000;
 
-const corsOptions = {
-  origin: ['http://127.0.0.1:5173/admin'], 
-  methods: 'GET',
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {

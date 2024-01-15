@@ -18,13 +18,13 @@ const FooterSmall: React.FC = () => {
 
     return (
 
-        <div className='h-auto    flex justify-center gap-5 items-center flex-col bg-black text-white'>
+        <div className='h-auto   footer-small  flex justify-center gap-5 items-center flex-col bg-black text-white'>
             <div>
                 <div className='flex justify-center mt-2 flex-col items-center'>
                     <div className=''>
                         <img className='w-24' src={Logo} alt="" />
                     </div>
-                    <div className='border bg-gray-700 cursor-pointer  h-[40px] border-none w-[120px] hover:scale-90 duration-300   flex   p-2 gap-2 my-5 justify-center items-center rounded-3xl'>
+                    <div className='border  cursor-pointer  h-[40px] border-none w-[120px] hover:scale-90 duration-300   flex   p-2 gap-2 my-5 justify-center items-center rounded-3xl'>
                         <FaPhoneAlt />
                         <p>444 6 555</p>
                     </div>
