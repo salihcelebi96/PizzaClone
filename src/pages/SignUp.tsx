@@ -3,14 +3,15 @@ import "../css/signUp.css";
 import { useDispatch } from 'react-redux';
 import { loginOpen, signUpClose } from '../reducers/loginSlice';
 import { useNavigate } from 'react-router-dom';
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const notify = () => toast("Kayıt olundu !! ");
   const GoLoginPage = () => {
     dispatch(loginOpen());
     dispatch(signUpClose());
@@ -28,6 +29,7 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<any>("");
   const [phoneNumber, setPhoneNumber] = useState<string>();
+  
   
   
 
@@ -99,6 +101,8 @@ const SignUp: React.FC = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Signup successful:', result);
+        navigate("/login");
+        notify();
       } else {
         console.error('Signup failed:', response.statusText);
       }

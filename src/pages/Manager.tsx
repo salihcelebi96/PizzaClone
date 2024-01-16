@@ -6,7 +6,7 @@ import TatlıData from "../managerComp/tatlıData";
 
 const Manager: React.FC = () => {
   return (
-    <div className='grid sm:grid-cols-1   lg:grid-cols-4  text-xl font-semibold  md:grid-cols-2   justify-center gap-5 m-5 '>
+    <div className='grid sm:grid-cols-1 xl:grid-cols-4   lg:grid-cols-3  text-xl font-semibold  md:grid-cols-2    justify-center gap-5 m-5 '>
       
       
         <PizzaData />

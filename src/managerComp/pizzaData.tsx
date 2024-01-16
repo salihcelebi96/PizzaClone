@@ -74,7 +74,7 @@ const PizzaData: React.FC = () => {
         <div className='labelStyle'>
           <label className='w-28 '>Pizza Türü</label>
           <input
-            className='input'
+            className='input '
             type="text"
             onChange={(e) => setPizzaData({ ...pizzaData, tür: e.target.value })}
           />
@@ -105,10 +105,10 @@ const PizzaData: React.FC = () => {
             />
           </div>
         </div>
-        <div className='labelStyle'>
-          <label className='w-28 '>Image</label>
+        <div className='labelStyle '>
+          <label className='w-28'>Image</label>
           <input
-            className='input border-none'
+            className='input border-none  '
             type="file"
             accept='image/*'
             onChange={convertToBase64}

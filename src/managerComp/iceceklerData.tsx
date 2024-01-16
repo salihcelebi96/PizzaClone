@@ -78,7 +78,7 @@ const IceceklerData: React.FC = () => {
                     </div>
 
                 </div>
-                <div className='labelStyle'>
+                <div className='labelStyle '>
                     <label className='w-28'>Image</label>
                     <input className='input border-none' type="file" onChange={convertToBase64} />
                 </div>
