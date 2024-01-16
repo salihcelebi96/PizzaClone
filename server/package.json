@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines":{
+   "node": "14.x"
+  },
   "scripts": {
     "start": "concurrently \"nodemon pizza.js\" \"nodemon wings.js\" \"nodemon icecekler.js\" \"nodemon kampanyalar.js\" \"nodemon tatlı.js\"   \"nodemon loginJwt.js\"   \"nodemon admin.js\"   \"nodemon payment.js\"  "
   },
