@@ -88,8 +88,8 @@ const AdminPage: React.FC = () => {
                     </div>
                 </div>
                 
-                <div className='m-2 w-2/3 flex  justify-end'>
-                    <button onClick={handleAdmin} className='border px-3 py-1 rounded-md  text-white hover:bg-blue-500 bg-blue-600'>Giriş</button>
+                <div className='m-2 w-full flex  justify-center'>
+                    <button onClick={handleAdmin} className='border px-3 py-1 rounded-md w-1/2  text-white hover:bg-blue-500 bg-blue-600'>Giriş</button>
                 </div>
             </div>
             
