@@ -48,8 +48,9 @@ console.log(isAdminLogin, "app.tsx");
         <Route path='/sepet' element={<Sepet />}/>
         <Route path='/payment' element={<Payment />}/>
         <Route path='/admin' element={<AdminPage />}/>
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
+        {/* <Route path="*" element={<Navigate to="/" />} />
+        <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} /> */}
+        <Route path='/manager' element={ <Manager/>}  />  
       </Routes>
       <Footer />
     </Router>
