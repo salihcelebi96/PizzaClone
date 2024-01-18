@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines":{
-   "node": "14.x"
-  },
+  
   "scripts": {
     "start": "concurrently \"nodemon pizza.js\" \"nodemon wings.js\" \"nodemon icecekler.js\" \"nodemon kampanyalar.js\" \"nodemon tatlı.js\"   \"nodemon loginJwt.js\"   \"nodemon admin.js\"   \"nodemon payment.js\"  "
   },
@@ -13,12 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.2",
-    "multer": "^1.4.5-lts.1"
+    "mongoose": "^8.1.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.3"
   }
 }

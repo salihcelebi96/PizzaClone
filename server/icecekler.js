@@ -8,13 +8,20 @@ const port = 3004;
 
 
 app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+  next();
+});
 
 
 mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+  tls: true,
+  tlsAllowInvalidCertificates: true
+}
 
+);
 
 const icecekSchema = new mongoose.Schema({
   tür: {

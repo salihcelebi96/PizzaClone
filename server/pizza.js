@@ -10,10 +10,28 @@ app.use(cors());
 app.use(fileUpload());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+  next();
 });
+
+
+
+
+
+
+
+
+
+
+mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
+  tls: true,
+  tlsAllowInvalidCertificates: true
+}
+
+);
 
 const pizzaSchema = new mongoose.Schema({
   tür: {

@@ -56,7 +56,7 @@ const IceceklerData: React.FC = () => {
 
     return (
         <div className=''>
-            <div className='h-[500px] relative border flex flex-col gap-5 p-5'>
+            <div className='relative  border flex flex-col gap-5 p-5'>
                 <div className='labelStyle'>
                     <label className='w-28'>İçecek Türü</label>
                     <input
