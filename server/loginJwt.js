@@ -5,6 +5,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken'); // Import JWT library
 require('dotenv').config();
 const secretKey = process.env.SECRET_KEY || 'defaultSecret';
+const dotenv = require('dotenv');
 
 
 
@@ -12,14 +13,11 @@ const secretKey = process.env.SECRET_KEY || 'defaultSecret';
 const app = express();
 const port = 3006;
 app.use(cors());
+dotenv.config();
 
 
 
-
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  tls: true,
-  tlsAllowInvalidCertificates: true
-});
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

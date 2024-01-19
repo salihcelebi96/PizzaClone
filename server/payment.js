@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3008;
+const dotenv = require('dotenv');
 
 app.use(cors());
 app.use(express.json()); 
@@ -13,13 +14,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', '*');
   next();
 });
-
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  tls: true,
-  tlsAllowInvalidCertificates: true
-}
-
-);
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI);
 
 const paymentSchema = new mongoose.Schema({
   totalPrice: {

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 const app = express();
 const port = 3003;
@@ -15,13 +16,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  tls: true,
-  tlsAllowInvalidCertificates: true
-}
-
-);
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI);
 
 
 const kampanyaSchema = new mongoose.Schema({

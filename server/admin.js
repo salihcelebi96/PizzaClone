@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 const app = express();
 const port = 4000;
+const dotenv = require('dotenv');
 
 
 
@@ -14,14 +14,9 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', '*');
   next();
 });
+dotenv.config();
 
-
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  tls: true,
-  tlsAllowInvalidCertificates: true
-}
-
-);
+mongoose.connect(process.env.MONGODB_URI);
 
 const adminSchema = new mongoose.Schema({
     email: {

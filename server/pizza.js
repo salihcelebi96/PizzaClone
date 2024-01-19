@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const dotenv = require('dotenv');
 
 const app = express();
 const port = 3001;
@@ -17,22 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
+dotenv.config();
 
 
-
-
-
-
-
-
-
-mongoose.connect('mongodb+srv://celebisalih277:salih266@cluster0.4wktsa2.mongodb.net/PizzaHut', {
-  tls: true,
-  tlsAllowInvalidCertificates: true
-}
-
-);
-
+mongoose.connect(process.env.MONGODB_URI);
 const pizzaSchema = new mongoose.Schema({
   tür: {
     type: String,
