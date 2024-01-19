@@ -38,11 +38,11 @@ const adminSchema = new mongoose.Schema({
 
 const admins = mongoose.model('admin',adminSchema); 
 
-// Express ortamı
+
 
 app.use(express.json());
 
-// API endpoint'i
+
 app.get('/admin', async (req, res) => { 
   try {
     const data = await admins.find(); 
