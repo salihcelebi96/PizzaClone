@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["react", "react-dom", "react-icons", "jwt-decode"],
+    "types": ["react", "react-dom", "react-icons", "jwt-decode", "node"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     

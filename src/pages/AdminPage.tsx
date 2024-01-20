@@ -6,7 +6,10 @@ import { adminLoginTrue  } from '../reducers/adminSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const AdminPage: React.FC = () => {
+    const port = "http://localhost:4000/admin";
  const dispatch = useDispatch();
  const navigate = useNavigate();
     interface IDataItem {
@@ -14,8 +17,8 @@ const AdminPage: React.FC = () => {
         password:string;
        
     }
-
-
+    
+    
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -35,7 +38,7 @@ const AdminPage: React.FC = () => {
     
 
     useEffect(() => {
-        axios.get<IDataItem[]>('http://localhost:4000/admin')
+        axios.get<IDataItem[]>(port)
             .then((response: AxiosResponse<IDataItem[]>) => {
                 setAdminData(response.data);
                 console.log(response.data);
