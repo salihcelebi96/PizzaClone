@@ -109,7 +109,7 @@ const Login: React.FC = () => {
    
   
   return (
-    <div className=" flex justify-center ">
+    <div className=" flex justify-center relative ">
       <div className="bg-white  border-1 border-gray-400  h-[500px] w-[400px] p-8 rounded-md">
         <div className="text-xl text-center font-bold  mb-4">Giriş Yap</div>
         <div className="mb-4 ">
@@ -139,6 +139,7 @@ const Login: React.FC = () => {
         </div>
         
       </div>
+      
     </div>
   );
 };

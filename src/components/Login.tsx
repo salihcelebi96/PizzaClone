@@ -104,6 +104,8 @@ const Login: React.FC = () => {
     dispatch(logout());
   };
 
+
+
   return (
     <div className="text-black   ">
       <div className="bg-white  border-1 border-gray-400 absolute top-50 left-50 transform-translate-50-50 z-10 h-[500px] w-[400px] p-8 rounded-md">
@@ -148,6 +150,9 @@ const Login: React.FC = () => {
         <div className="absolute text-red-600  top-0 right-2 text-3xl">
           <button onClick={closeLogin}> x </button>
         </div>
+        <div onClick={closeLogin} className="text-sm absolute bottom-0 right-2 ">
+          <Link to="/admin">  Admin <span className="text-xl"> &rarr;</span> </Link>
+      </div>
       </div>
       
      
