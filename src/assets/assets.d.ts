@@ -1,4 +1,4 @@
-// assets.d.ts
+
 
 declare module '*.png' {
     const value: any;
@@ -10,5 +10,5 @@ declare module '*.png' {
     export = value;
   }
   
-  // Diğer dosya türleri için de benzer tanımlamalar ekleyebilirsiniz.
+  
   
