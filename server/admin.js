@@ -5,20 +5,11 @@ const app = express();
 const port = 4000;
 const dotenv = require('dotenv');
 
-const corsOptions = {
-  origin: [' https://pizza-clone.vercel.app/admin', "http://127.0.0.1:5173/admin  " ],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-  next();
-});
+
+
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI);

@@ -52,7 +52,7 @@ const Wings: React.FC = () => {
   return (
     <div className='grid sm:grid-cols-2 text-xl font-semibold  m-16 md:grid-cols-4 justify-center gap-5'>
     {data.map((item: WingsData) => (
-      <div className='border hover:scale-105 duration-300' key={item.id}>
+      <div  key={item.id} className='border hover:scale-105 duration-300' >
         <div className='h-64 items-center flex justify-center p-2 my-2'>
           <div className='flex flex-col justify-center gap-3 items-center'>
             <div>{item.tür}</div>
@@ -65,7 +65,7 @@ const Wings: React.FC = () => {
             </div>
           </div>
         </div>
-        <div onClick={()=> handleBasket(item)} className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
+        <div  onClick={()=> handleBasket(item)} className='border p-1 px-3 flex justify-center hover:bg-red-400 bg-red-600 text-white'>
           <Link className='w-full h-full text-center' to="/sepet">Sipariş Ver</Link>
         </div>
       </div>
