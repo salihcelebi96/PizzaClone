@@ -9,7 +9,12 @@ const dotenv = require('dotenv');
 
 
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI);

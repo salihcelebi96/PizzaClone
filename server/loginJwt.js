@@ -12,7 +12,12 @@ const dotenv = require('dotenv');
 
 const app = express();
 const port = 3006;
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
 dotenv.config();
 
 
