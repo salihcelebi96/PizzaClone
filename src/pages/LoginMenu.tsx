@@ -103,7 +103,9 @@ const Login: React.FC = () => {
   // };
 
 
-
+const closeLogin = () => {
+   dispatch(logout());
+}
 
 
    
@@ -137,7 +139,9 @@ const Login: React.FC = () => {
             </Link>
           </h1>
         </div>
-        
+        <div onClick={closeLogin} className="text-sm absolute bottom-0 right-2 ">
+          <Link to="/admin">  Admin <span className="text-xl"> &rarr;</span> </Link>
+      </div>
       </div>
       
     </div>
