@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { SepetData } from '../reducers/sepetSlice';
@@ -29,10 +29,16 @@ const Sepet: React.FC = () => {
     console.log(userLogin);
     const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0);
 
-    if (totalPrice === 0) {
-      navigate("/");
-      
-    }
+   
+
+    useEffect(() => {
+      if (totalPrice === 0) {
+        navigate("/");
+        
+      }
+    })
+
+   
 
     return totalPrice.toFixed(2); 
   };

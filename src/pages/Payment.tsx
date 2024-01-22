@@ -26,7 +26,7 @@ const Payment: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [lastDate, setLastDate] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
-  
+
   const [isCvcActive, setIsCvcActive] = useState<boolean>(false);
   const [validCard, setValidCard] = useState<boolean>(false);
 
@@ -133,23 +133,6 @@ const Payment: React.FC = () => {
       alert("Hatalı veya eksik bilgi girdiniz");
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
