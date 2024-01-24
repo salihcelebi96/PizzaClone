@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const AdminPage: React.FC = () => {
-    const port = "http://localhost:4000/admin";
+    const port = "http://localhost:3001/admin";
  const dispatch = useDispatch();
  const navigate = useNavigate();
     interface IDataItem {

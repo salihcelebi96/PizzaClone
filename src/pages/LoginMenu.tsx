@@ -29,7 +29,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3006/login', { email, password });
+      const response = await axios.post('http://localhost:3001/login', { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);

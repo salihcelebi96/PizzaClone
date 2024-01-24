@@ -38,7 +38,7 @@ const Icecekler: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<IceceklerData[]>('http://localhost:3004/icecekler')
+      .get<IceceklerData[]>('http://localhost:3001/icecekler')
       .then((response: AxiosResponse<IceceklerData[]>) => {
         dispatch(pushNewIcecek(response.data));
       })

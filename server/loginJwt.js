@@ -2,25 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const jwt = require('jsonwebtoken'); // Import JWT library
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
+
 const secretKey = process.env.SECRET_KEY || 'defaultSecret';
-const dotenv = require('dotenv');
-
-
 
 
 const app = express();
-const port = 3006;
+const port = 3001;
+
 app.use(cors({
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
-
-dotenv.config();
-
-
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -43,6 +38,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 app.use(bodyParser.json());
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
@@ -64,31 +60,22 @@ app.post('/signup', async (req, res) => {
 });
 
 // Login endpoint with JWT
-// Login endpoint with JWT
 app.post('/login', async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-  
-      if (user && user.password === password) {
-        // Create a JWT token using your secret key from environment variables
-        const token = jwt.sign({ userId: user._id, email: user.email }, secretKey, { expiresIn: '7d' });
-  
-        // Send the token back to the client
-        res.status(200).json({ token });
-      } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (user && user.password === password) {
+      const token = jwt.sign({ userId: user._id, email: user.email }, secretKey, { expiresIn: '7d' });
+      res.status(200).json({ token });
+    } else {
+      res.status(401).json({ message: 'Invalid credentials' });
     }
-  });
-
-
-
-
-
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 // Örnek: Protected endpoint
 app.get('/protected', (req, res) => {
@@ -107,14 +94,6 @@ app.get('/protected', (req, res) => {
     res.status(401).json({ message: 'Unauthorized' });
   }
 });
-
-
-
-
-
-
-
-  
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
