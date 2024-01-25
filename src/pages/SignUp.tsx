@@ -115,7 +115,7 @@ const SignUp: React.FC = () => {
   return (
     <div className='container   flex justify-center my-10 '>
       <div className='flex border px-5 py-10 items-center  w-[470px] h-[688px] flex-col gap-4'>
-        <div className='text-xl  w-full font-bold'>
+        <div className='text-xl  flex justify-center w-full font-bold'>
           <h1 className=''>Kayıt Ol</h1> 
         </div>
         <div>
