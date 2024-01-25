@@ -80,7 +80,7 @@ app.post('/pizza', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on port ${port}`);
   console.log('Server is active!');
 });
