@@ -56,7 +56,8 @@ app.post('/tatlilar', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+    console.log('Server is active!');
+  });
+  

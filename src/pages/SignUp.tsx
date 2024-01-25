@@ -59,7 +59,7 @@ const SignUp: React.FC = () => {
   
 
 
-  //salih celebi@gmail.com 5448169518 salih123
+ 
 
 
 
