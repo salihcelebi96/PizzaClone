@@ -20,7 +20,7 @@ const IceceklerData: React.FC = () => {
     const notify = () => toast("İçecek GÖderildi !");
     const icecekPost = async () => {
         try {
-            const apiUrl = "http://localhost:3004/icecekler";
+            const apiUrl = "http://localhost:3002/icecekler";
 
             const postData = {
                 tür: iceceklerData.tür,

@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const UserModel = require('./userModel'); // userModel.js dosyasını içe aktar
 
 const app = express();
-const port = 3001;
+const port = 3007;
 
 app.use(cors({
   origin: '*',

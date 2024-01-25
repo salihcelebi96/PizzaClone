@@ -9,7 +9,7 @@ const secretKey = process.env.SECRET_KEY || 'defaultSecret';
 
 
 const app = express();
-const port = 3001;
+const port = 3004;
 
 app.use(cors({
   origin: '*',

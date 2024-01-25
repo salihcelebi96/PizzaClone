@@ -2,9 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
 const app = express();
-const port = 3001;
+const port = 3009;
 
 
 
@@ -47,8 +46,7 @@ const wingsSchema = new mongoose.Schema({
 const Wings = mongoose.model('Wings', wingsSchema);
 
 
-app.use(cors());
-app.use(express.json());
+
 
 
 app.get('/wings', async (req, res) => {

@@ -5,7 +5,7 @@ const fileUpload = require('express-fileupload');
 const dotenv = require('dotenv');
 
 const app = express();
-const port = 3001;
+const port = 3006;
 
 app.use(cors({
   origin: '*',

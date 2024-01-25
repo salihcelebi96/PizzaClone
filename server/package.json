@@ -2,13 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "engines": {
     "node": "16.17.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
-    
+    "start": "concurrently \"nodemon admin.js\" \"nodemon icecekler.js\" \"nodemon kampanyalar.js\" \"nodemon loginJwt.js\" \"nodemon payment.js\" \"nodemon pizza.js\" \"nodemon signup.js\" \"nodemon tatli.js\" \"nodemon wings.js\""
   },
   "keywords": [],
   "author": "",

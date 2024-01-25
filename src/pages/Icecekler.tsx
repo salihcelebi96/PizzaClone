@@ -38,7 +38,7 @@ const Icecekler: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<IceceklerData[]>('http://localhost:3001/icecekler')
+      .get<IceceklerData[]>('http://localhost:3002/icecekler')
       .then((response: AxiosResponse<IceceklerData[]>) => {
         dispatch(pushNewIcecek(response.data));
       })
@@ -54,7 +54,7 @@ const Icecekler: React.FC = () => {
  
   useEffect(() => {
     axios
-      .get<tatlıData[]>('http://localhost:3005/tatlilar')
+      .get<tatlıData[]>('http://localhost:3008/tatlilar')
       .then((response: AxiosResponse<tatlıData[]>) => {
         dispatch(pushNewTatlı(response.data));
         console.log(response.data)

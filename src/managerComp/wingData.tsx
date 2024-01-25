@@ -21,7 +21,7 @@ const WingData: React.FC = () => {
     const notify = () => toast("Wings Gönderildi !");
     const handleWingPost = async () => {
         try {
-            const apiUrl = 'http://localhost:3002/wings';
+            const apiUrl = 'http://localhost:3009/wings';
             const response = await axios.post(apiUrl, wingData);
 
             console.log('Server Response:', response.data);

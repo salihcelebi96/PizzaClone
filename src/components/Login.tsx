@@ -38,7 +38,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3001/protected", {
+      const response = await fetch("http://localhost:3004/protected", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

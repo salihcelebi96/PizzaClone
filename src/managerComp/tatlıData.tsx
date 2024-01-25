@@ -20,7 +20,7 @@ const TatliData: React.FC = () => {
     const notify = () => toast("Tatlı Gönderildi !");
     const handleTatliPost = async () => {
         try {
-            const apiUrl = "http://localhost:3005/tatlilar";
+            const apiUrl = "http://localhost:3008/tatlilar";
 
             const postData = {
                 tür: tatliData.tür,
