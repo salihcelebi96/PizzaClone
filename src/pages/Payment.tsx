@@ -105,7 +105,7 @@ const Payment: React.FC = () => {
 
   const postData = async () => {
     try {
-      const apiUrl = 'https://1554-176-240-216-6.ngrok-free.app/payment';
+      const apiUrl = 'http://localhost:8080/payment';
       const requestData = {
         cvc, lastDate, name, cardNumber, totalPrice
       };

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import {  useNavigate,Link } from "react-router-dom";
 import "../css/login.css";
 import { logout, signUpOpen, userLoginTrue } from "../reducers/loginSlice";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const apiUrl = "https://1554-176-240-216-6.ngrok-free.app";
+
+
+
+
 
 const Login: React.FC = () => {
+  //  const [user, setUser] = useState<string[] | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
@@ -17,10 +21,14 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const handleSignUp = () => {
     dispatch(logout());
     dispatch(signUpOpen());
+    
+    
   };
+  
 
   const fetchProtectedData = async () => {
     try {
@@ -31,7 +39,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch(`${apiUrl}/loginjwt/protected`, {
+      const response = await fetch("apiurl/loginjwt/protected", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -48,21 +56,41 @@ const Login: React.FC = () => {
     }
   };
 
+
+
+
+
+
+
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/loginjwt/login`, { email, password });
+      const response = await axios.post('http://localhost:8080/loginjwt/login', { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);
       notify();
       navigate('/');
       fetchProtectedData();
+      
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
 
+  
+
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setUser(null);
+  //   setuserLogin(false);
+  //   console.log("Logout successful");
+  // };
+
+
   useEffect(() => {
+
     if (userLogin) {
       dispatch(logout());
       dispatch(userLoginTrue());
@@ -70,14 +98,19 @@ const Login: React.FC = () => {
     }
   }, [userLogin]);
 
+
+
+
   const closeLogin = () => {
     dispatch(logout());
   };
 
+
+
   return (
-    <div className="text-black">
-      <div className="bg-white border-1 border-gray-400 absolute top-50 left-50 transform-translate-50-50 z-10 h-[500px] w-[400px] p-8 rounded-md">
-        <div className="text-xl font-bold mb-4">Giriş Yap</div>
+    <div className="text-black   ">
+      <div className="bg-white  border-1 border-gray-400 absolute top-50 left-50 transform-translate-50-50 z-10 h-[500px] w-[400px] p-8 rounded-md">
+        <div className="text-xl font-bold  mb-4">Giriş Yap</div>
         <div className="mb-4 ">
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -98,28 +131,32 @@ const Login: React.FC = () => {
         </div>
         <div
           onClick={() => handleLogin()}
-          className="text-center bg-red-600 hover:bg-red-500 text-white border py-2"
+          className="text-center bg-red-600 hover:bg-red-500 text-white border  py-2"
         >
           <button>Giriş</button>
         </div>
-        <div className="py-2 text-center text-sm hover:text-red-600">
+        <div className="py-2 text-center  text-sm hover:text-red-600">
           <p>Şifremi unuttum</p>
         </div>
         <div className="text-center py-5">
           <h1>
             Hesabın yok mu?{" "}
-            <Link to="/kayıtol" onClick={() => handleSignUp()} className="text-red-600 link-arrow">
+            <Link to="/kayıtol"
+              onClick={() => handleSignUp()}
+              className="text-red-600 link-arrow">
               Kayıt Ol&gt;{" "}
             </Link>
-          </h1>
+           </h1>
         </div>
-        <div className="absolute text-red-600 top-0 right-2 text-3xl">
+        <div className="absolute text-red-600  top-0 right-2 text-3xl">
           <button onClick={closeLogin}> x </button>
         </div>
         <div onClick={closeLogin} className="text-sm absolute bottom-0 right-2 ">
-          <Link to="/admin"> Admin <span className="text-xl"> &rarr;</span> </Link>
-        </div>
+          <Link to="/admin">  Admin <span className="text-xl"> &rarr;</span> </Link>
       </div>
+      </div>
+      
+     
     </div>
   );
 };

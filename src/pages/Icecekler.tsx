@@ -64,7 +64,19 @@ useEffect(() => {
  
  
  
-
+  useEffect(() => {
+    axios
+      .get<tatlıData[]>('http://localhost:8080/tatlilar')
+      .then((response: AxiosResponse<tatlıData[]>) => {
+        dispatch(pushNewTatlı(response.data));
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        
+      });
+  }, []);
+  
   
 
   const data = useSelector((state: RootState) => state.icecekler.icecekler);

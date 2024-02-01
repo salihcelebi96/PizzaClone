@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { pushNewItems, SepetData} from "../reducers/sepetSlice";
 
 const Kampanyalar :React.FC = () => {
-  const apiUrl = "https://1554-176-240-216-6.ngrok-free.app";
+  
 
 
     const data = useSelector((state : RootState) => state.kampanya.kampanya);
@@ -39,7 +39,7 @@ const Kampanyalar :React.FC = () => {
 
       useEffect(() => {
 
-        axios.get< KampanyaData[]>(`${apiUrl}/kampanyalar`)
+        axios.get< KampanyaData[]>('http://localhost:8080/kampanyalar')
             .then((response: AxiosResponse<KampanyaData[]>) => {
                 
                 dispatch(pushNewKampanya(response.data))
