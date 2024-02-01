@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3005;
 const dotenv = require('dotenv');
+const router = express.Router(); 
 
 app.use(cors({
   origin: '*',
@@ -47,7 +48,7 @@ const paymentSchema = new mongoose.Schema({
 
 const Payments = mongoose.model('payment', paymentSchema);
 
-app.get('/payment', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const data = await Payments.find();
     res.json(data);
@@ -56,7 +57,7 @@ app.get('/payment', async (req, res) => {
   }
 });
 
-app.post('/payment', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, lastDate, cvc, cardNumber, totalPrice } = req.body;
     const newPayment = new Payments({ name, lastDate, cvc, cardNumber, totalPrice });
@@ -69,7 +70,6 @@ app.post('/payment', async (req, res) => {
 });
 
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+
+
+module.exports = router;

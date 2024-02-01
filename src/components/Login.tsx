@@ -38,7 +38,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3004/protected", {
+      const response = await fetch("http://localhost:8080/loginjwt/protected", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3006/login', { email, password });
+      const response = await axios.post('http://localhost:8080/loginjwt/login', { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);

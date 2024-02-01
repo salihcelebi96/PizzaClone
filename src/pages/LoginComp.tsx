@@ -19,7 +19,7 @@ const LoginComp :React.FC = () => {
     }, []);
   return (
     <div>
-       {windowWidth <= 768 ? <LoginMenu /> : <Login />}
+       {windowWidth <= 768  ? <LoginMenu /> : <Login />}
     </div>
   )
 }

@@ -7,15 +7,7 @@ require('dotenv').config();
 
 const secretKey = process.env.SECRET_KEY || 'defaultSecret';
 
-
-const app = express();
-const port = 3004;
-
-app.use(cors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+const router = express.Router(); // Create an instance of express.Router()
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -37,9 +29,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.use(bodyParser.json());
+router.use(bodyParser.json());
 
-app.use((req, res, next) => {
+router.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', '*');
@@ -47,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 // Signup endpoint
-app.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const { name, email, phoneNumber, password, isChecked1, isChecked2, isChecked3 } = req.body;
     const newUser = new User({ name, email, phoneNumber, password, isChecked1, isChecked2, isChecked3 });
@@ -59,8 +51,29 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await UserModel.find({});
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error('Error getting users:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 // Login endpoint with JWT
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -77,25 +90,16 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Örnek: Protected endpoint
-app.get('/protected', (req, res) => {
+// Protected endpoint
+router.get('/protected', (req, res) => {
   try {
-    // Token'ı al
     const token = req.headers.authorization.split(' ')[1];
-
-    // Token'ı doğrula
     const decodedToken = jwt.verify(token, secretKey);
-
-    // Token doğrulandıysa, istemciye korunan veriyi gönder
     res.status(200).json({ message: 'Protected data', user: decodedToken });
   } catch (error) {
-    // Token doğrulanamazsa veya hata olursa hata mesajı gönder
     console.error('Error during protected data fetch:', error);
     res.status(401).json({ message: 'Unauthorized' });
   }
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+module.exports = router;

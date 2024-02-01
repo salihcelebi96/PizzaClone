@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const dotenv = require('dotenv');
-
+const router = express.Router(); 
 const app = express();
-const port = 3006;
+
 
 app.use(cors({
   origin: '*',
@@ -54,7 +54,7 @@ const pizzaSchema = new mongoose.Schema({
 
 const Pizza = mongoose.model('Pizza', pizzaSchema);
 
-app.get('/pizza', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const data = await Pizza.find();
     res.json(data);
@@ -63,7 +63,7 @@ app.get('/pizza', async (req, res) => {
   }
 });
 
-app.post('/pizza', async (req, res) => {
+router.post('/', async (req, res) => {
   const { url, tür, fiyatlar } = req.body;
   try {
     // Create a new pizza document directly using create
@@ -80,7 +80,6 @@ app.post('/pizza', async (req, res) => {
   }
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+
+
+module.exports = router;

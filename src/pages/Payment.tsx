@@ -105,7 +105,7 @@ const Payment: React.FC = () => {
 
   const postData = async () => {
     try {
-      const apiUrl = 'http://localhost:3005/payment';
+      const apiUrl = 'http://localhost:8080/payment';
       const requestData = {
         cvc, lastDate, name, cardNumber, totalPrice
       };

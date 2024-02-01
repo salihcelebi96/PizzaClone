@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
 const port = 3009;
-
+const router = express.Router(); 
 
 
 app.use(cors({
@@ -49,7 +49,7 @@ const Wings = mongoose.model('Wings', wingsSchema);
 
 
 
-app.get('/wings', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const data = await Wings.find();
     res.json(data);
@@ -61,7 +61,7 @@ app.get('/wings', async (req, res) => {
 
 
 
-app.post('/wings', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { tür, Fiyat, Açıklama,  Url } = req.body;
 
@@ -87,7 +87,6 @@ app.post('/wings', async (req, res) => {
 
 
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+
+
+module.exports = router;

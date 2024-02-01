@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const router = express.Router();
 const app = express();
 const port = 3002;
 dotenv.config();
@@ -46,7 +46,7 @@ const Icecekler = mongoose.model('icecek', icecekSchema);
 
 app.use(express.json());
 
-app.get('/icecekler', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const data = await Icecekler.find();
     res.json(data);
@@ -55,7 +55,7 @@ app.get('/icecekler', async (req, res) => {
   }
 });
 
-app.post('/icecekler', async (req, res) => {
+router.post('/', async (req, res) => {
   const { tür, fiyat, url } = req.body;
 
   try {
@@ -71,7 +71,9 @@ app.post('/icecekler', async (req, res) => {
   }
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+
+
+
+
+
+module.exports = router;

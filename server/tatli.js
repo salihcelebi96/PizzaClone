@@ -4,6 +4,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const port = 3008;
 const app = express();
+const router = express.Router(); 
+
+
 
 app.use(cors({
   origin: '*',
@@ -34,7 +37,9 @@ const tatliSchema = new mongoose.Schema({
 });
 const Tatlilar = mongoose.model('tatli', tatliSchema);
 app.use(express.json());
-app.get('/tatlilar', async (req, res) => {
+
+
+router.get('/', async (req, res) => {
   try {
     const data = await Tatlilar.find();
     res.json(data);
@@ -42,7 +47,7 @@ app.get('/tatlilar', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.post('/tatlilar', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { tür, fiyat, url } = req.body;
     const newTatlı = new Tatlilar({
@@ -56,8 +61,6 @@ app.post('/tatlilar', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running on port ${port}`);
-    console.log('Server is active!');
-  });
+
   
+  module.exports = router;

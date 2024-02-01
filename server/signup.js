@@ -4,10 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors'); 
 const dotenv = require('dotenv');
-const UserModel = require('./userModel'); // userModel.js dosyasını içe aktar
-
+const router = express.Router(); 
 const app = express();
-const port = 3007;
 
 app.use(cors({
   origin: '*',
@@ -34,29 +32,30 @@ db.once('open', function () {
 
 app.use(bodyParser.json());
 
-app.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, email, phoneNumber, password, isChecked1, isChecked2, isChecked3 } = req.body;
-    const newUser = new UserModel({ name, email, phoneNumber, password, isChecked1, isChecked2, isChecked3 });
-    const savedUser = await newUser.save();
-    res.status(200).json({ message: 'Signup successful', user: savedUser });
+    
+    
+    res.status(200).json({ message: 'Signup successful'/*, user: savedUser */ });
   } catch (error) {
     console.error('Error during signup:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
-app.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const users = await UserModel.find({});
-    res.status(200).json({ users });
+    // UserModel kullanımını kaldırın
+    // const users = await UserModel.find({});
+    
+    // Burada gerekli işlemleri gerçekleştirin
+
+    res.status(200).json({ /*users*/ });
   } catch (error) {
     console.error('Error getting users:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
-  console.log('Server is active!');
-});
+module.exports = router;

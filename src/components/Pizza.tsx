@@ -32,7 +32,7 @@ const Pizza: React.FC = () => {
 
   useEffect(() => {
 
-    axios.get<IDataItem[]>('http://localhost:3006/pizza')
+    axios.get<IDataItem[]>('http://localhost:8080/pizza')
       .then((response: AxiosResponse<IDataItem[]>) => {
 
         dispatch(pushNewPizzas(response.data))

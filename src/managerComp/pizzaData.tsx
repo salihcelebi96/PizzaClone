@@ -28,7 +28,7 @@ const PizzaData: React.FC = () => {
   const notify = () => toast("Pizza Gönderildi !  ");
   const PizzaPost = async () => {
     try {
-      const apiUrl = "http://localhost:3006/pizza";
+      const apiUrl = "http://localhost:8080/pizza";
   
       const postData = {
         tür: pizzaData.tür,

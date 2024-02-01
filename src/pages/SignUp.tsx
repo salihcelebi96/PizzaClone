@@ -82,7 +82,7 @@ const SignUp: React.FC = () => {
         
 
 
-      const response = await fetch('http://localhost:3007/signup', {
+      const response = await fetch('http://localhost:8080/loginjwt/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
