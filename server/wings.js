@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
-const port = 3009;
+
 const router = express.Router(); 
 
 
