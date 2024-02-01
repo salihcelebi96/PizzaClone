@@ -30,12 +30,12 @@ const Wings: React.FC = () => {
 
 
 
-
+  
 
 
 
   useEffect(() => {
-    axios.get<WingsData[]>('http://localhost:8080/wings')
+    axios.get<WingsData[]>('https://1554-176-240-216-6.ngrok-free.app/wings')
       .then((response: AxiosResponse<WingsData[]>) => {
         response.data.forEach(wing => {
           dispatch(pushNewWings(wing));

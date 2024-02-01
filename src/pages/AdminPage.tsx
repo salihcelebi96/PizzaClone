@@ -7,9 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
+const apiUrl = "https://1554-176-240-216-6.ngrok-free.app";
+
 
 const AdminPage: React.FC = () => {
-    const port = "http://localhost:8080/admin";
+    const port = `${apiUrl}/admin`;
+
  const dispatch = useDispatch();
  const navigate = useNavigate();
     interface IDataItem {

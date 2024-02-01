@@ -101,11 +101,11 @@ const Payment: React.FC = () => {
   const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0).toFixed(2);
 
 
-
+ 
 
   const postData = async () => {
     try {
-      const apiUrl = 'http://localhost:8080/payment';
+      const apiUrl = 'https://1554-176-240-216-6.ngrok-free.app/payment';
       const requestData = {
         cvc, lastDate, name, cardNumber, totalPrice
       };

@@ -13,7 +13,7 @@ import { pushNewItems,SepetData} from "../reducers/sepetSlice";
 const Icecekler: React.FC = () => {
   const dispatch = useDispatch();
   const [sepet, setSepet] = useState<string>("");
-
+  const apiUrl = "https://1554-176-240-216-6.ngrok-free.app";
 
   const handleBasket = (item: IceceklerData) => {
     const newSepetData: SepetData = {
@@ -36,35 +36,35 @@ const Icecekler: React.FC = () => {
 
 
 
-  useEffect(() => {
-    axios
-      .get<IceceklerData[]>('http://localhost:8080/icecekler')
-      .then((response: AxiosResponse<IceceklerData[]>) => {
-        dispatch(pushNewIcecek(response.data));
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        
-      });
-  }, []);
+ useEffect(() => {
+  axios
+    .get<IceceklerData[]>(`${apiUrl}/icecekler`)  // Change here
+    .then((response: AxiosResponse<IceceklerData[]>) => {
+      dispatch(pushNewIcecek(response.data));
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+}, []);
+
+useEffect(() => {
+  axios
+    .get<tatlıData[]>(`${apiUrl}/tatlilar`)  // Change here
+    .then((response: AxiosResponse<tatlıData[]>) => {
+      dispatch(pushNewTatlı(response.data));
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+}, []);
+
 
  
  
  
  
-  useEffect(() => {
-    axios
-      .get<tatlıData[]>('http://localhost:8080/tatlilar')
-      .then((response: AxiosResponse<tatlıData[]>) => {
-        dispatch(pushNewTatlı(response.data));
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        
-      });
-  }, []);
-  
+
   
 
   const data = useSelector((state: RootState) => state.icecekler.icecekler);
