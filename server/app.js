@@ -16,7 +16,7 @@ const cors = require('cors');
 
 
 const app = express();
-const PORT = 8080;
+const port = 8080;
 
 
 
@@ -38,6 +38,9 @@ app.use("/payment", payment);
 
 
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const ip = "0.0.0.0"; 
+
+app.listen(port, ip, () => {
+  console.log(`Server is running on http://${ip}:${port}`);
 });
+

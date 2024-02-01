@@ -1,0 +1,8 @@
+authtoken: 2bT5TxDxy6UD7TCWmiJVZq73WnK_2FjTJeXuWSSskdANY69q6
+tunnels:
+  ilk:
+    addr: 8080
+    proto: http
+  ikinci:
+    addr: 3000
+    proto: http
