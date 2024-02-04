@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 const Login: React.FC = () => {
   //  const [user, setUser] = useState<string[] | null>(null);
   const [email, setEmail] = useState<string>("");
@@ -66,14 +67,14 @@ const Login: React.FC = () => {
 
 
 
-
   
+
 
 
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/loginjwt/login`, { email, password });
+      const response = await axios.post(`${apiUrl}//loginjwt/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);
@@ -112,7 +113,6 @@ const Login: React.FC = () => {
   const closeLogin = () => {
     dispatch(logout());
   };
-
 
    
   
