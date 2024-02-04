@@ -79,10 +79,17 @@ const SignUp: React.FC = () => {
           return;
         }
 
+        interface ExtendedImportMeta extends ImportMeta {
+          env: {
+            VITE_APP_URL: string;
+            // Diğer ortam değişkenleri buraya eklenebilir
+          };
+        }
         
+        const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
 
-      const response = await fetch('http://localhost:8080/loginjwt/signup', {
+      const response = await fetch(`${apiUrl}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

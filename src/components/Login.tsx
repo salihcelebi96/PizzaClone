@@ -28,6 +28,15 @@ const Login: React.FC = () => {
     
     
   };
+
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+      // Diğer ortam değişkenleri buraya eklenebilir
+    };
+  }
+  
+  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
   
 
   const fetchProtectedData = async () => {
@@ -39,7 +48,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch("apiurl/loginjwt/protected", {
+      const response = await fetch(`${apiUrl}/loginjwt/protected`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,14 +67,14 @@ const Login: React.FC = () => {
 
 
 
-
+  
 
 
 
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/loginjwt/login', { email, password });
+      const response = await axios.post(`${apiUrl}//loginjwt/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);

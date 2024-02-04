@@ -30,22 +30,32 @@ const Wings: React.FC = () => {
 
 
 
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+      // Diğer ortam değişkenleri buraya eklenebilir
+    };
+  }
   
-
+  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
 
   useEffect(() => {
-    axios.get<WingsData[]>('http://localhost:8080/wings')
+    axios.get<WingsData[]>(`${apiUrl}/wings`)
       .then((response: AxiosResponse<WingsData[]>) => {
-        response.data.forEach(wing => {
-          dispatch(pushNewWings(wing));
-          
-        });
+        if (Array.isArray(response.data)) {
+          response.data.forEach(wing => {
+            dispatch(pushNewWings(wing));
+          });
+        } else {
+          console.error('Error fetching data: Data is not an array');
+        }
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
+  
 
   const data = useSelector((state: RootState) => state.wings.wings)
 

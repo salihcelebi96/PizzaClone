@@ -35,11 +35,18 @@ const Kampanyalar :React.FC = () => {
 
        
 
-
+      interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+          // Diğer ortam değişkenleri buraya eklenebilir
+        };
+      }
+      
+      const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
       useEffect(() => {
 
-        axios.get< KampanyaData[]>('http://localhost:8080/kampanyalar')
+        axios.get< KampanyaData[]>(`${apiUrl}/kampanyalar`)
             .then((response: AxiosResponse<KampanyaData[]>) => {
                 
                 dispatch(pushNewKampanya(response.data))

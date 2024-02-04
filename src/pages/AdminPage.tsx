@@ -7,10 +7,19 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
-const apiUrl = "https://1554-176-240-216-6.ngrok-free.app";
+
+
 
 
 const AdminPage: React.FC = () => {
+    interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+          // Diğer ortam değişkenleri buraya eklenebilir
+        };
+      }
+      
+      const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
     const port = `${apiUrl}/admin`;
 
  const dispatch = useDispatch();

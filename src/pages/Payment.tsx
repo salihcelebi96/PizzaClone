@@ -100,12 +100,19 @@ const Payment: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
   const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0).toFixed(2);
 
-
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+      // Diğer ortam değişkenleri buraya eklenebilir
+    };
+  }
+  
+  const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
  
 
   const postData = async () => {
     try {
-      const apiUrl = 'http://localhost:8080/payment';
+      const apiUrl = `${api}/payment`;
       const requestData = {
         cvc, lastDate, name, cardNumber, totalPrice
       };
