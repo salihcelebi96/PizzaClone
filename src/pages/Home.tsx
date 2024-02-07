@@ -1,5 +1,5 @@
 import Slide from "../components/SlideComp";
-import Option from "../components/Options";
+import Option from "../components/OptionComp";
 
 const Home:React.FC = () => {
   return (
