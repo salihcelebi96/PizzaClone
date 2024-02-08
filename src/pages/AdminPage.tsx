@@ -20,7 +20,7 @@ const AdminPage: React.FC = () => {
       }
       
       const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
-    const port = `${apiUrl}/admin`;
+    const port = `${apiUrl}/api/admin`;
 
  const dispatch = useDispatch();
  const navigate = useNavigate();

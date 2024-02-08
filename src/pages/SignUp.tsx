@@ -89,7 +89,7 @@ const SignUp: React.FC = () => {
         const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
 
-      const response = await fetch(`${apiUrl}/loginjwt/signup`, {
+      const response = await fetch(`${apiUrl}/api/loginjwt/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

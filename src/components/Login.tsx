@@ -74,7 +74,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${apiUrl}//loginjwt/login`, { email, password });
+      const response = await axios.post(`${apiUrl}/api/loginjwt/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setuserLogin(true);

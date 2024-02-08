@@ -33,7 +33,7 @@ const Pizza: React.FC = () => {
   const [option, setOption] = useState<string>("Small");
 
   useEffect(() => {
-    axios.get<IDataItem[]>(`${apiUrl}/pizza`)
+    axios.get<IDataItem[]>(`${apiUrl}/api/pizza`)
       .then((response: AxiosResponse<IDataItem[]>) => {
         dispatch(pushNewPizzas(response.data))
       })

@@ -46,7 +46,7 @@ const Kampanyalar :React.FC = () => {
 
       useEffect(() => {
 
-        axios.get< KampanyaData[]>(`${apiUrl}/kampanyalar`)
+        axios.get< KampanyaData[]>(`${apiUrl}/api/kampanyalar`)
             .then((response: AxiosResponse<KampanyaData[]>) => {
                 
                 dispatch(pushNewKampanya(response.data))

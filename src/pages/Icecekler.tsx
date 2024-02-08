@@ -38,7 +38,7 @@ const Icecekler: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<IceceklerData[]>(`${apiUrl}/icecekler`)
+      .get<IceceklerData[]>(`${apiUrl}/api/icecekler`)
       .then((response: AxiosResponse<IceceklerData[]>) => {
         // setNewData(response.data); 
         dispatch(pushNewIcecek(response.data));
@@ -50,7 +50,7 @@ const Icecekler: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<tatlıData[]>(`${apiUrl}/tatlilar`)
+      .get<tatlıData[]>(`${apiUrl}/api/tatlilar`)
       .then((response: AxiosResponse<tatlıData[]>) => {
         dispatch(pushNewTatlı(response.data));
         console.log(response.data);

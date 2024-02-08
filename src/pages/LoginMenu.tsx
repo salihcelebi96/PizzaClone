@@ -48,7 +48,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch(`${apiUrl}/loginjwt/protected`, {
+      const response = await fetch(`${apiUrl}/api/loginjwt/protected`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -41,7 +41,7 @@ const Wings: React.FC = () => {
 
 
   useEffect(() => {
-    axios.get<WingsData[]>(`${apiUrl}/wings`)
+    axios.get<WingsData[]>(`${apiUrl}/api/wings`)
       .then((response: AxiosResponse<WingsData[]>) => {
         if (Array.isArray(response.data)) {
           response.data.forEach(wing => {
