@@ -1,0 +1,14 @@
+/* Kaydırma çizgisini gizle */
+.cont {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* iOS'ta kaydırma davranışını etkinleştirir */
+    scrollbar-width: none; /* Firefox'ta kaydırma çubuğunu gizler */
+    -ms-overflow-style: none; /* IE/Edge'de kaydırma çubuğunu gizler */
+  }
+  
+  /* Firefox'ta kaydırma çubuğunu gizle */
+  .cont::-webkit-scrollbar {
+    display: none;
+  }
+  
