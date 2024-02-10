@@ -20,11 +20,11 @@ const compact = Image.map((img, index) => ({
 
 const Options: React.FC = () => {
   return (
-    <div className='flex flex-col items-center gap-7 my-2 mb-10'>
-      <div>
-        <div className='grid grid-cols-6'>
+    <div className='flex flex-col items-center gap-7 my-2 '>
+      <div className=''>
+        <div className='grid grid-cols-6 mb-10  '>
           {compact.map((item, index) => (
-            <div className='gap-5 hover:scale-110 hover:text-red-600 duration-500' key={index}>
+            <div className='gap-5 hover:scale-110 hover:text-red-600 duration-500 ' key={index}>
               <Link to={`/${item.optionPath}`}>
                 <img className='px-1' src={item.image} alt={item.optionText} />
                 <p className='text-center font-semibold'>{item.optionText}</p>

@@ -3,11 +3,11 @@ import OptionsSmall from "./OptionSmall";
 import OptionLarge from "./Options";
 
 const OptionComp: React.FC = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth < 768);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth < 600);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 600);
     };
 
     window.addEventListener('resize', handleResize);
@@ -15,10 +15,10 @@ const OptionComp: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isSmallScreen]);
 
   return (
-    <div>
+    <div className=' '>
       {isSmallScreen ? <OptionsSmall /> : <OptionLarge />}
     </div>
   );

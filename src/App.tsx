@@ -50,7 +50,6 @@ console.log(isAdminLogin, "app.tsx");
         <Route path='/admin' element={<AdminPage />}/>
         <Route path="*" element={<Navigate to="/" />} />
         <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
-        
       </Routes>
       <Footer />
     </Router>
