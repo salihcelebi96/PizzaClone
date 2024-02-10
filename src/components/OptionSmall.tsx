@@ -1,5 +1,5 @@
 import React from 'react';
-import AwesomeSlider from 'react-awesome-slider';
+
 import 'react-awesome-slider/dist/styles.css';
 import 'react-awesome-slider/dist/custom-animations/cube-animation.css'; // İsteğe bağlı animasyon
 import { Link } from "react-router-dom";
