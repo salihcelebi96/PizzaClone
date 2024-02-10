@@ -3,13 +3,13 @@ import React from 'react';
 import 'react-awesome-slider/dist/styles.css';
 import 'react-awesome-slider/dist/custom-animations/cube-animation.css'; // İsteğe bağlı animasyon
 import { Link } from "react-router-dom";
-
 import drinks from "../assets/options/drinksImg.png";
 import kampanyalar from "../assets/options/kampanyalarImg.png";
 import pizzalar from "../assets/options/pizzalarImg.png";
 import tatlılar from "../assets/options/tatlıImg.png";
 import wings from "../assets/options/wingstreetImg.png";
 import yanurunler from "../assets/options/yanurnImg.png";
+import "../css/option.css";
 
 const Options: React.FC = () => {
   const options = [
@@ -22,9 +22,9 @@ const Options: React.FC = () => {
   ];
 
   return (
-    <div className='flex  justify-center overflow-scroll mx-10 items-center gap-7 my-2'>
+    <div className='flex cont overflow-scroll     items-center gap-7 my-2'>
       {options.map((option, index) => (
-        <div key={index} className='gap-5 hover:scale-110  hover:text-red-600 duration-500'>
+        <div key={index} className='gap-5 hover:scale-110   hover:text-red-600 duration-500'>
           <Link to={`/${option.path}`} className="">
             <img className='' src={option.image} alt={option.text} />
             <p className='text-center font-semibold'>{option.text}</p>
