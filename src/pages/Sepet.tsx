@@ -92,8 +92,8 @@ const Sepet: React.FC = () => {
             className=' flex justify-end px-6 gap-2'>
             <p className='text-red-500'>Toplam: {ToplamPrice()} TL</p>    
           </div>
-          <div className=' flex justify-end   px-6 gap-2'>
-            <button onClick={handleBasket}   className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl'  >
+          <div onClick={handleBasket}  className=' flex justify-end   px-6 gap-2'>
+            <button   className='bg-green-600 hover:bg-green-400 text-white p-1 border rounded-xl'  >
                  Siparişi Tamamla 
               </button>
           </div>

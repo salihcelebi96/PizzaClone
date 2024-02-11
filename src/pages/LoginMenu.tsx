@@ -32,7 +32,7 @@ const Login: React.FC = () => {
   interface ExtendedImportMeta extends ImportMeta {
     env: {
       VITE_APP_URL: string;
-      // Diğer ortam değişkenleri buraya eklenebilir
+      
     };
   }
   
@@ -131,7 +131,7 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 border-black input-border" placeholder="Şifre" type="password" />
         </div>
-        <div onClick={handleLogin} className="text-center bg-red-600 text-white border  py-2">
+        <div onClick={() => handleLogin()} className="text-center bg-red-600 text-white border  py-2">
           <button>Giriş</button>
         </div>
         <div className="py-2 text-center  text-sm hover:text-red-600">
