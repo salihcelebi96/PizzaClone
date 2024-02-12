@@ -145,12 +145,13 @@ const Payment: React.FC = () => {
 
 
   return (
-    <div className='h-[700px] flex my-5 justify-center'>
-      <div className='border flex text-gray-500 flex-col items-center w-[600px]'>
+    <div className=' h-[700px] flex my-5 justify-center'>
+      <div className='sm:border border-none flex text-gray-500 flex-col items-center   w-[400px] sm:w-[600px]'>
         {isCvcActive ? (
           <CardBack bgColor={bgColorCard} cvc={cvc} />
         ) : (
-          <div style={bgColorCard()} className='relative credit-card bg-gray-300 border w-[300px] rounded-2xl h-40 mt-6'>
+         
+          <div style={bgColorCard()} className='relative credit-card bg-gray-300 border  w-[250px] sm:w-[300px] rounded-2xl h-40 mt-6'>
             <div className='w-10 absolute top-2 left-4'>
               <img src={Chip} alt="" />
             </div>
@@ -193,9 +194,9 @@ const Payment: React.FC = () => {
           </div>
         )}
 
-        <div>
+        <div className=''>
           <div className='flex mt-5 justify-around'>
-            <input value={totalPrice} className='input w-full' type="text" placeholder='Amount' disabled />
+            <input value={totalPrice} className='inputCard w-full' type="text" placeholder='Amount' disabled />
 
           </div>
           <div>
@@ -206,14 +207,14 @@ const Payment: React.FC = () => {
           <div>
             <input onChange={(e) => setName(e.target.value)} className='inputCard' type="text" placeholder='Name' />
           </div>
-          <div className='flex mt-5 justify-around gap-4'>
-            <input maxLength={4} onChange={(e) => setLastDate(e.target.value)} className='input ' type="text" placeholder='Valid thru' />
+          <div className=' flex mt-5 justify-around gap-4'>
+            <input maxLength={4} onChange={(e) => setLastDate(e.target.value)} className='inputCard ' type="text" placeholder='Valid thru' />
             <input
               ref={cvcInputRef}
               onClick={handleCvcClick}
               maxLength={3} minLength={3}
               onChange={(e) => setCvc(e.target.value)}
-              className={`input ${isCvcActive ? 'active' : ''}`} type="text" placeholder='CVC' />
+              className={`inputCard ${isCvcActive ? 'active' : ''}`} type="text" placeholder='CVC' />
           </div>
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>

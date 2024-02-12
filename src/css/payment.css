@@ -7,9 +7,26 @@
    border: 1px solid #ccc;
    padding: 7px;
    margin-top: 7px;
-   
+   border-radius: 5px;
 }
 
 .credit-card {
     transition: background-color  1s ease-in-out;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); /* Küçük ekranlarda yarı yarıya genişlik */
+    grid-gap: 10px; /* İstenilen bir boşluk değeri */
+}
+
+/* Küçük ekranlar için medya sorgusu */
+@media (max-width: 768px) {
+    .input {
+        width: calc(40% - 10px); 
+    }
+
+    .inputCard {
+        width: calc(100% ); 
+    }
 }
