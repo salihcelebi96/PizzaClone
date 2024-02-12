@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
-import { loginOpen, userLoginFalse } from "../reducers/loginSlice";
+import {  userLoginFalse} from "../reducers/loginSlice";
 import { BsFillBasketFill } from "react-icons/bs";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,10 +24,11 @@ const Menu: React.FC = () => {
 
     const openLogin = () => {
         if (!userLogin) {
-            dispatch(loginOpen());
+           
             navigate("/login");
-        } else {
-            dispatch(userLoginFalse());
+        }else {
+            dispatch(userLoginFalse()) 
+            console.log("login exit oldu")
             notify();
         }
 

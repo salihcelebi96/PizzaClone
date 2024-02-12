@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   //  const [user, setUser] = useState<string[] | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userLogin, setuserLogin] = useState<boolean>(false);
+  // const [userLogin, setuserLogin] = useState<boolean>(false);
   const notify = () => toast("Giriş Yapıldı !");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Login: React.FC = () => {
         return;
       }
 
-      const response = await fetch(`${apiUrl}/api/loginjwt/protected`, {
+      const response = await fetch(`${apiUrl}/loginjwt/protected`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
       const response = await axios.post(`${apiUrl}/api/loginjwt/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
-      setuserLogin(true);
+      dispatch(userLoginTrue());
       notify();
       navigate('/');
       fetchProtectedData();
@@ -98,14 +98,14 @@ const Login: React.FC = () => {
   // };
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (userLogin) {
-      dispatch(logout());
-      dispatch(userLoginTrue());
-      console.log("Login successful");
-    }
-  }, [userLogin]);
+  //   if (userLogin) {
+  //     dispatch(logout());
+      
+  //     console.log("Login successful");
+  //   }
+  // }, [userLogin]);
 
 
 
