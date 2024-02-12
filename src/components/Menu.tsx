@@ -64,16 +64,24 @@ const Menu: React.FC = () => {
                     </div>
                     <div className=''>
                         {menuOpen && (
-                            <div className='sidebar fixed top-0 left-0 w-full   z-50' />
+                            <div className='sidebar fixed top-0 left-0 w-full overlay  z-50' />
                         )}
                         {menuOpen && (
                             <div className='sidebar  fixed top-0 left-0 w-60 h-screen bg-white  z-50' ref={menuRef}>
                                 <nav className='w-full h-full'>
                                     <ul className='flex w-full  p-5 px-7 text-sm list-disc h-full  flex-col    '>
-                                        <li className=' hover:text-black list-none   flex flex-col gap-4'>
-                                            <h1 className='text-base'>Uygulalamımzı İndirin</h1>
+                                        <li className=' hover:text-black list-none    flex flex-col gap-4'>
+                                            <div>
+                                                <h1 className='text-base'>Uygulalamımzı İndirin</h1>
+                                            </div>
+                                            <div className='py-1 bg-black rounded-md'>
                                             <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
-                                            <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
+                                            </div>
+                                           <div className='py-1 rounded-md  bg-black'>
+                                           <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
+
+                                           </div>
+                                            
 
                                         </li>
                                         <li className='z-10 list-none  list'>
