@@ -15,6 +15,16 @@ interface PizzaDataState {
 }
 
 const PizzaData: React.FC = () => {
+
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+    };
+  }
+
+
+
+
   const [image, setImage] = useState<string>("");
   const [pizzaData, setPizzaData] = useState<PizzaDataState>({
     tür: '',
@@ -28,7 +38,7 @@ const PizzaData: React.FC = () => {
   const notify = () => toast("Pizza Gönderildi !  ");
   const PizzaPost = async () => {
     try {
-      const apiUrl = "http://localhost:8080/pizza";
+      const apiUrl =  `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/pizza` 
   
       const postData = {
         tür: pizzaData.tür,

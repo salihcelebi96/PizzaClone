@@ -20,7 +20,7 @@ const MenuComp: React.FC = () => {
 
   return (
     <div>
-      {windowWidth <= 768 ? <Menu /> : <Navbar />}
+      {windowWidth <= 1200 ? <Menu /> : <Navbar />}
     </div>
   );
 }

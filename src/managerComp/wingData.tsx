@@ -11,6 +11,15 @@ interface WingDataState {
 }
 
 const WingData: React.FC = () => {
+
+    interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+        };
+      }
+
+
+
     const [image, setImage] = useState<string>("");
     const [wingData, setWingData] = useState<WingDataState>({
         tür: '',
@@ -21,7 +30,7 @@ const WingData: React.FC = () => {
     const notify = () => toast("Wings Gönderildi !");
     const handleWingPost = async () => {
         try {
-            const apiUrl = 'http://localhost:8080/wings';
+            const apiUrl =  `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/wings` ;
             const response = await axios.post(apiUrl, wingData);
 
             console.log('Server Response:', response.data);

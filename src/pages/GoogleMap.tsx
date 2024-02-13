@@ -1,11 +1,12 @@
 import React from 'react';
+import "../css/googleMap.css";
 
 const GoogleMap: React.FC = () => {
   return (
-    <div>
+    <div className='google-map-container'>
       <iframe
         title="Google Map"
-        width="1920"
+        width=""
         height="753"
         
        

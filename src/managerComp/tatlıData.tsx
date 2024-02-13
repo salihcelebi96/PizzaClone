@@ -5,12 +5,22 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface TatliDataState {
+
     tür: string;
     fiyat: number;
     url: string;
 }
 
 const TatliData: React.FC = () => {
+
+    interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+        };
+      }
+
+
+
     const [image, setImage] = useState<string>("");
     const [tatliData, setTatliData] = useState<TatliDataState>({
         tür: '',
@@ -20,7 +30,7 @@ const TatliData: React.FC = () => {
     const notify = () => toast("Tatlı Gönderildi !");
     const handleTatliPost = async () => {
         try {
-            const apiUrl = "http://localhost:8080/tatlilar";
+            const apiUrl =  `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` 
 
             const postData = {
                 tür: tatliData.tür,

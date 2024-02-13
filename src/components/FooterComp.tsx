@@ -21,7 +21,7 @@ const FooterComp: React.FC = () => {
 
   return (
     <div>
-      {windowWidth <= 768 ? <FooterSmall /> : <FooterLarge />} 
+      {windowWidth <= 950 ? <FooterSmall /> : <FooterLarge />} 
     </div>
   )
 }

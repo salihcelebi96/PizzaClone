@@ -11,6 +11,17 @@ interface IcecekDataState {
 }
 
 const IceceklerData: React.FC = () => {
+
+    interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+        };
+      }
+
+
+
+
+
     const [image, setImage] = useState<string>("");
     const [iceceklerData, setIceceklerData] = useState<IcecekDataState>({
         tür: '',
@@ -20,11 +31,12 @@ const IceceklerData: React.FC = () => {
     const notify = () => toast("İçecek GÖderildi !");
     const icecekPost = async () => {
         try {
-            const apiUrl = "http://localhost:8080/icecekler";
+            const apiUrl = `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/icecekler`;
+
 
             const postData = {
                 tür: iceceklerData.tür,
-                fiyat: iceceklerData.fiyat,  // Corrected property name
+                fiyat: iceceklerData.fiyat,  
                 url: image || ""
             };
 
