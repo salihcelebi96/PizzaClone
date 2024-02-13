@@ -145,7 +145,7 @@ const Payment: React.FC = () => {
 
 
   return (
-    <div className='cont h-[700px] flex my-5 justify-center'>
+    <div className=' h-[700px] flex my-5 justify-center'>
       <div className='sm:border border-none flex text-gray-500 flex-col items-center   w-[400px] sm:w-[600px]'>
         {isCvcActive ? (
           <CardBack bgColor={bgColorCard} cvc={cvc} />
@@ -202,10 +202,7 @@ const Payment: React.FC = () => {
           <div>
             <input maxLength={16}
               onChange={(e) => setCardNumber(e.target.value)}
-              className='inputCard w-full' 
-              type="text" 
-              pattern="\d{4} \d{4} \d{4} \d{4}"
-              placeholder='Card Number' />
+              className='inputCard w-full' type="text" placeholder='Card Number' />
           </div>
           <div>
             <input onChange={(e) => setName(e.target.value)} className='inputCard w-full' type="text" placeholder='Name' />
@@ -221,7 +218,7 @@ const Payment: React.FC = () => {
           </div>
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>
-          <button onClick={handleCardNumber}>Pay {totalPrice} TL</button>
+          <button onClick={handleCardNumber}>Ödeme Yap</button>
         </div>
       </div>
     </div>
