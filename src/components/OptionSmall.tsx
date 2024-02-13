@@ -22,11 +22,11 @@ const Options: React.FC = () => {
   ];
 
   return (
-    <div className='flex cont overflow-scroll      items-center gap-7 my-5'>
+    <div className='flex cont overflow-scroll    items-center  gap-7 my-5'>
       {options.map((option, index) => (
-        <div key={index} className='gap-5 hover:scale-110   hover:text-red-600 duration-500'>
+        <div key={index} className='gap-5 hover:scale-110  duration-500'>
           <Link to={`/${option.path}`} className="">
-            <img className='' src={option.image} alt={option.text} />
+            <img className='h-24 w-48 ' src={option.image} alt={option.text} />
             <p className='text-center font-semibold'>{option.text}</p>
           </Link>
         </div>
