@@ -20,6 +20,10 @@
     grid-gap: 10px; /* İstenilen bir boşluk değeri */
 }
 
+.cont {
+    transition: transform 1s ease;
+}
+
 /* Küçük ekranlar için medya sorgusu */
 @media (max-width: 768px) {
     .input {
