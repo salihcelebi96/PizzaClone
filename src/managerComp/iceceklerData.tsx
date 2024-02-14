@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import "../css/manager.css";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface IcecekDataState {
@@ -14,13 +14,9 @@ const IceceklerData: React.FC = () => {
 
     interface ExtendedImportMeta extends ImportMeta {
         env: {
-          VITE_APP_URL: string;
+            VITE_APP_URL: string;
         };
-      }
-
-
-
-
+    }
 
     const [image, setImage] = useState<string>("");
     const [iceceklerData, setIceceklerData] = useState<IcecekDataState>({
@@ -28,15 +24,16 @@ const IceceklerData: React.FC = () => {
         fiyat: 0,
         image: ""
     });
-    const notify = () => toast("İçecek GÖderildi !");
+
+    const notify = () => toast("İçecek Gönderildi !");
+
     const icecekPost = async () => {
         try {
             const apiUrl = `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/icecekler`;
 
-
             const postData = {
                 tür: iceceklerData.tür,
-                fiyat: iceceklerData.fiyat,  
+                fiyat: iceceklerData.fiyat,
                 url: image || ""
             };
 
@@ -54,9 +51,9 @@ const IceceklerData: React.FC = () => {
         }
     };
 
-    const convertToBase64 = (e: any) => {
+    const convertToBase64 = (e: ChangeEvent<HTMLInputElement>) => {
         const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(e.target.files![0]);
         reader.onload = () => {
             const base64String = reader.result as string;
             setImage(base64String);
@@ -88,7 +85,6 @@ const IceceklerData: React.FC = () => {
                             onChange={(e) => setIceceklerData({ ...iceceklerData, fiyat: parseFloat(e.target.value) })}
                         />
                     </div>
-
                 </div>
                 <div className='labelStyle '>
                     <label className='w-28'>Image</label>
