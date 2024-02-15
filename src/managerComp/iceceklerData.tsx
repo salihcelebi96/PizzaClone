@@ -17,6 +17,7 @@ const IceceklerData: React.FC = () => {
             VITE_APP_URL: string;
         };
     }
+    const newApi =`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/icecekler`;
 
     const [image, setImage] = useState<string>("");
     const [iceceklerData, setIceceklerData] = useState<IcecekDataState>({
@@ -29,7 +30,7 @@ const IceceklerData: React.FC = () => {
 
     const icecekPost = async () => {
         try {
-            const apiUrl = `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/icecekler`;
+           
 
             const postData = {
                 tür: iceceklerData.tür,
@@ -37,7 +38,7 @@ const IceceklerData: React.FC = () => {
                 url: image || ""
             };
 
-            const response = await axios.post(apiUrl, postData, {
+            const response = await axios.post(newApi, postData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',

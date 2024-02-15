@@ -30,15 +30,15 @@ const TatliData: React.FC = () => {
     const notify = () => toast("Tatlı Gönderildi !");
     const handleTatliPost = async () => {
         try {
-            const apiUrl =  `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` 
+            
 
-            const postData = {
+            const postData = JSON.stringify({
                 tür: tatliData.tür,
                 fiyat: tatliData.fiyat,
                 url: image || ""
-            };
+            });
 
-            const response = await axios.post(apiUrl, postData, {
+            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , postData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
