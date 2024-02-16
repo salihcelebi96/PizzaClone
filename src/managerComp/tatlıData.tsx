@@ -34,7 +34,7 @@ const TatliData: React.FC = () => {
 
             
 
-            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , {tatliData}, {
+            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , tatliData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
