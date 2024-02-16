@@ -25,20 +25,16 @@ const TatliData: React.FC = () => {
     const [tatliData, setTatliData] = useState<TatliDataState>({
         tür: '',
         fiyat: 0,
-        url: ""
+        url: image
     });
     const notify = () => toast("Tatlı Gönderildi !");
     const handleTatliPost = async () => {
         try {
             
 
-            const postData = JSON.stringify({
-                tür: tatliData.tür,
-                fiyat: tatliData.fiyat,
-                url: image || ""
-            });
+            
 
-            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , postData, {
+            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , {tatliData}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -49,6 +45,7 @@ const TatliData: React.FC = () => {
             notify();
         } catch (error: any) {
             console.error('Error:', error.message);
+            console.error('Response:', error.response);
         }
     };
 
