@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
-import {  useSelector } from "react-redux";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import Home from './pages/Home';
 import Navbar from "./pages/MenuComp";
@@ -17,41 +17,48 @@ import Sepet from "./pages/Sepet";
 import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
 import Manager from './pages/Manager';
-import "./App.css";
+
 
 
 
 const App = () => {
+  
+  const isAdminLogin = useSelector((state: RootState) => state.admin.adminLogin);
+  
+  
+
+
+ 
 
   
-const isAdminLogin = useSelector((state :  RootState) => state.admin.adminLogin);
-console.log(isAdminLogin, "app.tsx");
-
-
-
-
 
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pizzalar" element={<Pizzas />} />
-        <Route path='/kampanyalar' element={<Kampanya/>}/>
-        <Route path='/wingstreet' element={<Wings/>}/>
-        <Route path='/yanurunler' element={<YanUrun/>}/>
-        <Route path='/tatlılar' element={<Tatlılar/>}/>
-        <Route path='/icecekler' element={<Icecekler/>}/>
-        <Route path='/restoranlar' element={<Restoranlar/>}/>
-        <Route path='/login' element={<LoginMenu/>}/>
-        <Route path='/kayıtol' element={<SignUp/>}/>
-        <Route path='/sepet' element={<Sepet />}/>
-        <Route path='/payment' element={<Payment />}/>
-        <Route path='/admin' element={<AdminPage />}/>
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
-      </Routes>
-      <Footer />
+      
+        
+          
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pizzalar" element={<Pizzas />} />
+            <Route path='/kampanyalar' element={<Kampanya />} />
+            <Route path='/wingstreet' element={<Wings />} />
+            <Route path='/yanurunler' element={<YanUrun />} />
+            <Route path='/tatlılar' element={<Tatlılar />} />
+            <Route path='/icecekler' element={<Icecekler />} />
+            <Route path='/restoranlar' element={<Restoranlar />} />
+            <Route path='/login' element={<LoginMenu />} />
+            <Route path='/kayıtol' element={<SignUp />} />
+            <Route path='/sepet' element={<Sepet />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/admin' element={<AdminPage />} />
+            <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Footer />
+       
+     
+       
     </Router>
   );
 };
