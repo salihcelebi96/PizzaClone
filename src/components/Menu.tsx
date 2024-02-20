@@ -77,7 +77,7 @@ const Menu: React.FC = () => {
                                             <div className='py-1 bg-black rounded-md'>
                                             <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
                                             </div>
-                                           <div className='py-1 rounded-md  bg-black'>
+                                           <div className='py-2 rounded-md  bg-black'>
                                            <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
 
                                            </div>
