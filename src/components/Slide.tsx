@@ -6,6 +6,7 @@ import foto1 from "../assets/slide/foto1.jpg";
 import foto2 from "../assets/slide/foto2.jpg";
 import foto3 from "../assets/slide/foto3.jpg";
 import foto4 from "../assets/slide/foto4.jpg";
+import {Link} from "react-router-dom";
 
 const Slide = () => {
   const settings = {
@@ -27,12 +28,14 @@ const Slide = () => {
         <Slider {...settings}>
           {slideImages.map((slideImage, index) => (
             <div key={index}>
+              <Link to="/kampanyalar">
               <img
               className='full'
                 src={slideImage}
                 alt={`Slide ${index + 1}`}
                 style={{ width: '100%', height: 'auto' }}
-              />
+              /></Link>
+              
             </div>
           ))}
         </Slider>
