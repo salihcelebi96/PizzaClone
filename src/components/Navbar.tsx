@@ -24,14 +24,14 @@ const Navbar: React.FC = () => {
 
   };
 
-  const isLoginOpen = useSelector((state: RootState) => state.login.isAuthenticated)
+  const isLoginOpen = useSelector((state: RootState) => state.login.isAuthenticated);
   const userLogin = useSelector((state: RootState) => state.login.userLogin);
   // const isSignUp = useSelector((state: RootState) => state.login.isSignUp);
   const sepet = useSelector((state: RootState) => state.sepet.items);
-
+  
   const sepetLength = sepet.length;
 
-
+ const name = useSelector((state: RootState) => state.login.name);
 
 
   const userLoginHandle = () => {
@@ -45,6 +45,10 @@ const Navbar: React.FC = () => {
       userLoginHandle();
     } 
   };
+
+  const firstLetterName = name.substring(0,1);
+
+
 
   return (
     <div className="flex justify-center items-center gap-24 h-16 font-semibold cursor-pointer border text-lg">
@@ -67,7 +71,12 @@ const Navbar: React.FC = () => {
       <div className="flex items-center gap-10">
         <div className='flex gap-2'>
           <div className='flex gap-2 items-center' onClick={toggleUserLogin}>
-            <FaRegCircleUser />
+            {
+              !userLogin && (
+                <FaRegCircleUser />
+              ) 
+            }
+          
             {isLoginOpen && (
               <h1>Giriş Yap</h1>
             )}
@@ -82,7 +91,12 @@ const Navbar: React.FC = () => {
             </div>
 
           ) : (
-            userLogin ? <h1 onClick={userLoginHandle}>Çıkış Yap</h1> : <h1 onClick={openLogin}>Giriş Yap</h1>
+            userLogin ? 
+            <div className='border rounded-full w-7 h-7 flex justify-center items-center  text-sm bg-gray-400 text-white'>
+              <h1 className='' onClick={userLoginHandle}> {firstLetterName}  </h1>
+
+            </div>
+             : <h1 onClick={openLogin}>Giriş Yap</h1>
           )}
         </div>
 

@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const SignUp: React.FC = () => {
         interface ExtendedImportMeta extends ImportMeta {
           env: {
             VITE_APP_URL: string;
-            // Diğer ortam değişkenleri buraya eklenebilir
+            
           };
         }
         
@@ -109,6 +110,7 @@ const SignUp: React.FC = () => {
         const result = await response.json();
         console.log('Signup successful:', result);
         navigate("/login");
+        
         notify();
       } else {
         console.error('Signup failed:', response.statusText);

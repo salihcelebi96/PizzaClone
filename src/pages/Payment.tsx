@@ -200,21 +200,22 @@ const Payment: React.FC = () => {
 
           </div>
           <div>
-            <input maxLength={16}
+            <input  maxLength={16}
               onChange={(e) => setCardNumber(e.target.value)}
-              className='inputCard w-full' type="text" placeholder='Card Number' />
+              className='inputCard w-full' type="number" placeholder='Card Number' />
           </div>
           <div>
             <input onChange={(e) => setName(e.target.value)} className='inputCard w-full' type="text" placeholder='Name' />
           </div>
           <div className=' flex mt-5 justify-around gap-4'>
-            <input maxLength={4} onChange={(e) => setLastDate(e.target.value)} className='inputCard ' type="text" placeholder='Valid thru' />
+            <input maxLength={4} onChange={(e) => setLastDate(e.target.value)} className='inputCard ' type="number" placeholder='Valid thru' />
             <input
               ref={cvcInputRef}
+              typeof='number'
               onClick={handleCvcClick}
               maxLength={3} minLength={3}
               onChange={(e) => setCvc(e.target.value)}
-              className={`inputCard ${isCvcActive ? 'active' : ''}`} type="text" placeholder='CVC' />
+              className={`inputCard ${isCvcActive ? 'active' : ''}`} type="number" placeholder='CVC' />
           </div>
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>

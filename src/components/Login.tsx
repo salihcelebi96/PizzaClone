@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { setUserName } from "../reducers/loginSlice";
 
 
 
@@ -18,6 +19,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
   const notify = () => toast("Giriş Yapıldı !");
+  const notifyError = () => toast("Girilen bilgilerde hata var !!");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -62,6 +64,7 @@ const Login: React.FC = () => {
       }
     } catch (error) {
       console.error("Error during fetch:", error);
+     
     }
   };
 
@@ -81,9 +84,12 @@ const Login: React.FC = () => {
       notify();
       navigate('/');
       fetchProtectedData();
+       dispatch(setUserName(email));
+      console.log("setusername",  email);
       
     } catch (error) {
       console.error('Login failed:', error);
+      notifyError();
     }
   };
 
