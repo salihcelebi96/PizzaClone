@@ -1,45 +1,37 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/manager.css";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface TatliDataState {
-
     tür: string;
     fiyat: number;
     url: string;
 }
 
 const TatliData: React.FC = () => {
-
     interface ExtendedImportMeta extends ImportMeta {
         env: {
-          VITE_APP_URL: string;
+            VITE_APP_URL: string;
         };
-      }
+    }
 
-
+    // const newApi =`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/icecekler`;
 
     const [image, setImage] = useState<string>("");
     const [tatliData, setTatliData] = useState<TatliDataState>({
         tür: '',
         fiyat: 0,
-        url: image
+        url: image || '',
     });
     const notify = () => toast("Tatlı Gönderildi !");
+    
     const handleTatliPost = async () => {
         try {
-            
+            const apiUrl =  `${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar`;
 
-            
-
-            const response = await axios.post(`${(import.meta as ExtendedImportMeta).env.VITE_APP_URL}/api/tatlilar` , tatliData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-            });
+            const response = await axios.post(apiUrl, tatliData);
 
             console.log("Server Response:", response.data);
             notify();
@@ -49,13 +41,14 @@ const TatliData: React.FC = () => {
         }
     };
 
-    const convertToBase64 = (e: any) => {
+    const convertToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e);
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = () => {
           const base64String = reader.result as string;
           setImage(base64String); 
+          setTatliData({...tatliData, url: base64String});
         };
         reader.onerror = (error) => {
           console.log(error);
