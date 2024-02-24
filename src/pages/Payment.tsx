@@ -103,12 +103,12 @@ const Payment: React.FC = () => {
   interface ExtendedImportMeta extends ImportMeta {
     env: {
       VITE_APP_URL: string;
-      // Diğer ortam değişkenleri buraya eklenebilir
+      
     };
   }
-  
+
   const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
- 
+
 
   const postData = async () => {
     try {
@@ -150,7 +150,7 @@ const Payment: React.FC = () => {
         {isCvcActive ? (
           <CardBack bgColor={bgColorCard} cvc={cvc} />
         ) : (
-         
+
           <div style={bgColorCard()} className='relative credit-card bg-gray-300 border  w-[250px] sm:w-[300px] rounded-2xl h-40 mt-6'>
             <div className='w-10 absolute top-2 left-4'>
               <img src={Chip} alt="" />
@@ -161,7 +161,9 @@ const Payment: React.FC = () => {
               </div>
             )}
             <div className='h-full flex items-center justify-center'>
-              <div className='text-6xl top-10 left-10'>
+              <div
+
+                className='text-6xl top-10 left-10'>
                 {cardNumber ? (
                   <p className='text-lg'>
                     {cardNumber.replace(/(\d{4})/g, '$1 ').trim()}
@@ -200,9 +202,17 @@ const Payment: React.FC = () => {
 
           </div>
           <div>
-            <input  maxLength={16}
-              onChange={(e) => setCardNumber(e.target.value)}
-              className='inputCard w-full' type="number" placeholder='Card Number' />
+            <input
+              value={cardNumber}
+              onChange={(e) => {
+                
+                const formattedValue = e.target.value.replace(/\D/g, '').slice(0, 16);
+                setCardNumber(formattedValue);
+              }}
+              className='inputCard w-full'
+              type="text"  
+              placeholder='Card Number' />
+
           </div>
           <div>
             <input onChange={(e) => setName(e.target.value)} className='inputCard w-full' type="text" placeholder='Name' />
