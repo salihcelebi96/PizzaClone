@@ -14,7 +14,7 @@ import { setUserName } from "../reducers/loginSlice";
 
 
 const Login: React.FC = () => {
-  //  const [user, setUser] = useState<string[] | null>(null);
+  
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
@@ -96,13 +96,7 @@ const Login: React.FC = () => {
   
 
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   setUser(null);
-  //   setuserLogin(false);
-  //   console.log("Logout successful");
-  // };
-
+  
 
   useEffect(() => {
 

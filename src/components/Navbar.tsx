@@ -6,16 +6,17 @@ import { BsFillBasketFill } from "react-icons/bs";
 import "../css/navbar.css";
 import Login from "./LoginSign";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginOpen, userLoginFalse, signUpClose } from "../reducers/loginSlice";
+import { loginOpen, signUpClose } from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
-import {  toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const Navbar: React.FC = () => {
-  const notify = () => toast("Çıkış Yapıldı !");
 
+const Navbar: React.FC = () => {
+  
+  
   const dispatch = useDispatch();
 
   const openLogin = () => {
@@ -34,17 +35,17 @@ const Navbar: React.FC = () => {
  const name = useSelector((state: RootState) => state.login.name);
 
 
-  const userLoginHandle = () => {
-    dispatch(userLoginFalse());
-    notify();
+  // const userLoginHandle = () => {
+  //   dispatch(userLoginFalse());
+  //   notify();
     
-  }
-  const toggleUserLogin = () => {
-    if (userLogin) {
-
-      userLoginHandle();
-    } 
-  };
+  // }
+  // const toggleUserLogin = () => {
+  //   if (userLogin) {
+      
+  //     userLoginHandle();
+  //   } 
+  // };
 
   const firstLetterName = name.substring(0,1);
 
@@ -70,7 +71,7 @@ const Navbar: React.FC = () => {
 
       <div className="flex items-center gap-10">
         <div className='flex gap-2'>
-          <div className='flex gap-2 items-center' onClick={toggleUserLogin}>
+          <div className='flex gap-2 items-center' >
             {
               !userLogin && (
                 <FaRegCircleUser />
@@ -91,11 +92,14 @@ const Navbar: React.FC = () => {
             </div>
 
           ) : (
-            userLogin ? 
+            userLogin ?  //Giriş yapıldıysa böyle gözükür
+            <Link to="/profil">
             <div className='border rounded-full w-7 h-7 flex justify-center items-center  text-sm bg-gray-400 text-white'>
-              <h1 className='' onClick={userLoginHandle}> {firstLetterName}  </h1>
+              <h1 className='' > {firstLetterName}  </h1>
 
             </div>
+            </Link>
+            
              : <h1 onClick={openLogin}>Giriş Yap</h1>
           )}
         </div>

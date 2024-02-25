@@ -17,6 +17,7 @@ import Sepet from "./pages/Sepet";
 import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
 import Manager from './pages/Manager';
+import ProfilPage from "./pages/ProfilPage";
 
 
 
@@ -54,6 +55,7 @@ const App = () => {
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
             <Route path="*" element={<Navigate to="/" />} />
+            <Route path='/profil' element={<ProfilPage/>}  />
           </Routes>
           <Footer />
        

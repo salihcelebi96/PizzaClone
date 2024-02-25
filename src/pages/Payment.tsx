@@ -103,7 +103,7 @@ const Payment: React.FC = () => {
   interface ExtendedImportMeta extends ImportMeta {
     env: {
       VITE_APP_URL: string;
-      
+
     };
   }
 
@@ -205,12 +205,12 @@ const Payment: React.FC = () => {
             <input
               value={cardNumber}
               onChange={(e) => {
-                
-                const formattedValue = e.target.value.replace(/\D/g, '').slice(0, 16);
-                setCardNumber(formattedValue);
+
+                const formattedCardNumber = e.target.value.replace(/\D/g, '').slice(0, 16);
+                setCardNumber(formattedCardNumber);
               }}
               className='inputCard w-full'
-              type="text"  
+              type="text"
               placeholder='Card Number' />
 
           </div>
@@ -218,14 +218,24 @@ const Payment: React.FC = () => {
             <input onChange={(e) => setName(e.target.value)} className='inputCard w-full' type="text" placeholder='Name' />
           </div>
           <div className=' flex mt-5 justify-around gap-4'>
-            <input maxLength={4} onChange={(e) => setLastDate(e.target.value)} className='inputCard ' type="number" placeholder='Valid thru' />
+            <input maxLength={4} 
+            onChange = {(e)=> {
+              const formattedValidNumber = e.target.value.replace(/\D/g, '').slice(0, 4);
+              setLastDate(formattedValidNumber);
+            } }
+            className='inputCard ' type="text" placeholder='Valid thru' />
             <input
               ref={cvcInputRef}
-              typeof='number'
-              onClick={handleCvcClick}
-              maxLength={3} minLength={3}
-              onChange={(e) => setCvc(e.target.value)}
-              className={`inputCard ${isCvcActive ? 'active' : ''}`} type="number" placeholder='CVC' />
+              maxLength={3}
+              onChange={(e) => {
+                const formattedCvc = e.target.value.replace(/\D/g, '').slice(0, 3);
+                setCvc(formattedCvc);
+              }}
+              className={`inputCard ${isCvcActive ? 'active' : ''}`}
+              type="text"
+              placeholder='CVC'
+            />
+
           </div>
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>

@@ -6,13 +6,17 @@ interface AuthState {
   isSignUp: boolean;
   userLogin:boolean;
   name:string;
+  profilName:string;
+  
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   isSignUp: false,
   userLogin: false,
-  name:""
+  name:"",
+  profilName:"",
+  
 };
 
 const authSlice = createSlice({
@@ -39,9 +43,12 @@ const authSlice = createSlice({
     },
     setUserName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
+    },
+    setProfilName:(state,action: PayloadAction<string>) => {
+      state.profilName = action.payload;
     }
   },
 });
 
-export const { loginOpen, logout, signUpOpen, signUpClose, userLoginFalse, userLoginTrue,setUserName } = authSlice.actions;
+export const { loginOpen, logout, signUpOpen, signUpClose, userLoginFalse, userLoginTrue,setUserName,setProfilName } = authSlice.actions;
 export default authSlice.reducer;

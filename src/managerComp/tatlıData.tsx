@@ -41,7 +41,7 @@ const TatliData: React.FC = () => {
         }
     };
 
-    const convertToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const convertToBase64 = (e: any) => {
         console.log(e);
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
