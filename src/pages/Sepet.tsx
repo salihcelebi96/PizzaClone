@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { SepetData } from '../reducers/sepetSlice';
@@ -15,7 +15,7 @@ const Sepet: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notify = () => toast("Giriş Yapmalısınız !");
-
+ const [count,setCount] = useState<number>(1);
 
 
 
@@ -51,7 +51,17 @@ const Sepet: React.FC = () => {
     }
   }
   
+  const increaseCount = () => {
+    setCount(prevCount => prevCount + 1);
+  }
 
+  const decreaseCount = () => {
+    if(count > 1){
+      setCount(prevCount => prevCount - 1);
+    }
+    
+  }
+  
 
 
   return (
@@ -73,7 +83,19 @@ const Sepet: React.FC = () => {
 
                 <div className='flex gap-6 items-center'>
                   <div>
-                    {item.fiyatlar} TL
+                    {item.fiyatlar * count} TL
+                  </div>
+                  <div className='flex gap-2 text-xl'>
+                    <div>
+                      <button onClick={decreaseCount}>-</button>
+                    </div>
+                    <div>
+                      {count}
+                    </div>
+                    <div>
+                      <button onClick={increaseCount}>+</button>
+                    </div>
+
                   </div>
                   <div className='text-red-600'>
                     <FaTrash onClick={() => handleDelete(item._id)} className='cursor-pointer ' />
