@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../css/signUp.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginOpen, signUpClose } from '../reducers/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setProfilName } from "../reducers/loginSlice";
+import {setUsers} from "../reducers/userSlice";
+import { RootState } from '../redux/store';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +21,6 @@ const SignUp: React.FC = () => {
     navigate("/");
   }
 
-
   interface User {
     name: string;
     email: string;
@@ -29,11 +30,8 @@ const SignUp: React.FC = () => {
     isChecked2: boolean;
     isChecked3: boolean;
   }
-  
 
-
-
-  const [users,setUsers] = useState<User[]>([]);
+  const [user, setUser] = useState<User[]>([]);
   const [isChecked1, setIsChecked1] = useState<boolean>(false);
   const [isChecked2, setIsChecked2] = useState<boolean>(false);
   const [isChecked3, setIsChecked3] = useState<boolean>(false);
@@ -41,14 +39,13 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+
   interface ExtendedImportMeta extends ImportMeta {
     env: {
       VITE_APP_URL: string;
     };
   }
 
-
- 
   const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
   useEffect(() => {
@@ -57,7 +54,7 @@ const SignUp: React.FC = () => {
         const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
         console.log(response.data);
         setUsers(response.data);
-        console.log(response.data.users); // Kullanıcıları konsola yazdırarak kontrol edebilirsiniz
+        console.log("users", response.data); 
       } catch (error) {
         console.error('Error getting users:', error);
       }
@@ -85,19 +82,31 @@ const SignUp: React.FC = () => {
     }
   };
 
+  const AllUser = useSelector((state:RootState)=> state.allUser.users);
+
+  useEffect(()=>{
+     
+    console.log("alluser", AllUser);
+    console.log("user", user);
+  },[AllUser]);
+
   const handleSignup = async () => {
     try {
-      // Kullanıcıların email adreslerini içeren bir dizi oluştur
-      const userEmails = users.map(user => user.email);
+      // Girilen e-postanın kullanımda olup olmadığını kontrol etmek için sunucudan kullanıcıları çek
+      const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
+      const existingUsers = response.data.users;
       
-      // Girilen email daha önce kullanılmış mı kontrol et
-      if (userEmails.includes(email)) {
+      // Girilen e-postanın kullanımda olup olmadığını kontrol et
+      const isEmailTaken = existingUsers.some((user: User) => user.email === email);
+      
+      // Eğer e-posta zaten kullanımdaysa, hata bildirimi göster ve işlemi durdur
+      if (isEmailTaken) {
         notifyError();
         return;
       }
       
-      // Email daha önce kullanılmadıysa, kayıt işlemini gerçekleştir
-      const response = await axios.post(`${apiUrl}/api/loginjwt/signup`, {
+      // Eğer e-posta kullanımda değilse, yeni kullanıcıyı kaydet
+      const signupResponse = await axios.post(`${apiUrl}/api/loginjwt/signup`, {
         name,
         email,
         password,
@@ -107,18 +116,26 @@ const SignUp: React.FC = () => {
         isChecked3,
       });
   
-      if (response.status === 200) {
-        console.log('Signup successful:', response.data);
+      if (signupResponse.status === 200) {
+        console.log('Signup successful:', signupResponse.data);
+  
+        // Yeni kullanıcı bilgilerini Redux mağazasına ekle
+        dispatch(setUsers([...existingUsers, signupResponse.data]));
+  
         navigate("/login");
         dispatch(setProfilName(name));
         notify();
       } else {
-        console.error('Signup failed:', response.statusText);
+        console.error('Signup failed:', signupResponse.statusText);
       }
     } catch (error) {
       console.error('Error during signup:', error);
     }
   };
+  
+  
+  
+  
   
 
   return (
