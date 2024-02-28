@@ -3,7 +3,7 @@
     height: 100vh; /* Menü yüksekliği, ekranın tamamını kaplaması için */
     position: fixed;
     top: 20px;
-    right: -55px;
+    right: -40px;
     background-color: white; /* Menü arka plan rengi */
     z-index: 1000; /* Diğer içeriklerin üzerinde olması için */
     transition: transform 0.3s ease; /* Açılış/kapanış animasyonu */
