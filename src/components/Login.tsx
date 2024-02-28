@@ -1,45 +1,64 @@
 import React, { useEffect, useState } from "react";
-import {  useNavigate,Link } from "react-router-dom";
-import "../css/login.css";
-import { logout, signUpOpen, userLoginTrue } from "../reducers/loginSlice";
-import { useDispatch } from "react-redux";
 import axios from 'axios';
-import {  toast } from 'react-toastify';
+import { useNavigate, Link } from "react-router-dom";
+import "../css/login.css";
+import { logout, signUpOpen, userLoginTrue, setUserName } from "../reducers/loginSlice";
+import { useDispatch } from "react-redux";
+import { setActiveUserByEmail, setUsers } from "../reducers/userSlice";
+import Loading from "../components/Loadings";
+
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setUserName } from "../reducers/loginSlice";
-
-
-
-
-
 
 const Login: React.FC = () => {
-  
+
+
+
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLogin, setuserLogin] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true); 
   const notify = () => toast("Giriş Yapıldı !");
   const notifyError = () => toast("Girilen bilgilerde hata var !!");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+    };
+  }
+
+  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
+        dispatch(setUsers(response.data.users));
+        setLoading(false);
+        
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+  
+    fetchUsers();
+  }, []); 
+
+
+
+
+
 
 
   const handleSignUp = () => {
     dispatch(logout());
     dispatch(signUpOpen());
-    
-    
   };
-
-  interface ExtendedImportMeta extends ImportMeta {
-    env: {
-      VITE_APP_URL: string;
-      
-    };
-  }
-  
-  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
-  
 
   const fetchProtectedData = async () => {
     try {
@@ -64,16 +83,8 @@ const Login: React.FC = () => {
       }
     } catch (error) {
       console.error("Error during fetch:", error);
-     
     }
   };
-
-
-
-  
-
-
-
 
   const handleLogin = async () => {
     try {
@@ -84,7 +95,8 @@ const Login: React.FC = () => {
       notify();
       navigate('/');
       fetchProtectedData();
-       dispatch(setUserName(email));
+      dispatch(setUserName(email));
+      dispatch(setActiveUserByEmail(email));
       console.log("setusername",  email);
       
     } catch (error) {
@@ -93,28 +105,21 @@ const Login: React.FC = () => {
     }
   };
 
-  
-
-
-  
+  const closeLogin = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
-
     if (userLogin) {
       dispatch(logout());
       dispatch(userLoginTrue());
       console.log("Login successful");
     }
-  }, [userLogin]);
+  }, [userLogin, dispatch]);
 
-
-
-
-  const closeLogin = () => {
-    dispatch(logout());
-  };
-
-
+  if(loading){
+    return <Loading/>;
+  }
 
   return (
     <div className="text-black   ">
@@ -150,22 +155,18 @@ const Login: React.FC = () => {
         <div className="text-center py-5">
           <h1>
             Hesabın yok mu?{" "}
-            <Link to="/kayıtol"
-              onClick={() => handleSignUp()}
-              className="text-red-600 link-arrow">
+            <Link to="/kayıtol" onClick={() => handleSignUp()} className="text-red-600 link-arrow">
               Kayıt Ol&gt;{" "}
             </Link>
-           </h1>
+          </h1>
         </div>
         <div className="absolute text-red-600  top-0 right-2 text-3xl">
           <button onClick={closeLogin}> x </button>
         </div>
         <div onClick={closeLogin} className="text-sm absolute bottom-0 right-2 ">
           <Link to="/admin">  Admin <span className="text-xl"> &rarr;</span> </Link>
+        </div>
       </div>
-      </div>
-      
-     
     </div>
   );
 };

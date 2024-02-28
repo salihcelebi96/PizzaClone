@@ -12,12 +12,14 @@ interface User {
 
 interface UsersState {
   users: User[];
+  activeUser: User | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: UsersState = {
   users: [],
+  activeUser: null,
   isLoading: false,
   error: null
 };
@@ -31,6 +33,14 @@ const usersSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
+    setActiveUser(state, action: PayloadAction<User>) {
+      state.activeUser = action.payload;
+    },
+    setActiveUserByEmail(state, action: PayloadAction<string>) {
+      const userEmail = action.payload;
+      const matchedUser = state.users.find(user => user.email === userEmail);
+      state.activeUser = matchedUser || null;
+    },
     setLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
       state.error = null;
@@ -42,6 +52,6 @@ const usersSlice = createSlice({
   }
 });
 
-export const { setUsers, setLoading, setError } = usersSlice.actions;
+export const { setUsers, setActiveUser, setActiveUserByEmail, setLoading, setError } = usersSlice.actions;
 
 export default usersSlice.reducer;

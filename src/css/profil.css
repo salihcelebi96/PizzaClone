@@ -1,0 +1,47 @@
+.liStyle:hover {
+    color: red;
+    
+    
+}
+
+
+
+
+.liStyle:hover .icon {
+    background-color: rgb(246, 99, 99); 
+    ;
+}
+
+
+.liStyle{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.containerStyle{
+    font-family: "Roboto",sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.link{
+    display: flex;
+    gap: 5px;
+
+}
+
+.icon{
+  height: 30px;
+  width: 30px;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  
+}
+

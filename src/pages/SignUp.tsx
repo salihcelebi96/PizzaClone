@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import "../css/signUp.css";
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { setProfilName } from "../reducers/loginSlice";
 import {setUsers} from "../reducers/userSlice";
 import { RootState } from '../redux/store';
+
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const SignUp: React.FC = () => {
     isChecked3: boolean;
   }
 
-  const [user, setUser] = useState<User[]>([]);
+  
   const [isChecked1, setIsChecked1] = useState<boolean>(false);
   const [isChecked2, setIsChecked2] = useState<boolean>(false);
   const [isChecked3, setIsChecked3] = useState<boolean>(false);
@@ -39,6 +40,7 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  
 
   interface ExtendedImportMeta extends ImportMeta {
     env: {
@@ -48,20 +50,7 @@ const SignUp: React.FC = () => {
 
   const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
-        console.log(response.data);
-        setUsers(response.data);
-        console.log("users", response.data); 
-      } catch (error) {
-        console.error('Error getting users:', error);
-      }
-    };
 
-    fetchUsers();
-  }, []);
 
   const handleCheckboxChange1 = () => {
     setIsChecked1(!isChecked1);
@@ -82,24 +71,20 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const AllUser = useSelector((state:RootState)=> state.allUser.users);
 
-  useEffect(()=>{
-     
-    console.log("alluser", AllUser);
-    console.log("user", user);
-  },[AllUser]);
+
+  
+  
+
+  
+  const existingUsers = useSelector((state:RootState) => state.allUser.users);
+  
 
   const handleSignup = async () => {
     try {
-      // Girilen e-postanın kullanımda olup olmadığını kontrol etmek için sunucudan kullanıcıları çek
-      const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
-      const existingUsers = response.data.users;
-      
-      // Girilen e-postanın kullanımda olup olmadığını kontrol et
       const isEmailTaken = existingUsers.some((user: User) => user.email === email);
       
-      // Eğer e-posta zaten kullanımdaysa, hata bildirimi göster ve işlemi durdur
+     
       if (isEmailTaken) {
         notifyError();
         return;
@@ -122,7 +107,7 @@ const SignUp: React.FC = () => {
         // Yeni kullanıcı bilgilerini Redux mağazasına ekle
         dispatch(setUsers([...existingUsers, signupResponse.data]));
   
-        navigate("/login");
+        navigate("/");
         dispatch(setProfilName(name));
         notify();
       } else {
