@@ -8,8 +8,8 @@ import Login from "./LoginSign";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginOpen, signUpClose } from "../reducers/loginSlice";
 import { RootState } from '../redux/store';
-
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
 
   const isLoginOpen = useSelector((state: RootState) => state.login.isAuthenticated);
   const userLogin = useSelector((state: RootState) => state.login.userLogin);
-  // const isSignUp = useSelector((state: RootState) => state.login.isSignUp);
+  
   const sepet = useSelector((state: RootState) => state.sepet.items);
   
   const sepetLength = sepet.length;
@@ -35,17 +35,7 @@ const Navbar: React.FC = () => {
  const name = useSelector((state: RootState) => state.login.name);
 
 
-  // const userLoginHandle = () => {
-  //   dispatch(userLoginFalse());
-  //   notify();
-    
-  // }
-  // const toggleUserLogin = () => {
-  //   if (userLogin) {
-      
-  //     userLoginHandle();
-  //   } 
-  // };
+ 
 
   const firstLetterName = name.substring(0,1);
 
@@ -76,6 +66,7 @@ const Navbar: React.FC = () => {
               !userLogin && (
                 <FaRegCircleUser />
               ) 
+              
             }
           
             {isLoginOpen && (

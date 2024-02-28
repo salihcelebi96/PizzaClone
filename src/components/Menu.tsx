@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
 import "../css/menu.css";
@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
-import {  userLoginFalse} from "../reducers/loginSlice";
+import { userLoginFalse } from "../reducers/loginSlice";
 import { BsFillBasketFill } from "react-icons/bs";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfilPage from "../pages/ProfilPageSmall";
 
 
 const Menu: React.FC = () => {
@@ -20,31 +21,34 @@ const Menu: React.FC = () => {
     const sepet = useSelector((state: RootState) => state.sepet.items);
     const navigate = useNavigate();
     const sepetLength = sepet.length;
-    const notify = () => toast("Çıkış Yapıldı !");
+    const [profileOpen, setProfileOpen] = useState<Boolean>(false);
 
     const openLogin = () => {
         if (!userLogin) {
-           
             navigate("/login");
-        }else {
-            dispatch(userLoginFalse()) 
-            console.log("login exit oldu")
-            notify();
+        }else{
+            setProfileOpen(prevState => !prevState);
+            console.log(profileOpen);
+
         }
 
     };
 
+    
 
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
     const handleMenuToggle = () => {
-        setMenuOpen(!menuOpen);
+        setMenuOpen(true);
     }
 
     const handleOutsideClick = (e: any) => {
         if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
             setMenuOpen(false);
+        }
+        if (profileOpen && !e.target.closest('.profile-container')) {
+            setProfileOpen(false);
         }
     };
 
@@ -57,11 +61,22 @@ const Menu: React.FC = () => {
 
     return (
         <div className=' '>
+            {
+                profileOpen && (
+                    <div className='profile-container '>
+                        <ProfilPage/>
+                    </div>
+                )
+                    
+                
+                        
+            }
             <div className='flex justify-between px-2 items-center'>
                 <div onClick={handleMenuToggle} className='flex my-5'>
-                    <div>
+                    <div className=''>
                         <AiOutlineMenu size={20} />
                     </div>
+                    
                     <div className=''>
                         {menuOpen && (
                             <div className='sidebar fixed top-0 left-0 w-full overlay  z-50' />
@@ -75,13 +90,13 @@ const Menu: React.FC = () => {
                                                 <h1 className='text-base'>Uygulalamımzı İndirin</h1>
                                             </div>
                                             <div className='py-1 bg-black rounded-md'>
-                                            <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
+                                                <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
                                             </div>
-                                           <div className='py-2 rounded-md  bg-black'>
-                                           <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
+                                            <div className='py-2 rounded-md  bg-black'>
+                                                <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
 
-                                           </div>
-                                            
+                                            </div>
+
 
                                         </li>
                                         <li className='z-10 list-none  list'>
@@ -112,15 +127,15 @@ const Menu: React.FC = () => {
                     </Link>
                 </div>
 
-                
-                <div className='flex justify-center items-center relative gap-5 p-4'>
-                <div onClick={openLogin}>
-                    <div>
-                    <FaRegCircleUser size={24} />
-                    </div>
-                   
 
-                </div>
+                <div className='flex justify-center items-center relative gap-5 p-4'>
+                    <div className='' onClick={openLogin}>
+                        <div>
+                            <FaRegCircleUser size={24} />
+                        </div>
+
+
+                    </div>
 
                     <div>
                         <Link to="/sepet">

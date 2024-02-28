@@ -1,0 +1,13 @@
+.containerStyle {
+    width: 300px; /* Menü genişliği */
+    height: 100vh; /* Menü yüksekliği, ekranın tamamını kaplaması için */
+    position: fixed;
+    top: 20px;
+    right: -55px;
+    background-color: white; /* Menü arka plan rengi */
+    z-index: 1000; /* Diğer içeriklerin üzerinde olması için */
+    transition: transform 0.3s ease; /* Açılış/kapanış animasyonu */
+    transform: translateX(0); /* Başlangıçta sağdan dışarıda olması için */
+  }
+
+  
