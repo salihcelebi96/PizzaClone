@@ -225,6 +225,7 @@ const Payment: React.FC = () => {
             } }
             className='inputCard ' type="text" placeholder='Valid thru' />
             <input
+            onClick={handleCvcClick}
               ref={cvcInputRef}
               maxLength={3}
               onChange={(e) => {

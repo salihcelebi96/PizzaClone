@@ -14,7 +14,7 @@ import Exit from "../svg/exitSvg";
 const ProfilPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-     // Redux store'dan kullanıcı oturum durumu alınıyor
+     
     
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
     const dispatch = useDispatch();
