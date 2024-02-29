@@ -8,9 +8,7 @@ import {  useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
-
 import { BsFillBasketFill } from "react-icons/bs";
-
 import 'react-toastify/dist/ReactToastify.css';
 import ProfilPage from "../pages/ProfilPageSmall";
 
@@ -40,6 +38,7 @@ const Menu: React.FC = () => {
     useEffect(()=>{
         if (!userLogin) {
             setProfileOpen(false);
+
         }
 
     },[userLogin]);

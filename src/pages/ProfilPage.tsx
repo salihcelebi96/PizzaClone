@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { FaUserAlt } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import "../css/profil.css";
 import { Link } from "react-router-dom";
@@ -10,8 +10,8 @@ import Adress from "../svg/adressSvg";
 import MyAccount from "../svg/myaccounts";
 import Pay from "../svg/paySvg";
 import Exit from "../svg/exitSvg";
-
-
+import { userLoginFalse } from '../reducers/loginSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -19,6 +19,13 @@ import Exit from "../svg/exitSvg";
 const ProfilPage: React.FC = () => {
 
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        dispatch(userLoginFalse());
+        navigate("/");
+        
+   }
 
 
     useEffect(() => {
@@ -90,7 +97,7 @@ const ProfilPage: React.FC = () => {
 
                              </li>
                              <li className='liStyle '>
-                                <Link className='link' to="/">
+                                <Link onClick={handleLogout} className='link' to="/">
                                    <span className='icon'>
                                      <Exit />
                                    </span>
