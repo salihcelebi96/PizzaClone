@@ -15,7 +15,7 @@ const ProfilPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
      // Redux store'dan kullanıcı oturum durumu alınıyor
-    const userLogin = useSelector((state: RootState) => state.login.userLogin);
+    
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,9 +23,7 @@ const ProfilPage: React.FC = () => {
 
    
 
-    const handleMenuToggle = () => {
-        setMenuOpen(!menuOpen);
-    }
+    
 
     const handleOutsideClick = (e: any) => {
         if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {

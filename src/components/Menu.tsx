@@ -4,19 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
 import "../css/menu.css";
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
-import { userLoginFalse } from "../reducers/loginSlice";
+
 import { BsFillBasketFill } from "react-icons/bs";
-import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import ProfilPage from "../pages/ProfilPageSmall";
 
 const Menu: React.FC = () => {
     const userLogin = useSelector((state: RootState) => state.login.userLogin);
-    const dispatch = useDispatch();
+   
     const sepet = useSelector((state: RootState) => state.sepet.items);
     const navigate = useNavigate();
     const sepetLength = sepet.length;
