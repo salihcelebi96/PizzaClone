@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useState,useEffect } from "react";
 import {  useNavigate,Link } from "react-router-dom";
 import "../css/login.css";
 import { logout, signUpOpen, userLoginTrue } from "../reducers/loginSlice";
@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from "../components/Loadings";
+import { setActiveUserByEmail, setUsers } from "../reducers/userSlice";
+
 
 
 
@@ -13,14 +16,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login: React.FC = () => {
-  //  const [user, setUser] = useState<string[] | null>(null);
+  
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // const [userLogin, setuserLogin] = useState<boolean>(false);
+ 
   const notify = () => toast("Giriş Yapıldı !");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState<boolean>(true); 
 
   const handleSignUp = () => {
     dispatch(logout());
@@ -56,6 +59,7 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
+        
         console.log("Protected data:", data);
       } else {
         console.error("Failed to fetch protected data");
@@ -67,7 +71,20 @@ const Login: React.FC = () => {
 
 
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/loginjwt/users`);
+        dispatch(setUsers(response.data.users));
+        setLoading(false);
+        
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
   
+    fetchUsers();
+  }, []); 
 
 
 
@@ -81,6 +98,8 @@ const Login: React.FC = () => {
       notify();
       navigate('/');
       fetchProtectedData();
+      dispatch(setActiveUserByEmail(email));
+      
       
     } catch (error) {
       console.error('Login failed:', error);
@@ -90,22 +109,7 @@ const Login: React.FC = () => {
   
 
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   setUser(null);
-  //   setuserLogin(false);
-  //   console.log("Logout successful");
-  // };
-
-
-  // useEffect(() => {
-
-  //   if (userLogin) {
-  //     dispatch(logout());
-      
-  //     console.log("Login successful");
-  //   }
-  // }, [userLogin]);
+  
 
 
 
@@ -114,7 +118,9 @@ const Login: React.FC = () => {
     dispatch(logout());
   };
 
-   
+  if(loading){
+    return <Loading/>;
+  }
   
   return (
     <div className=" flex justify-center relative ">

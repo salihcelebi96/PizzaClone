@@ -17,7 +17,7 @@ import Exit from "../svg/exitSvg";
 
 
 const ProfilPage: React.FC = () => {
-    
+
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
 
 
@@ -50,7 +50,7 @@ const ProfilPage: React.FC = () => {
                                         Siparişlerim
                                     </span>
                                 </Link>
-                                   
+
 
                             </li>
                              <li className='liStyle '>
@@ -62,7 +62,7 @@ const ProfilPage: React.FC = () => {
                                         Adreslerim
                                     </span>
                                     </Link>
-                                   
+
 
                              </li>
                              <li className='liStyle '>
@@ -74,7 +74,7 @@ const ProfilPage: React.FC = () => {
                                         Hesabım
                                     </span>
                                     </Link>
-                                   
+
 
                              </li>
                              <li className='liStyle '>
@@ -86,7 +86,7 @@ const ProfilPage: React.FC = () => {
                                         Ödeme Yöntemi
                                     </span>
                                     </Link>
-                                   
+
 
                              </li>
                              <li className='liStyle '>
@@ -98,7 +98,7 @@ const ProfilPage: React.FC = () => {
                                         Çıkış
                                     </span>
                                     </Link>
-                                   
+
 
                              </li>
                         </ul>
@@ -111,11 +111,3 @@ const ProfilPage: React.FC = () => {
 }
 
 export default ProfilPage
-
-
-
-
-
-
-
-

@@ -27,15 +27,16 @@ const ProfilPage: React.FC = () => {
     }, [activeUser]);
 
     return (
-        <div className=' containerStyle   flex justify-center m-7'>
+        <div className='overlay'>
+             <div className=' containerStyle   flex justify-center m-7'>
             <div>
-                <div className='h-full  flex flex-col gap-10 p-7 justify-start border'>
+                <div className='h-full  flex flex-col     gap-10 p-7 justify-start '>
                     <div className='flex gap-5'>
                         <div className=' border rounded-full p-2 flex justify-center items-center bg-gray-200'>
                             <span className='text-gray-400 text-3xl'> <FaUserAlt /> </span>
                         </div>
                         <div>
-                            <div className=' flex items-center'>
+                            <div className=' flex  h-full items-center '>
                                 {activeUser ? activeUser.name : "No active user"}
                             </div>
                         </div>
@@ -108,6 +109,8 @@ const ProfilPage: React.FC = () => {
             </div>
             <div className=' h-full border'></div>
         </div>
+        </div>
+       
     )
 }
 
