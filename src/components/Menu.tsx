@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfilPage from "../pages/ProfilPageSmall";
 
-
 const Menu: React.FC = () => {
     const userLogin = useSelector((state: RootState) => state.login.userLogin);
     const dispatch = useDispatch();
@@ -22,25 +21,20 @@ const Menu: React.FC = () => {
     const navigate = useNavigate();
     const sepetLength = sepet.length;
     const [profileOpen, setProfileOpen] = useState<Boolean>(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
 
     const openLogin = () => {
         if (!userLogin) {
             navigate("/login");
-        }else{
+        } else {
             setProfileOpen(prevState => !prevState);
-            console.log(profileOpen);
-
+            setMenuOpen(false); // Menüyü kapat
         }
-
     };
 
-    
-
-    const [menuOpen, setMenuOpen] = useState(false);
-    const menuRef = useRef<HTMLDivElement | null>(null);
-
     const handleMenuToggle = () => {
-        setMenuOpen(true);
+        setMenuOpen(!menuOpen);
     }
 
     const handleOutsideClick = (e: any) => {
@@ -49,6 +43,9 @@ const Menu: React.FC = () => {
         }
         if (profileOpen && !e.target.closest('.profile-container')) {
             setProfileOpen(false);
+        }
+        if (!e.target.closest('.menu-container')) {
+            setProfileOpen(false); // Profil dışında bir yere tıklandığında profil kapanacak
         }
     };
 
@@ -60,16 +57,13 @@ const Menu: React.FC = () => {
     }, [menuOpen]);
 
     return (
-        <div className=' '>
+        <div className='menu-container'>
             {
                 profileOpen && (
-                    <div className='profile-container '>
+                    <div className='profile-container'>
                         <ProfilPage/>
                     </div>
                 )
-                    
-                
-                        
             }
             <div className='flex justify-between px-2 items-center'>
                 <div onClick={handleMenuToggle} className='flex my-5'>
@@ -79,40 +73,41 @@ const Menu: React.FC = () => {
                     
                     <div className=''>
                         {menuOpen && (
-                            <div className='sidebar fixed top-0 left-0 w-full overlay  z-50' />
+                            <div className='sidebar fixed top-0 left-0 w-full overlay z-50' />
                         )}
                         {menuOpen && (
-                            <div className='sidebar  fixed top-0 left-0 w-60 h-screen bg-white  z-50' ref={menuRef}>
+                            <div className='sidebar fixed top-0 left-0 w-60 h-screen bg-white z-50' ref={menuRef}>
                                 <nav className='w-full h-full'>
-                                    <ul className='flex w-full  p-5 px-7 text-sm list-disc h-full  flex-col    '>
-                                        <li className=' hover:text-black list-none    flex flex-col gap-4'>
+                                    <ul className='flex w-full p-5 px-7 text-sm list-disc h-full flex-col'>
+                                        <li className='hover:text-black list-none flex flex-col gap-4'>
                                             <div>
-                                                <h1 className='text-base'>Uygulalamımzı İndirin</h1>
+                                                <h1 className='text-base'>Uygulamamızı İndirin</h1>
                                             </div>
                                             <div className='py-1 bg-black rounded-md'>
-                                                <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US"> <img src={googlePlay} alt="" /></Link>
+                                                <Link className='' target='_blank' to="https://play.google.com/store/apps/details?id=tr.com.pizzahut&hl=en_US">
+                                                    <img src={googlePlay} alt="" />
+                                                </Link>
                                             </div>
-                                            <div className='py-2 rounded-md  bg-black'>
-                                                <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr"> <img src={appStore} alt="" />  </Link>
-
+                                            <div className='py-2 rounded-md bg-black'>
+                                                <Link className=' ' target='_blank' to="https://apps.apple.com/tr/app/pizza-hut-t%C3%BCrkiye/id1444013628?l=tr">
+                                                    <img src={appStore} alt="" />
+                                                </Link>
                                             </div>
-
-
                                         </li>
-                                        <li className='z-10 list-none  list'>
-                                            <Link className="  link-item   z-10" to="/kampanyalar">Kampanyalar</Link>
-                                        </li>
-                                        <li className='list-none  list z-10'>
-                                            <Link className="z-10  link-item " to="/pizzalar">Pizzalar</Link>
-                                        </li>
-                                        <li className='list-none list  list z-10'>
-                                            <Link className=" z-10 link-item " to="/wingstreet">WingStreet</Link>
-                                        </li>
-                                        <li className='list-none  list  z-10'>
-                                            <Link className=" z-10 link-item " to="/yanurunler">Yan Ürünler</Link>
+                                        <li className='z-10 list-none list'>
+                                            <Link className="link-item z-10" to="/kampanyalar">Kampanyalar</Link>
                                         </li>
                                         <li className='list-none list z-10'>
-                                            <Link className=" z-10 link-item " to="/restoranlar">Restoranlar</Link>
+                                            <Link className="z-10 link-item" to="/pizzalar">Pizzalar</Link>
+                                        </li>
+                                        <li className='list-none list z-10'>
+                                            <Link className="z-10 link-item" to="/wingstreet">WingStreet</Link>
+                                        </li>
+                                        <li className='list-none list z-10'>
+                                            <Link className="z-10 link-item" to="/yanurunler">Yan Ürünler</Link>
+                                        </li>
+                                        <li className='list-none list z-10'>
+                                            <Link className="z-10 link-item" to="/restoranlar">Restoranlar</Link>
                                         </li>
                                     </ul>
                                 </nav>
@@ -127,14 +122,11 @@ const Menu: React.FC = () => {
                     </Link>
                 </div>
 
-
                 <div className='flex justify-center items-center relative gap-5 p-4'>
                     <div className='' onClick={openLogin}>
                         <div>
                             <FaRegCircleUser size={24} />
                         </div>
-
-
                     </div>
 
                     <div>
@@ -147,7 +139,6 @@ const Menu: React.FC = () => {
                             {sepetLength}
                         </div>
                     )}
-
                 </div>
             </div>
         </div>

@@ -2,12 +2,18 @@
     width: 350px; 
     height: 100vh; 
     position: fixed;
-    top: 20px;
-    right: -55px;
+    top: 0;
+    right: 0;
     background-color: white; 
     z-index: 1000; 
     transition: transform 0.3s ease; 
     transform: translateX(0); 
   }
 
+  .link{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
   

@@ -26,8 +26,8 @@ const ProfilPage: React.FC = () => {
     }, [activeUser]);
 
     return (
-        <div className='h-[536px] containerStyle   flex justify-center m-7'>
-            <div>
+        <div className='h-[536px]   w-screen  flex justify-center my-5'>
+            <div className=''>
                 <div className='h-full w-[345px] flex flex-col gap-10 p-7 justify-start border'>
                     <div className='flex gap-5'>
                         <div className='h-[64px] w-[64px] border rounded-full p-2 flex justify-center items-center bg-gray-200'>
