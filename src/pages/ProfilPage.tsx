@@ -90,7 +90,7 @@ const ProfilPage: React.FC = () => {
 
                              </li>
                              <li className='liStyle '>
-                                <Link className='link' to="/link1">
+                                <Link className='link' to="/">
                                    <span className='icon'>
                                      <Exit />
                                    </span>

@@ -27,11 +27,29 @@ const Menu: React.FC = () => {
     const openLogin = () => {
         if (!userLogin) {
             navigate("/login");
+            
+            
         } else {
             setProfileOpen(prevState => !prevState);
             setMenuOpen(false); // Menüyü kapat
         }
     };
+
+
+
+    useEffect(()=>{
+        if (!userLogin) {
+            setProfileOpen(false);
+        }
+
+    },[userLogin]);
+
+
+
+
+
+
+
 
     const handleMenuToggle = () => {
         setMenuOpen(!menuOpen);
@@ -61,7 +79,8 @@ const Menu: React.FC = () => {
             {
                 profileOpen && (
                     <div className='profile-container'>
-                        <ProfilPage/>
+                        <ProfilPage    />
+
                     </div>
                 )
             }
