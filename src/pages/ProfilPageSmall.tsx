@@ -75,7 +75,7 @@ const ProfilPage: React.FC = () => {
                         <div>
                             <ul className='flex w-full flex-col gap-8'>
                                 <li className='liStyle'>
-                                    <Link className='link' to="/link1">
+                                    <Link className='link' to="/profil/siparislerim">
                                         <span className='icon'>
                                             <Order />
                                         </span>

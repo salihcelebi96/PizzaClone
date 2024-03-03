@@ -18,6 +18,10 @@ import Payment from './pages/Payment';
 import AdminPage from './pages/AdminPage';
 import Manager from './pages/Manager';
 import ProfilPage from "./pages/ProfilPage";
+import Siparislerim from "./pages/profilComponents/Siparislerim";
+import Adreslerim from "./pages/profilComponents/Adreslerim";
+import Hesabım from "./pages/profilComponents/Hesabım";
+import OdemeYontemleri from "./pages/profilComponents/OdemeYontemi";
 
 
 
@@ -56,6 +60,10 @@ const App = () => {
             <Route path='/manager' element={isAdminLogin ? <Manager /> : <Navigate to="/" />} />
             <Route path="*" element={<Navigate to="/" />} />
             <Route path='/profil' element={<ProfilPage/>}  />
+            <Route path='/profil/siparislerim' element={<Siparislerim/>}  />
+            <Route path='/profil/adreslerim' element={<Adreslerim/>}  />
+            <Route path='/profil/hesabım' element={<Hesabım/>}  />
+            <Route path='/profil/ödeme-yöntemlerim' element={<OdemeYontemleri/>}  />
             
           </Routes>
           <Footer />

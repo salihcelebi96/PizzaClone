@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { emptySepet } from "../reducers/sepetSlice";
 import axios from 'axios';
+import {pushToOrdered} from "../reducers/sepetSlice";
 
 
 
@@ -127,13 +128,14 @@ const Payment: React.FC = () => {
 
 
   const handleCardNumber = () => {
-    if (cardNumber.length === 16 && name && lastDate && cvc.length === 3) {
+    if (cardNumber.length === 16 && name && lastDate.length ===4 && cvc.length === 3) {
       postData();
       setValidCard(true);
       navigate("/");
       notify();
       dispatch(emptySepet());
       console.log(validCard);
+      dispatch(pushToOrdered(data));
 
 
     } else {

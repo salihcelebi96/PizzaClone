@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import { FaUserAlt } from "react-icons/fa";
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import "../css/profil.css";
 import { Link } from "react-router-dom";
 import "../css/profil.css";
 import Order from "../svg/orderSvg";
@@ -12,28 +11,24 @@ import Pay from "../svg/paySvg";
 import Exit from "../svg/exitSvg";
 import { userLoginFalse } from '../reducers/loginSlice';
 import { useNavigate } from 'react-router-dom';
-
-
-
+import Siparislerim from './profilComponents/Siparislerim';
+import Adreslerim from './profilComponents/Adreslerim';
+import Hesabım  from './profilComponents/Hesabım';
+import OdemeYontemi  from  "./profilComponents/OdemeYontemi";
 
 const ProfilPage: React.FC = () => {
-
+    const [activeComponent, setActiveComponent] = useState<string>('siparislerim');
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const handleLogout = () => {
         dispatch(userLoginFalse());
         navigate("/");
-        
-   }
-
-
-    useEffect(() => {
-        console.log("activeuser", activeUser);
-    }, [activeUser]);
+    }
 
     return (
-        <div className='h-[536px]   w-screen  flex justify-center my-5'>
+        <div className='h-[536px] w-screen flex justify-center my-5'>
             <div className=''>
                 <div className='h-full w-[345px] flex flex-col gap-10 p-7 justify-start border'>
                     <div className='flex gap-5'>
@@ -47,74 +42,49 @@ const ProfilPage: React.FC = () => {
                         </div>
                     </div>
                     <div>
-                        <ul className='flex w-full  flex-col gap-8'>
-                            <li className='liStyle '>
-                                <Link className='link' to="/link1">
-                                   <span className='icon'>
-                                     <Order />
-                                   </span>
-                                   <span>
-                                        Siparişlerim
-                                    </span>
+                        <ul className='flex w-full flex-col gap-8'>
+                            <li className='liStyle'>
+                                <Link className='link' to="/profil/siparislerim" onClick={() => setActiveComponent('siparislerim')}>
+                                    <span className='icon'><Order /></span>
+                                    <span>Siparişlerim</span>
                                 </Link>
-
-
                             </li>
-                             <li className='liStyle '>
-                                <Link className='link' to="/link1">
-                                   <span className='icon'>
-                                     <Adress />
-                                   </span>
-                                   <span>
-                                        Adreslerim
-                                    </span>
-                                    </Link>
-
-
-                             </li>
-                             <li className='liStyle '>
-                                <Link className='link' to="/link1">
-                                   <span className='icon'>
-                                     <MyAccount />
-                                   </span>
-                                   <span>
-                                        Hesabım
-                                    </span>
-                                    </Link>
-
-
-                             </li>
-                             <li className='liStyle '>
-                                <Link className='link' to="/link1">
-                                   <span className='icon'>
-                                     <Pay />
-                                   </span>
-                                   <span>
-                                        Ödeme Yöntemi
-                                    </span>
-                                    </Link>
-
-
-                             </li>
-                             <li className='liStyle '>
-                                <Link onClick={handleLogout} className='link' to="/">
-                                   <span className='icon'>
-                                     <Exit />
-                                   </span>
-                                   <span>
-                                        Çıkış
-                                    </span>
-                                    </Link>
-
-
-                             </li>
+                            <li className='liStyle'>
+                                <Link className='link' to="/profil/adreslerim" onClick={() => setActiveComponent('adreslerim')}>
+                                    <span className='icon'><Adress /></span>
+                                    <span>Adreslerim</span>
+                                </Link>
+                            </li>
+                            <li className='liStyle'>
+                                <Link className='link' to="/profil/hesabım" onClick={() => setActiveComponent('hesabım')}>
+                                    <span className='icon'><MyAccount /></span>
+                                    <span>Hesabım</span>
+                                </Link>
+                            </li>
+                            <li className='liStyle'>
+                                <Link className='link' to="/profil/ödeme-yöntemlerim" onClick={() => setActiveComponent('odemeyontemi')}>
+                                    <span className='icon'><Pay /></span>
+                                    <span>Ödeme Yöntemi</span>
+                                </Link>
+                            </li>
+                            <li className='liStyle'>
+                                <Link className='link' onClick={handleLogout} to="/">
+                                    <span className='icon'><Exit /></span>
+                                    <span>Çıkış</span>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div className='w-[576px] h-full border'></div>
+            <div className='w-[576px] h-full border'>
+                {activeComponent === "adreslerim" && <Adreslerim />}
+                {activeComponent === "siparislerim" && <Siparislerim />}
+                {activeComponent === "hesabım" && <Hesabım />}
+                {activeComponent === "odemeyontemi" && <OdemeYontemi />}
+            </div>
         </div>
     )
 }
 
-export default ProfilPage
+export default ProfilPage;

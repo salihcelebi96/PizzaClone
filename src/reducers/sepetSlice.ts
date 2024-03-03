@@ -13,10 +13,12 @@ export interface SepetData {
 
 export interface SepetState {
   items: SepetData[];
+  ordered:SepetData[];
 }
 
 const initialState: SepetState = {
   items: [],
+  ordered: [],
 };
 
 const sepetSlice = createSlice({
@@ -37,9 +39,12 @@ const sepetSlice = createSlice({
     emptySepet: (state) => {
       state.items = [];
     },
+    pushToOrdered: (state,action:PayloadAction<SepetData[]>) => {
+      state.ordered.push(...action.payload);
+    }
   },
 });
 
-export const { pushNewItems, deleteItems,emptySepet } = sepetSlice.actions;
+export const { pushNewItems, deleteItems,emptySepet,pushToOrdered } = sepetSlice.actions;
 
 export default sepetSlice.reducer;
