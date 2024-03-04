@@ -45,7 +45,7 @@ const ProfilPage: React.FC = () => {
                         <ul className='flex w-full flex-col gap-8'>
                             <li className='liStyle'>
                                 <button className='link' onClick={() => setActiveComponent('siparislerim')}>
-                                    <span className='icon'><Order /></span>
+                                    <span className='icon '><Order /></span>
                                     <span>Siparişlerim</span>
                                 </button>
                             </li>

@@ -24,7 +24,7 @@ const wingsSlice = createSlice({
     pushNewWings: (state, action: PayloadAction<WingsData>) => {
       const newWing = action.payload;
 
-      // Check for duplicates based on the 'tür' property
+      
       const isDuplicate = state.wings.some(existingWing => existingWing.tür === newWing.tür);
 
       if (!isDuplicate) {

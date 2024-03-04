@@ -9,6 +9,7 @@
 
 .liStyle:hover .icon {
     background-color: rgb(246, 99, 99); 
+    color: red;
     ;
 }
 

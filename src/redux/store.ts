@@ -11,6 +11,7 @@ import AdminSlice from "../reducers/adminSlice";
 import Loading from "../reducers/loadingSlice";
 import AllUser from "../reducers/userSlice";
 import Adress from "../reducers/addressSlice";
+import CreditCard from "../reducers/creditCardSlice";
 
 
 const store = configureStore({
@@ -25,7 +26,8 @@ const store = configureStore({
    admin:AdminSlice,
    loading:Loading,
    allUser:AllUser,
-   adres:Adress
+   adres:Adress,
+   card:CreditCard
     
   },
 });

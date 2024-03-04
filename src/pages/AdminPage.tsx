@@ -15,7 +15,7 @@ const AdminPage: React.FC = () => {
     interface ExtendedImportMeta extends ImportMeta {
         env: {
           VITE_APP_URL: string;
-          // Diğer ortam değişkenleri buraya eklenebilir
+          
         };
       }
       

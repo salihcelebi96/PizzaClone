@@ -14,7 +14,7 @@ const loadingSlice = createSlice({
     initialState,
     reducers: {
         loadingTrue: (state) => {
-            return { ...state, loading: true }; // Güncellenmiş kopyayı döndür
+            return { ...state, loading: true }; 
           },
           
           

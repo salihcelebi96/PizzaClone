@@ -3,4 +3,6 @@
     border: 1px solid;
     height: 58px;
     pointer-events: none;
+    display: flex;
+    padding-left: 5px;
 }

@@ -90,7 +90,7 @@ const SignUp: React.FC = () => {
         return;
       }
       
-      // Eğer e-posta kullanımda değilse, yeni kullanıcıyı kaydet
+      
       const signupResponse = await axios.post(`${apiUrl}/api/loginjwt/signup`, {
         name,
         email,
@@ -104,7 +104,7 @@ const SignUp: React.FC = () => {
       if (signupResponse.status === 200) {
         console.log('Signup successful:', signupResponse.data);
   
-        // Yeni kullanıcı bilgilerini Redux mağazasına ekle
+        
         dispatch(setUsers([...existingUsers, signupResponse.data]));
   
         navigate("/");

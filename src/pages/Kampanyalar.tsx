@@ -22,7 +22,7 @@ const Kampanyalar :React.FC = () => {
 
 
 
-    // const [sepet, setSepet] = useState<string>("");
+    
     const dispatch = useDispatch();
     
     interface KampanyaData {
@@ -49,7 +49,7 @@ const Kampanyalar :React.FC = () => {
       interface ExtendedImportMeta extends ImportMeta {
         env: {
           VITE_APP_URL: string;
-          // Diğer ortam değişkenleri buraya eklenebilir
+          
         };
       }
       
