@@ -1,0 +1,6 @@
+.user{
+    width: 100%;
+    border: 1px solid;
+    height: 58px;
+    pointer-events: none;
+}
