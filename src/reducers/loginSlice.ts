@@ -7,6 +7,7 @@ interface AuthState {
   userLogin:boolean;
   name:string;
   profilName:string;
+  addAdress:boolean;
   
 }
 
@@ -16,6 +17,7 @@ const initialState: AuthState = {
   userLogin: false,
   name:"",
   profilName:"",
+  addAdress:false,
   
 };
 
@@ -46,9 +48,15 @@ const authSlice = createSlice({
     },
     setProfilName:(state,action: PayloadAction<string>) => {
       state.profilName = action.payload;
+    },
+    addAdressFalse: (state) => {
+      state.addAdress=false;
+    },
+    addAdressTrue: (state) => {
+      state.addAdress=true;
     }
   },
 });
 
-export const { loginOpen, logout, signUpOpen, signUpClose, userLoginFalse, userLoginTrue,setUserName,setProfilName } = authSlice.actions;
+export const { loginOpen, logout, signUpOpen, signUpClose, userLoginFalse, userLoginTrue,setUserName,setProfilName,addAdressFalse,addAdressTrue } = authSlice.actions;
 export default authSlice.reducer;

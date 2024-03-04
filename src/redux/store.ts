@@ -10,6 +10,7 @@ import sepetSlice from "../reducers/sepetSlice";
 import AdminSlice from "../reducers/adminSlice";
 import Loading from "../reducers/loadingSlice";
 import AllUser from "../reducers/userSlice";
+import Adress from "../reducers/addressSlice";
 
 
 const store = configureStore({
@@ -24,6 +25,7 @@ const store = configureStore({
    admin:AdminSlice,
    loading:Loading,
    allUser:AllUser,
+   adres:Adress
     
   },
 });

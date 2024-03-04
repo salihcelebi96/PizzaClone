@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { FaUserAlt } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { Link } from "react-router-dom";
+
 import "../css/profil.css";
 import Order from "../svg/orderSvg";
 import Adress from "../svg/adressSvg";
@@ -13,8 +13,8 @@ import { userLoginFalse } from '../reducers/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import Siparislerim from './profilComponents/Siparislerim';
 import Adreslerim from './profilComponents/Adreslerim';
-import Hesabım  from './profilComponents/Hesabım';
-import OdemeYontemi  from  "./profilComponents/OdemeYontemi";
+import Hesabım from './profilComponents/Hesabım';
+import OdemeYontemi from "./profilComponents/OdemeYontemi";
 
 const ProfilPage: React.FC = () => {
     const [activeComponent, setActiveComponent] = useState<string>('siparislerim');
@@ -28,9 +28,9 @@ const ProfilPage: React.FC = () => {
     }
 
     return (
-        <div className='h-[536px] w-screen flex justify-center my-5'>
+        <div className='h-[536px] w-screen flex justify-start gap-10 mx-36 my-5'>
             <div className=''>
-                <div className='h-full w-[345px] flex flex-col gap-10 p-7 justify-start border'>
+                <div className='h-full w-[345px] flex flex-col gap-10 p-7 justify-start '>
                     <div className='flex gap-5'>
                         <div className='h-[64px] w-[64px] border rounded-full p-2 flex justify-center items-center bg-gray-200'>
                             <span className='text-gray-400 text-3xl'> <FaUserAlt /> </span>
@@ -44,40 +44,41 @@ const ProfilPage: React.FC = () => {
                     <div>
                         <ul className='flex w-full flex-col gap-8'>
                             <li className='liStyle'>
-                                <Link className='link' to="/profil/siparislerim" onClick={() => setActiveComponent('siparislerim')}>
+                                <button className='link' onClick={() => setActiveComponent('siparislerim')}>
                                     <span className='icon'><Order /></span>
                                     <span>Siparişlerim</span>
-                                </Link>
+                                </button>
                             </li>
                             <li className='liStyle'>
-                                <Link className='link' to="/profil/adreslerim" onClick={() => setActiveComponent('adreslerim')}>
+                                <button className='link' onClick={() => setActiveComponent('adreslerim')}>
                                     <span className='icon'><Adress /></span>
                                     <span>Adreslerim</span>
-                                </Link>
+                                </button>
                             </li>
                             <li className='liStyle'>
-                                <Link className='link' to="/profil/hesabım" onClick={() => setActiveComponent('hesabım')}>
+                                <button className='link' onClick={() => setActiveComponent('hesabım')}>
                                     <span className='icon'><MyAccount /></span>
                                     <span>Hesabım</span>
-                                </Link>
+                                </button>
                             </li>
                             <li className='liStyle'>
-                                <Link className='link' to="/profil/ödeme-yöntemlerim" onClick={() => setActiveComponent('odemeyontemi')}>
+                                <button className='link' onClick={() => setActiveComponent('odemeyontemi')}>
                                     <span className='icon'><Pay /></span>
                                     <span>Ödeme Yöntemi</span>
-                                </Link>
+                                </button>
                             </li>
                             <li className='liStyle'>
-                                <Link className='link' onClick={handleLogout} to="/">
+                                <button className='link' onClick={handleLogout}>
                                     <span className='icon'><Exit /></span>
                                     <span>Çıkış</span>
-                                </Link>
+                                </button>
                             </li>
+
                         </ul>
                     </div>
                 </div>
             </div>
-            <div className='w-[576px] h-full border'>
+            <div className='w-[576px]  '>
                 {activeComponent === "adreslerim" && <Adreslerim />}
                 {activeComponent === "siparislerim" && <Siparislerim />}
                 {activeComponent === "hesabım" && <Hesabım />}
