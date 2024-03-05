@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Logo from "../assets/logo/pizzaLogo.svg";
 import "../css/menu.css";
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import googlePlay from "../assets/logo/googleplay.png";
 import appStore from "../assets/logo/appStore.png";
 import { RootState } from '../redux/store';
@@ -14,7 +14,7 @@ import ProfilPage from "../pages/ProfilPageSmall";
 
 const Menu: React.FC = () => {
     const userLogin = useSelector((state: RootState) => state.login.userLogin);
-   
+
     const sepet = useSelector((state: RootState) => state.sepet.items);
     const navigate = useNavigate();
     const sepetLength = sepet.length;
@@ -25,8 +25,8 @@ const Menu: React.FC = () => {
     const openLogin = () => {
         if (!userLogin) {
             navigate("/login");
-            
-            
+
+
         } else {
             setProfileOpen(prevState => !prevState);
             setMenuOpen(false); // Menüyü kapat
@@ -35,13 +35,13 @@ const Menu: React.FC = () => {
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!userLogin) {
             setProfileOpen(false);
 
         }
 
-    },[userLogin]);
+    }, [userLogin]);
 
 
 
@@ -78,7 +78,7 @@ const Menu: React.FC = () => {
             {
                 profileOpen && (
                     <div className='profile-container'>
-                        <ProfilPage    />
+                        <ProfilPage />
 
                     </div>
                 )
@@ -88,7 +88,7 @@ const Menu: React.FC = () => {
                     <div className=''>
                         <AiOutlineMenu size={20} />
                     </div>
-                    
+
                     <div className=''>
                         {menuOpen && (
                             <div className='sidebar fixed top-0 left-0 w-full overlay z-50' />

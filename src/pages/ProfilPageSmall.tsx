@@ -11,15 +11,12 @@ import MyAccount from "../svg/myaccounts";
 import Pay from "../svg/paySvg";
 import Exit from "../svg/exitSvg";
 import { userLoginFalse } from '../reducers/loginSlice';
-import Siparislerim from './profilComponents/Siparislerim';
-import Adreslerim from './profilComponents/Adreslerim';
-import Hesabım from './profilComponents/Hesabım';
-import OdemeYontemi from "./profilComponents/OdemeYontemi";
+
 
 const ProfilPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-    const [activeComponent, setActiveComponent] = useState<string>('siparislerim');
+   
     
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
     const dispatch = useDispatch();
@@ -53,7 +50,7 @@ const ProfilPage: React.FC = () => {
 
     return (
         <div className='containerStyle '>
-            <div className=' flex ov justify-center '>
+            <div className=' flex  justify-center  fixed top-0 right-0 w-60 h-screen bg-white z-50 '>
                 <div className=''>
                     <div className='h-full flex flex-col gap-10  p-7 justify-start'>
                         <div className='flex gap-5'>
@@ -69,25 +66,25 @@ const ProfilPage: React.FC = () => {
                         <div>
                             <ul className='flex w-full flex-col gap-8'>
                                 <li className='liStyle'>
-                                    <Link to="/profil/siparislerim" className='link' onClick={() => setActiveComponent('siparislerim')}>
+                                    <Link to="/profil/siparislerim" className='link' >
                                         <span className='icon '><Order /></span>
                                         <span>Siparişlerim</span>
                                     </Link>
                                 </li>
                                 <li className='liStyle'>
-                                    <Link to="/profil/adreslerim" className='link' onClick={() => setActiveComponent('adreslerim')}>
+                                    <Link to="/profil/adreslerim" className='link' >
                                         <span className='icon'><Adress /></span>
                                         <span>Adreslerim</span>
                                     </Link>
                                 </li>
                                 <li className='liStyle  '>
-                                    <Link to="/profil/hesabım" className='link' onClick={() => setActiveComponent('hesabım')}>
+                                    <Link to="/profil/hesabım" className='link' >
                                         <span className='icon'><MyAccount /></span>
                                         <span>Hesabım</span>
                                     </Link>
                                 </li>
                                 <li className='liStyle '>
-                                    <Link to="/profil/ödeme-yöntemlerim" className='link' onClick={() => setActiveComponent('odemeyontemi')}>
+                                    <Link to="/profil/ödeme-yöntemlerim" className='link' >
                                         <span className='icon'><Pay /></span>
                                         <span>Ödeme Yöntemi</span>
                                     </Link>
