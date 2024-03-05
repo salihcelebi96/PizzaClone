@@ -26,10 +26,18 @@ const ProfilPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleOutsideClick = (e: MouseEvent) => {
-        if (menuOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        if (
+            menuOpen && 
+            menuRef.current && 
+            e.target && // Null kontrolü
+            !menuRef.current.contains(e.target as Node) && 
+            !(e.target as HTMLElement).classList.contains('ov') // HTMLElement kontrolü
+        ) {
             setMenuOpen(false);
         }
     };
+    
+    
 
     useEffect(() => {
         document.addEventListener("mousedown", handleOutsideClick);
@@ -44,9 +52,9 @@ const ProfilPage: React.FC = () => {
     }
 
     return (
-        <div className='containerStyle'>
-            <div className=' flex   justify-center '>
-                <div>
+        <div className='containerStyle '>
+            <div className=' flex ov justify-center '>
+                <div className=''>
                     <div className='h-full flex flex-col gap-10  p-7 justify-start'>
                         <div className='flex gap-5'>
                             <div className='border rounded-full p-2 flex justify-center items-center bg-gray-200'>
