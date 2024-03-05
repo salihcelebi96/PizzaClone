@@ -72,9 +72,9 @@ const AddAdress: React.FC = () => {
     }
 
     return (
-        <div className=' overlay flex justify-center pt-10'>
-            <div className='w-[470px] h-[701px] border bg-white relative  rounded-lg '>
-                <div className=' p-10 h-full w-[430px]   flex flex-col gap-10'>
+        <div className=' overlay flex justify-center '>
+            <div className='w-[470px]    h-[701px] border bg-white relative   rounded-lg '>
+                <div className=' p-10 h-full w-[430px]    flex flex-col gap-10'>
                     <div className='font-bold text-2xl' style={{ fontFamily: "Rubik-Bold" }}>
                         Yeni Adres Ekle
                     </div>
@@ -101,7 +101,7 @@ const AddAdress: React.FC = () => {
                     <div onClick={handleSave}>
                         <button className='input bg-red-600 border-none hover:bg-red-700 text-white text-lg cursor-pointer'> Adresimi Kaydet </button>
                     </div>
-                    <div onClick={closeAdress} className='absolute right-2 top-0 text-2xl font-bold cursor-pointer '>
+                    <div onClick={closeAdress} className='absolute sm:right-2 right-8  top-0  text-2xl font-bold cursor-pointer '>
                         X
                     </div>
                 </div>

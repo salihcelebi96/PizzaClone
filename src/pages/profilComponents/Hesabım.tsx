@@ -6,7 +6,7 @@ import "../../css/hesabım.css";
 const Hesabım: React.FC = () => {
   const user = useSelector((state: RootState) => state.allUser.activeUser);
   return (
-    <div className='h-full w-full '>
+    <div className='h-full w-full p-7'>
       <div className='flex flex-col gap-5'>
         <div className='text-2xl font-bold'>
           Hesabım

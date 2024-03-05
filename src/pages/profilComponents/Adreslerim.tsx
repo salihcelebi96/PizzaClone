@@ -23,7 +23,7 @@ const Adreslerim: React.FC = () => {
   };
 
   return (
-    <div className='h-full w-full'>
+    <div className='h-full w-full p-7'>
       <div className='flex flex-col gap-5'>
         <div className='font-bold text-2xl' style={{ fontFamily: "Rubik-Bold" }}>
           Adreslerim

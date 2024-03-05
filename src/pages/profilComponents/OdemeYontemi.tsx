@@ -62,7 +62,7 @@ const OdemeYontemi: React.FC = () => {
   }
 
   return (
-    <div className='h-full w-full'>
+    <div className='h-full  p-7 '>
       <div className='flex flex-col gap-5'>
         <div className='text-2xl font-bold'>Ödeme Yöntemi</div>
         <div className='border option flex items-center'>
