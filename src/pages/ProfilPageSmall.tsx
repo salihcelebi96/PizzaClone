@@ -1,32 +1,32 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaUserAlt } from "react-icons/fa";
-import { useSelector ,useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import "../css/smallProfile.css";
-import { Link, useNavigate, } from "react-router-dom";
-import { userLoginFalse } from '../reducers/loginSlice';
+import { Link, useNavigate } from 'react-router-dom';
+
+import "../css/profil.css";
 import Order from "../svg/orderSvg";
 import Adress from "../svg/adressSvg";
 import MyAccount from "../svg/myaccounts";
 import Pay from "../svg/paySvg";
 import Exit from "../svg/exitSvg";
+import { userLoginFalse } from '../reducers/loginSlice';
+import Siparislerim from './profilComponents/Siparislerim';
+import Adreslerim from './profilComponents/Adreslerim';
+import Hesabım from './profilComponents/Hesabım';
+import OdemeYontemi from "./profilComponents/OdemeYontemi";
 
 const ProfilPage: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-     
+    const [activeComponent, setActiveComponent] = useState<string>('siparislerim');
     
     const activeUser = useSelector((state: RootState) => state.allUser.activeUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
 
-   
-
-    
-
-    const handleOutsideClick = (e: any) => {
-        if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
+    const handleOutsideClick = (e: MouseEvent) => {
+        if (menuOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
             setMenuOpen(false);
         }
     };
@@ -38,24 +38,10 @@ const ProfilPage: React.FC = () => {
         }
     }, [menuOpen]);
 
-    useEffect(() => {
-        console.log("activeuser", activeUser);
-    }, [activeUser]);
-
-
     const handleLogout = () => {
          dispatch(userLoginFalse());
          navigate("/");
-         
     }
-
-
-
-
-
-
-
-
 
     return (
         <div className='containerStyle'>
@@ -75,47 +61,31 @@ const ProfilPage: React.FC = () => {
                         <div>
                             <ul className='flex w-full flex-col gap-8'>
                                 <li className='liStyle'>
-                                    <Link className='link' to="/profil/siparislerim">
-                                        <span className='icon'>
-                                            <Order />
-                                        </span>
-                                        <span>
-                                            Siparişlerim
-                                        </span>
+                                    <Link to="/profil/siparislerim" className='link' onClick={() => setActiveComponent('siparislerim')}>
+                                        <span className='icon '><Order /></span>
+                                        <span>Siparişlerim</span>
                                     </Link>
                                 </li>
                                 <li className='liStyle'>
-                                    <Link className='link' to="/link1">
-                                        <span className='icon'>
-                                            <Adress />
-                                        </span>
-                                        <span>
-                                            Adreslerim
-                                        </span>
+                                    <Link to="/profil/adreslerim" className='link' onClick={() => setActiveComponent('adreslerim')}>
+                                        <span className='icon'><Adress /></span>
+                                        <span>Adreslerim</span>
                                     </Link>
                                 </li>
-                                <li className='liStyle'>
-                                    <Link className='link' to="/link1">
-                                        <span className='icon'>
-                                            <MyAccount />
-                                        </span>
-                                        <span>
-                                            Hesabım
-                                        </span>
+                                <li className='liStyle  '>
+                                    <Link to="/profil/hesabım" className='link' onClick={() => setActiveComponent('hesabım')}>
+                                        <span className='icon'><MyAccount /></span>
+                                        <span>Hesabım</span>
                                     </Link>
                                 </li>
-                                <li className='liStyle'>
-                                    <Link className='link' to="/link1">
-                                        <span className='icon'>
-                                            <Pay />
-                                        </span>
-                                        <span>
-                                            Ödeme Yöntemi
-                                        </span>
+                                <li className='liStyle '>
+                                    <Link to="/profil/ödeme-yöntemlerim" className='link' onClick={() => setActiveComponent('odemeyontemi')}>
+                                        <span className='icon'><Pay /></span>
+                                        <span>Ödeme Yöntemi</span>
                                     </Link>
                                 </li>
                                 <li onClick={handleLogout} className='liStyle'>
-                                    <Link  className='link   ' to="/">
+                                    <Link className='link   ' to="/">
                                         <span className='icon'>
                                             <Exit />
                                         </span>
