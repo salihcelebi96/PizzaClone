@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { addAdressFalse } from '../reducers/loginSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import "../css/addAdress.css";
 import {  addAddress } from '../reducers/addressSlice';
-
+import axios from 'axios'; 
+import { RootState } from '../redux/store';
 
 
 
@@ -16,6 +17,11 @@ const AddAdress: React.FC = () => {
     const [street, setStreet] = useState<string>("");
     const [addressName, setAddressName] = useState<string>("");
     const [addressDetails, setAddressDetails] = useState<string>("");
+    
+    const user = useSelector((state:RootState)=> state.allUser.activeUser);
+   
+    const userEmail:string = user ? user.email : '';
+    
 
     const newAddress = {
         city: city,
@@ -23,8 +29,17 @@ const AddAdress: React.FC = () => {
         neighborhood: neighborhood,
         street: street,
         addressName: addressName,
-        addressDetails: addressDetails
+        addressDetails: addressDetails,
+        user:userEmail
     };
+
+    interface ExtendedImportMeta extends ImportMeta {
+        env: {
+          VITE_APP_URL: string;
+        };
+      }
+    
+      const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
     
    
 
@@ -62,14 +77,22 @@ const AddAdress: React.FC = () => {
         console.log(newAddress)
     }
 
-    const handleSave = () => {
-        if (city && district && neighborhood && street && addressName && addressDetails) {
+    
+
+    const handleSave = async () => {
+        try {
+            await axios.post(`${apiUrl}/api/address`,newAddress);
             dispatch(addAddress(newAddress));
-            dispatch(addAdressFalse())
-            console.log(city)
-            
+            dispatch(addAdressFalse());
+        } catch (error){
+            console.log("adres ekleme hatası ",error);
         }
-    }
+    };
+
+
+
+
+
 
     return (
         <div className=' overlay flex justify-center '>

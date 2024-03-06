@@ -1,18 +1,48 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { ImLocation } from "react-icons/im";
 import { addAdressTrue } from '../../reducers/loginSlice';
+import {addAddress} from "../../reducers/addressSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import AddAdress from "../../components/AddAdress";
 import { RootState } from '../../redux/store';
+import axios from 'axios'; 
 
 const Adreslerim: React.FC = () => {
-  const adreslerim = useSelector((state: RootState) => state.adres.addresses);
+
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+    };
+  }
+
+  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
+
+
+
+  
   const dispatch = useDispatch();
 
   const handleAddAdress = () => {
     dispatch(addAdressTrue());
   }
+  
+
+  
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        dispatch(addAddress(response.data));
+      } catch (error) {
+        console.error('Adresleri getirme hatası:', error);
+      }
+    };
+    fetchAddresses();
+  }, [apiUrl]);
+
   const addressState = useSelector((state: RootState) => state.login.addAdress);
+
 
   if (addressState) {
     return (
@@ -21,6 +51,8 @@ const Adreslerim: React.FC = () => {
       </div>
     );
   };
+
+  const adreslerim = useSelector((state: RootState) => state.adres.addresses);
 
   return (
     <div className='h-full w-full p-7'>
