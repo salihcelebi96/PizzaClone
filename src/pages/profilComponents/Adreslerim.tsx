@@ -40,6 +40,7 @@ const Adreslerim: React.FC = () => {
     };
     fetchAddresses();
   }, [apiUrl]);
+ 
   const adreslerim = useSelector((state: RootState) => state.adres.addresses);
   const addressState = useSelector((state: RootState) => state.login.addAdress);
 
