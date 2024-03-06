@@ -40,7 +40,7 @@ const Adreslerim: React.FC = () => {
     };
     fetchAddresses();
   }, [apiUrl]);
-
+  const adreslerim = useSelector((state: RootState) => state.adres.addresses);
   const addressState = useSelector((state: RootState) => state.login.addAdress);
 
 
@@ -52,7 +52,7 @@ const Adreslerim: React.FC = () => {
     );
   };
 
-  const adreslerim = useSelector((state: RootState) => state.adres.addresses);
+ 
 
   return (
     <div className='h-full w-full p-7'>
