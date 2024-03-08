@@ -1,15 +1,12 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { addAdressFalse } from '../reducers/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import "../css/addAdress.css";
-import {  addAddress } from '../reducers/addressSlice';
-import axios from 'axios'; 
+import { addAddress } from '../reducers/addressSlice';
+import axios from 'axios';
 import { RootState } from '../redux/store';
 
-
-
 const AddAdress: React.FC = () => {
-    
     const dispatch = useDispatch();
     const [city, setCity] = useState<string>("");
     const [district, setDistrict] = useState<string>("");
@@ -17,31 +14,32 @@ const AddAdress: React.FC = () => {
     const [street, setStreet] = useState<string>("");
     const [addressName, setAddressName] = useState<string>("");
     const [addressDetails, setAddressDetails] = useState<string>("");
-    
-    const user = useSelector((state:RootState)=> state.allUser.activeUser);
-   
-    const userEmail:string = user ? user.email : '';
-    
+
+    const user = useSelector((state: RootState) => state.allUser.activeUser);
 
     const newAddress = {
-        city: city,
-        district: district,
-        neighborhood: neighborhood,
-        street: street,
         addressName: addressName,
+        neighborhood: neighborhood,
+        street: street, 
         addressDetails: addressDetails,
-        user:userEmail
-    };
+        district: district,
+        city: city,
+        userEmail: user?.email || "",
+        
+    };   
+        
+       
+        
+    
 
     interface ExtendedImportMeta extends ImportMeta {
         env: {
           VITE_APP_URL: string;
         };
       }
-    
+      
       const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
-    
-   
+      
 
     const closeAdress = () => {
         dispatch(addAdressFalse());
@@ -49,50 +47,43 @@ const AddAdress: React.FC = () => {
 
     const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCity(event.target.value);
-        
     }
 
     const handleDistrictChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDistrict(event.target.value);
-       
     }
 
     const handleNeighborhoodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNeighborhood(event.target.value);
-        
     }
 
     const handleStreetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setStreet(event.target.value);
-        
     }
 
     const handleAddressNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAddressName(event.target.value);
-        
     }
 
     const handleAddressDetailsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAddressDetails(event.target.value);
-        console.log(newAddress)
     }
 
-    
-
     const handleSave = async () => {
-        try {
-            await axios.post(`${apiUrl}/api/address`,newAddress);
-            dispatch(addAddress(newAddress));
-            dispatch(addAdressFalse());
-        } catch (error){
-            console.log("adres ekleme hatası ",error);
+        
+        if (city && district && neighborhood && street && addressName && addressDetails && user?.email) {
+            try {
+                await axios.post(`${apiUrl}/api/address`, newAddress);
+                dispatch(addAddress(newAddress));
+                dispatch(addAdressFalse());
+            } catch (error) {
+                console.log("Adres ekleme hatası:", error);
+            }
+        } else {
+            console.log("Lütfen tüm alanları doldurun.");
         }
     };
-
-
-
-
-
+    
 
     return (
         <div className=' overlay flex justify-center '>

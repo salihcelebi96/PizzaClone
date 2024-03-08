@@ -7,6 +7,7 @@ interface Address {
     street: string;
     addressName: string;
     addressDetails: string;
+    userEmail:string;
 }
 
 interface AddressState {

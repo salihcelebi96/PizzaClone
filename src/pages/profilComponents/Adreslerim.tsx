@@ -1,14 +1,13 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { ImLocation } from "react-icons/im";
 import { addAdressTrue } from '../../reducers/loginSlice';
-import {addAddress} from "../../reducers/addressSlice";
+import { addAddress } from "../../reducers/addressSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import AddAdress from "../../components/AddAdress";
 import { RootState } from '../../redux/store';
-import axios from 'axios'; 
+import axios from 'axios';
 
 const Adreslerim: React.FC = () => {
-
   interface ExtendedImportMeta extends ImportMeta {
     env: {
       VITE_APP_URL: string;
@@ -16,34 +15,35 @@ const Adreslerim: React.FC = () => {
   }
 
   const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
-
-
-
-  
+  const activeUserEmail = useSelector((state: RootState) => state.allUser.activeUser?.email);
   const dispatch = useDispatch();
 
   const handleAddAdress = () => {
     dispatch(addAdressTrue());
   }
-  
-
-  
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const response = await axios.get(apiUrl);
+        const response = await axios.get(`${apiUrl}/api/address`, {
+          params: {
+            userEmail: activeUserEmail
+          }
+        });
         dispatch(addAddress(response.data));
+        console.log(response.data);
       } catch (error) {
         console.error('Adresleri getirme hatası:', error);
       }
     };
-    fetchAddresses();
-  }, [apiUrl]);
- 
+
+    if (activeUserEmail && adreslerim.length === 0) { // Eğer activeUserEmail değeri varsa ve adresler boşsa yalnızca o zaman fetchAddresses çalışacak
+      fetchAddresses();
+    }
+  }, [activeUserEmail, adreslerim]); // activeUserEmail veya adresler değiştiğinde fetchAddresses çalışacak
+
   const adreslerim = useSelector((state: RootState) => state.adres.addresses);
   const addressState = useSelector((state: RootState) => state.login.addAdress);
-
 
   if (addressState) {
     return (
@@ -52,8 +52,6 @@ const Adreslerim: React.FC = () => {
       </div>
     );
   };
-
- 
 
   return (
     <div className='h-full w-full p-7'>
