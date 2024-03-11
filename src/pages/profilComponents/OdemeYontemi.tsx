@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux';
 
 interface FormData {
   cardNumber: string;
+  name: string;
   month: string;
   years: string;
-  name: string;
   cvc: string;
   cardName: string;
+  
 }
 
 const OdemeYontemi: React.FC = () => {
@@ -35,11 +36,11 @@ const OdemeYontemi: React.FC = () => {
   const years = ['24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34'];
 
   const [formData, setFormData] = useState<FormData>({
-    cardNumber: '',
+    cardNumber: "",
     name:"",
     month: "",
     years: "",
-     cvc: "",
+    cvc: "",
     cardName: "",
    
   });
@@ -155,7 +156,7 @@ const OdemeYontemi: React.FC = () => {
             Masterpass Nedir? Kullanım koşulları için tıklayınız.
           </div>
         </div>
-        <div className='bg-red-500 h-[51px] w-[576px text-white flex justify-center items-center text-xl font-bold]' onClick={handleSave}>Kaydet</div>
+        <div className='bg-red-500  cursor-pointer  h-[51px] w-[576px text-white flex justify-center items-center text-xl font-bold]' onClick={handleSave}>Kaydet</div>
       </div>
     </div>
   );

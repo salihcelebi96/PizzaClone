@@ -22,7 +22,7 @@ interface CardInfo {
   month: string;
   years: string;
   cvc: string;
-  cardName: string;
+  
 
 }
 
@@ -43,7 +43,7 @@ const Payment: React.FC = () => {
 
   const [isCvcActive, setIsCvcActive] = useState<boolean>(false);
   const [validCard, setValidCard] = useState<boolean>(false);
-  const [cardName, setCardName] = useState<string>("");
+  
 
   const navigate = useNavigate();
 
@@ -134,7 +134,7 @@ const Payment: React.FC = () => {
         month,
         years,
         cvc,
-        cardName,
+        
 
       };
       const response = await axios.post(apiUrl, requestData);
@@ -282,10 +282,7 @@ const Payment: React.FC = () => {
             </div>
           </div>
 
-          <div className=''>
-            <input value={cardName} onChange={(e) => setCardName(e.target.value)} className='inputCard w-full' type="text" placeholder='Card Name' />
-
-          </div>
+          
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>
           <button onClick={handleCardNumber}>Ödeme Yap</button>
