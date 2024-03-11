@@ -11,8 +11,20 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { emptySepet } from "../reducers/sepetSlice";
 import axios from 'axios';
-import {pushToOrdered} from "../reducers/sepetSlice";
+import { pushToOrdered } from "../reducers/sepetSlice";
 
+
+
+interface CardInfo {
+  totalPrice: string;
+  cardNumber: string;
+  name: string;
+  month: string;
+  years: string;
+  cvc: string;
+  cardName: string;
+
+}
 
 
 
@@ -25,12 +37,13 @@ const Payment: React.FC = () => {
 
   const [cardNumber, setCardNumber] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [lastDate, setLastDate] = useState<string>("");
+  const [month, setMonth] = useState<string>("");
+  const [years, setYears] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
 
   const [isCvcActive, setIsCvcActive] = useState<boolean>(false);
   const [validCard, setValidCard] = useState<boolean>(false);
-
+  const [cardName, setCardName] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -74,8 +87,8 @@ const Payment: React.FC = () => {
 
 
 
-  const firstDivided = typeof lastDate === 'string' ? lastDate.substring(0, 2) : "";
-  const secondDivided = typeof lastDate === 'string' ? lastDate.substring(2, 4) : "";
+  const firstDivided = typeof month === 'string' ? month.substring(0, 2) : "";
+  const secondDivided = typeof years === 'string' ? years.substring(2, 4) : "";
 
 
 
@@ -114,12 +127,18 @@ const Payment: React.FC = () => {
   const postData = async () => {
     try {
       const apiUrl = `${api}/api/payment`;
-      const requestData = {
-        cvc, lastDate, name, cardNumber, totalPrice
+      const requestData: CardInfo = {
+        totalPrice,
+        cardNumber,
+        name,
+        month,
+        years,
+        cvc,
+        cardName,
+
       };
-
       const response = await axios.post(apiUrl, requestData);
-
+      
       console.log('Server Response:', response.data);
     } catch (error: any) {
       console.error('Error:', error.message);
@@ -127,8 +146,9 @@ const Payment: React.FC = () => {
   };
 
 
+
   const handleCardNumber = () => {
-    if (cardNumber.length === 16 && name && lastDate.length ===4 && cvc.length === 3) {
+    if (cardNumber.length === 16 && name && years.length === 2 && month.length === 2 && cvc.length === 3) {
       postData();
       setValidCard(true);
       navigate("/");
@@ -147,7 +167,7 @@ const Payment: React.FC = () => {
 
 
   return (
-    <div className=' h-[700px] flex my-5 justify-center'>
+    <div className=' h-[700px]  flex my-5 justify-center'>
       <div className='sm:border border-none flex text-gray-500 flex-col items-center   w-[400px] sm:w-[600px]'>
         {isCvcActive ? (
           <CardBack bgColor={bgColorCard} cvc={cvc} />
@@ -198,7 +218,7 @@ const Payment: React.FC = () => {
           </div>
         )}
 
-        <div className=''>
+        <div className='w-full'>
           <div className='flex mt-5 justify-around'>
             <input value={totalPrice} className='inputCard w-full' type="text" placeholder='Amount' disabled />
 
@@ -219,26 +239,51 @@ const Payment: React.FC = () => {
           <div>
             <input onChange={(e) => setName(e.target.value)} className='inputCard w-full' type="text" placeholder='Name' />
           </div>
-          <div className=' flex mt-5 justify-around gap-4'>
-            <input maxLength={4} 
-            onChange = {(e)=> {
-              const formattedValidNumber = e.target.value.replace(/\D/g, '').slice(0, 4);
-              setLastDate(formattedValidNumber);
-            } }
-            className='inputCard ' type="text" placeholder='Valid thru' />
-            <input
-            
-            onClick={handleCvcClick}
-              ref={cvcInputRef}
-              maxLength={3}
-              onChange={(e) => {
-                const formattedCvc = e.target.value.replace(/\D/g, '').slice(0, 3);
-                setCvc(formattedCvc);
-              }}
-              className={`inputCard ${isCvcActive ? 'active' : ''}`}
-              type="text"
-              placeholder='CVC'
-            />
+          <div className='flex w-full  '>
+            <div className='flex  gap-1'>
+              <input
+                onChange={(e) => {
+                  const formattedMonth = e.target.value.replace(/\D/g, '').slice(0, 2);
+                  setMonth(formattedMonth);
+                }}
+                className='inputCard'
+                type="text"
+                placeholder='MM'
+                maxLength={2}
+              />
+
+              <span className="text-3xl  flex items-center"> / </span>
+
+              <input
+                onChange={(e) => {
+                  const formattedYear = e.target.value.replace(/\D/g, '').slice(0, 2);
+                  setYears(formattedYear);
+                }}
+                className='inputCard'
+                type="text"
+                placeholder='YY'
+                maxLength={2}
+              />
+            </div>
+
+            <div className=''>
+              <input
+                onClick={handleCvcClick}
+                ref={cvcInputRef}
+                maxLength={3}
+                onChange={(e) => {
+                  const formattedCvc = e.target.value.replace(/\D/g, '').slice(0, 3);
+                  setCvc(formattedCvc);
+                }}
+                className={`inputCard ${isCvcActive ? 'active' : ''}`}
+                type="text"
+                placeholder='CVC'
+              />
+            </div>
+          </div>
+
+          <div className=''>
+            <input value={cardName} onChange={(e) => setCardName(e.target.value)} className='inputCard w-full' type="text" placeholder='Card Name' />
 
           </div>
         </div>

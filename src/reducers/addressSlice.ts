@@ -22,8 +22,8 @@ const addressSlice = createSlice({
     name: "Address",
     initialState,
     reducers: {
-        addAddress: (state, action: PayloadAction<Address>) => {
-            state.addresses.push(action.payload); 
+        addAddress: (state, action: PayloadAction<Address[]>) => {
+            state.addresses = action.payload;
         },
         updateAddress: (state, action: PayloadAction<{ index: number, address: Address }>) => {
             state.addresses[action.payload.index] = action.payload.address; 

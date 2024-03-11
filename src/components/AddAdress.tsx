@@ -6,6 +6,20 @@ import { addAddress } from '../reducers/addressSlice';
 import axios from 'axios';
 import { RootState } from '../redux/store';
 
+
+interface Address {
+    addressName: string;
+    neighborhood: string;
+    street:string;
+    addressDetails: string;
+    district: string;
+    city: string;
+    userEmail: string;
+   
+  }
+
+
+
 const AddAdress: React.FC = () => {
     const dispatch = useDispatch();
     const [city, setCity] = useState<string>("");
@@ -17,7 +31,7 @@ const AddAdress: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.allUser.activeUser);
 
-    const newAddress = {
+    const newAddress: Address = {
         addressName: addressName,
         neighborhood: neighborhood,
         street: street, 
@@ -74,7 +88,7 @@ const AddAdress: React.FC = () => {
         if (city && district && neighborhood && street && addressName && addressDetails && user?.email) {
             try {
                 await axios.post(`${apiUrl}/api/address`, newAddress);
-                dispatch(addAddress(newAddress));
+                dispatch(addAddress([newAddress]));
                 dispatch(addAdressFalse());
             } catch (error) {
                 console.log("Adres ekleme hatası:", error);

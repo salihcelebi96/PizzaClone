@@ -1,63 +1,69 @@
 import React, { useState } from 'react';
-import "../../css/odeme.css";
+import axios from 'axios';
 import Mastercard from "../../assets/logo/masterpass.png";
 import { addCard } from '../../reducers/creditCardSlice';
 import { useDispatch } from 'react-redux';
 
+
 interface FormData {
   cardNumber: string;
   month: string;
-  year: string;
+  years: string;
+  name: string;
   cvc: string;
   cardName: string;
 }
 
 const OdemeYontemi: React.FC = () => {
+
+
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+    };
+  }
+  
+  const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
+
+
+
+
+
   const dispatch = useDispatch();
 
-  const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-  const years = ['2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034'];
+  const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  const years = ['24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34'];
 
   const [formData, setFormData] = useState<FormData>({
     cardNumber: '',
-    month: '',
-    year: '',
-    cvc: '',
-    cardName: '',
+    name:"",
+    month: "",
+    years: "",
+     cvc: "",
+    cardName: "",
+   
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
-    if ((name === 'cardNumber' || name === 'cvc') && !/^\d+$/.test(value)) {
-      return; 
-    }
-    
-
-    if(name ==="cardNumber" && value.length > 16) {
-      return;
-    }
-
-    if (name === 'cvc' && value.length > 3) {
-      return; 
-    }
     setFormData({ ...formData, [name]: value });
   }
 
-  
-
-
-
-
   const handleSave = () => {
     const isFormDataComplete = Object.values(formData).every(value => value !== '');
-    // Kart numarası 16 basamak, CVC kodu ise 3 basamak olmalı
     const isValidLength = formData.cardNumber.length === 16 && formData.cvc.length === 3;
     if (isFormDataComplete && isValidLength) {
-      dispatch(addCard(formData));
-      console.log('formData tamam, kaydediliyor...',formData);
+      axios.post(`${apiUrl}/api/card`, formData)
+        .then(() => { 
+          dispatch(addCard(formData));
+          console.log('formData kaydedildi:', formData);
+        })
+        .catch(error => {
+          console.error('formData kaydedilirken bir hata oluştu:', error);
+        });
+
     } else {
-      console.log('formData eksik veya geçersiz, kaydedilemiyor...');
+      console.log('formData eksik veya geçersiz, kaydedilemedi...');
     }
   }
 
@@ -72,8 +78,22 @@ const OdemeYontemi: React.FC = () => {
             placeholder='Kart Numarası'
             name="cardNumber"
             value={formData.cardNumber}
-            onChange={handleChange}
+            onChange={(e) => {
+              const formattedCardNumber = e.target.value.replace(/\D/g, '').slice(0, 16);
+              setFormData({ ...formData, cardNumber: formattedCardNumber });
+            }}
           />
+        </div>
+        <div className='border option flex items-center'>
+          <input 
+          type="text" 
+          className='h-full w-full p-2 outline-none' 
+          placeholder='Kart Sahibinin Adı'
+          onChange={(e) => {
+            setFormData({ ...formData, name: e.target.value });
+          }}
+           />
+          
         </div>
         <div className='flex gap-5 w-full'>
           <div className='border option w-1/6'>
@@ -92,8 +112,8 @@ const OdemeYontemi: React.FC = () => {
           <div className='border option w-1/6'>
             <select
               className='h-full w-full p-1'
-              value={formData.year}
-              name="year"
+              value={formData.years}
+              name="years"
               onChange={handleChange}
             >
               <option value="" disabled hidden>Yıl</option>
@@ -109,20 +129,24 @@ const OdemeYontemi: React.FC = () => {
               placeholder='CVC Kodu'
               name="cvc"
               value={formData.cvc}
-              onChange={handleChange}
+              onChange={(e) => {
+                const formattedCvc = e.target.value.replace(/\D/g, '').slice(0, 3); 
+                setFormData({ ...formData, cvc: formattedCvc });
+               }}
             />
           </div>
         </div>
         <div className='border option w-full h-full'>
           <input
             type="text"
-            className='h-full w-full p-1 outline-none'
+            className='h-full w-full p-2 outline-none'
             placeholder='Kartınızı isim verin'
             name="cardName"
             value={formData.cardName}
             onChange={handleChange}
           />
         </div>
+        
         <div className='flex gap-6'>
           <div><img src={Mastercard} alt="" /></div>
           <div className='text-xs h-[48px] w-[366px]'>

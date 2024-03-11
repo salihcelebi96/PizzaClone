@@ -2,8 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CardInfo {
     cardNumber: string;
+    name: string;
     month: string;
-    year: string;
+    years: string;
     cvc: string;
     cardName: string;
 }
