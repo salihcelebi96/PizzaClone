@@ -88,7 +88,7 @@ const Payment: React.FC = () => {
 
 
   const firstDivided = typeof month === 'string' ? month.substring(0, 2) : "";
-  const secondDivided = typeof years === 'string' ? years.substring(2, 4) : "";
+  const secondDivided = typeof years === 'string' ? years.substring(0, 2) : "";
 
 
 
