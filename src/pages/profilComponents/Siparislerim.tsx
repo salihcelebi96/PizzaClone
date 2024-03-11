@@ -22,7 +22,7 @@ const Siparislerim: React.FC = () => {
 
   return (
     <div className='w-full relative h-full'>
-      <div className='ordered-container  flex justify-center   overflow-y-auto h-[577px] my-5 ' ref={containerRef}>
+      <div className='ordered-container  flex justify-center   overflow-y-auto   h-[577px] my-5 ' ref={containerRef}>
         <div className=' '>
           <h1 className=' text-2xl flex font-bold  font-serif'></h1>
           {orderedItems.length == 0 ? (
@@ -40,7 +40,7 @@ const Siparislerim: React.FC = () => {
         {listOrdered.map((items, index) => (
           <div key={index} className="ordered-row items-center   flex flex-col gap-8">
             {items.map((item, idx) => (
-              <div key={idx} className="ordered-item text-center py-10 w-96 m-5">
+              <div key={idx} className="ordered-item text-center py-10  w-40   sm:w-96 m-5">
                 <p>Tür: {item.tür}</p>
                 <p>Fiyat: {item.fiyatlar} TL</p>
                 <img src={item.url} alt="Ürün resmi" />
