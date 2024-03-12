@@ -22,8 +22,18 @@ interface CardInfo {
   month: string;
   years: string;
   cvc: string;
-  
 
+
+}
+
+interface cardData {
+  _id: string;
+  cardNumber: string;
+  name: string;
+  month: string;
+  years: string;
+  cvc: string;
+  activeUserEmail: string;
 }
 
 
@@ -31,7 +41,17 @@ interface CardInfo {
 const Payment: React.FC = () => {
   const notify = () => toast("Sipariş Verildi !");
   const dispatch = useDispatch();
+  const activeUser = useSelector((state: RootState) => state.allUser.activeUser?.email) ?? "";
+  
 
+  interface ExtendedImportMeta extends ImportMeta {
+    env: {
+      VITE_APP_URL: string;
+
+    };
+  }
+
+  const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
 
 
@@ -40,10 +60,12 @@ const Payment: React.FC = () => {
   const [month, setMonth] = useState<string>("");
   const [years, setYears] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
-
+  const [cardData, setCardData] = useState<cardData[]>([]);
   const [isCvcActive, setIsCvcActive] = useState<boolean>(false);
   const [validCard, setValidCard] = useState<boolean>(false);
-  
+  const [activeCard, setActiveCard] = useState<cardData[]>([]);
+  const [isCardActive, setIsCardActive] = useState<string>("");
+
 
   const navigate = useNavigate();
 
@@ -114,14 +136,7 @@ const Payment: React.FC = () => {
   const data = useSelector((state: RootState) => state.sepet.items);
   const totalPrice = data.reduce((acc, item) => acc + item.fiyatlar, 0).toFixed(2);
 
-  interface ExtendedImportMeta extends ImportMeta {
-    env: {
-      VITE_APP_URL: string;
 
-    };
-  }
-
-  const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
 
   const postData = async () => {
@@ -134,11 +149,11 @@ const Payment: React.FC = () => {
         month,
         years,
         cvc,
-        
+
 
       };
       const response = await axios.post(apiUrl, requestData);
-      
+
       console.log('Server Response:', response.data);
     } catch (error: any) {
       console.error('Error:', error.message);
@@ -163,6 +178,37 @@ const Payment: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const response = await axios.get(`${api}/api/card`);
+        console.log('Card Data:', response.data);
+        const filteredData = response.data.filter((card: cardData) => card.activeUserEmail === activeUser);
+        console.log("filteredData", filteredData);
+        setCardData(filteredData);
+      } catch (error) {
+        console.error('Error fetching card data:', error);
+      }
+    };
+
+    fetchCardData();
+  }, [api]);
+
+
+
+
+const handleActiveCard = (card: cardData) => {
+ setActiveCard([card]);
+ setIsCardActive(card._id);
+ 
+};
+
+
+useEffect(() => {
+  console.log("activecard", activeCard);
+  
+}, [activeCard]);
+
 
 
 
@@ -184,7 +230,7 @@ const Payment: React.FC = () => {
             )}
             <div className='h-full flex items-center justify-center'>
               <div
-
+ 
                 className='text-6xl top-10 left-10'>
                 {cardNumber ? (
                   <p className='text-lg'>
@@ -281,8 +327,39 @@ const Payment: React.FC = () => {
               />
             </div>
           </div>
+          <div className="cardData flex-col flex gap-2 ">
+            <div className='text-center  mt-10'>
+              Kayıtlı Kartlar
+            </div>
+            {cardData.map((card, index) => (
+ <div className={`flex justify-around border h-10 relative gap-5 ${isCardActive === card._id && "bg-gray-200"}`} key={index}>
+    {card.cardNumber && (
+      <div className='w-40 absolute left-0 h-full'>
+        {card.cardNumber.startsWith('4') ? (
+          <img className='h-full w-9 border rounded-md' src={Visa} alt='' />
+        ) : (
+          <img className='h-full w-9 border rounded-md' src={MasterCard} alt='' />
+        )}
+      </div>
+    )}
 
-          
+    <div className='w-40 flex justify-center items-center'> <p className=''>{card.cardNumber}</p></div>
+    <div className='w-40 flex justify-center items-center'><p className=''>{card.name}</p></div>
+    <div 
+      onClick={()=> handleActiveCard(card)} 
+      className={`border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full ${
+        activeCard.some(active => active.cardNumber === card.cardNumber) ? 'bg-gray-300' : ''
+      }`}
+    >
+      Seç
+    </div>
+  </div>
+))}
+
+          </div>
+
+
+
         </div>
         <div className='border w-32 text-center mt-5 bg-green-600 hover:bg-green-400 text-white py-1 rounded-2xl'>
           <button onClick={handleCardNumber}>Ödeme Yap</button>

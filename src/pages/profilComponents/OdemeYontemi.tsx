@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Mastercard from "../../assets/logo/masterpass.png";
 import { addCard } from '../../reducers/creditCardSlice';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch,useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 interface FormData {
   cardNumber: string;
@@ -12,7 +12,7 @@ interface FormData {
   years: string;
   cvc: string;
   cardName: string;
-  
+  activeUserEmail: string;
 }
 
 const OdemeYontemi: React.FC = () => {
@@ -25,7 +25,7 @@ const OdemeYontemi: React.FC = () => {
   }
   
   const apiUrl = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
-
+  const activeUser = useSelector((state: RootState) => state.allUser.activeUser?.email) ?? "";
 
 
 
@@ -42,12 +42,14 @@ const OdemeYontemi: React.FC = () => {
     years: "",
     cvc: "",
     cardName: "",
+    activeUserEmail:activeUser,
    
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+   
   }
 
   const handleSave = () => {

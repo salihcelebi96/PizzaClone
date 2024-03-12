@@ -7,6 +7,7 @@ interface CardInfo {
     years: string;
     cvc: string;
     cardName: string;
+    activeUserEmail:string;
 }
 
 interface CardState {
