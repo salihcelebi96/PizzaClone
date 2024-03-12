@@ -15,6 +15,7 @@ import { pushToOrdered } from "../reducers/sepetSlice";
 
 
 
+
 interface CardInfo {
   totalPrice: string;
   cardNumber: string;
@@ -53,6 +54,8 @@ const Payment: React.FC = () => {
 
   const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
+ 
+
 
 
   const [cardNumber, setCardNumber] = useState<string>("");
@@ -65,6 +68,8 @@ const Payment: React.FC = () => {
   const [validCard, setValidCard] = useState<boolean>(false);
   const [activeCard, setActiveCard] = useState<cardData[]>([]);
   const [isCardActive, setIsCardActive] = useState<string>("");
+
+  
 
 
   const navigate = useNavigate();
@@ -203,11 +208,20 @@ const handleActiveCard = (card: cardData) => {
  
 };
 
-
 useEffect(() => {
   console.log("activecard", activeCard);
-  
+  if (activeCard && activeCard.length > 0) {
+    setName(activeCard[0].name);
+    setCardNumber(activeCard[0].cardNumber);
+    setYears(activeCard[0].years);
+    setMonth(activeCard[0].month);
+    setCvc(activeCard[0].cvc);
+  }
 }, [activeCard]);
+
+
+
+
 
 
 
