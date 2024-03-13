@@ -38,12 +38,28 @@ interface cardData {
 }
 
 
+interface Address {
+  addressName: string;
+  neighborhood: string;
+  street: string;
+  addressDetails: string;
+  district: string;
+  city: string;
+  userEmail: string;
+  _id:string;
+}
+
+
+
+
+
+
 
 const Payment: React.FC = () => {
   const notify = () => toast("Sipariş Verildi !");
   const dispatch = useDispatch();
   const activeUser = useSelector((state: RootState) => state.allUser.activeUser?.email) ?? "";
-  
+  const notifyError = () =>  (toast("Hatalı veya Eksik bilgi girdiniz"));
 
   interface ExtendedImportMeta extends ImportMeta {
     env: {
@@ -54,7 +70,12 @@ const Payment: React.FC = () => {
 
   const api = (import.meta as ExtendedImportMeta).env.VITE_APP_URL;
 
- 
+
+
+
+
+
+
 
 
 
@@ -68,8 +89,9 @@ const Payment: React.FC = () => {
   const [validCard, setValidCard] = useState<boolean>(false);
   const [activeCard, setActiveCard] = useState<cardData[]>([]);
   const [isCardActive, setIsCardActive] = useState<string>("");
+  const [address, setAddress] = useState<Address[]>([]);
+  const [isAddressActive, setIsAddressActive] = useState<string>("");
 
-  
 
 
   const navigate = useNavigate();
@@ -168,7 +190,7 @@ const Payment: React.FC = () => {
 
 
   const handleCardNumber = () => {
-    if (cardNumber.length === 16 && name && years.length === 2 && month.length === 2 && cvc.length === 3) {
+    if (cardNumber.length === 16 && name && years.length === 2 && month.length === 2 && cvc.length === 3 && isAddressActive) {
       postData();
       setValidCard(true);
       navigate("/");
@@ -179,7 +201,7 @@ const Payment: React.FC = () => {
 
 
     } else {
-      alert("Hatalı veya eksik bilgi girdiniz");
+      notifyError();
     }
   }
 
@@ -199,36 +221,56 @@ const Payment: React.FC = () => {
     fetchCardData();
   }, [api]);
 
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const response = await axios.get(`${api}/api/address`);
+        console.log('Address Data:', response.data);
+        const filteredData = response.data.filter((adres: Address) => adres.userEmail === activeUser);
+
+        setAddress(filteredData);
+      } catch (error) {
+        console.error('Error fetching card data:', error);
+      }
+    };
+
+    fetchCardData();
+  }, [api]);
 
 
+  const handleActiveCard = (card: cardData) => {
+    setActiveCard([card]);
+    setIsCardActive(card._id);
 
-const handleActiveCard = (card: cardData) => {
- setActiveCard([card]);
- setIsCardActive(card._id);
- 
-};
+  };
 
-useEffect(() => {
-  console.log("activecard", activeCard);
-  if (activeCard && activeCard.length > 0) {
-    setName(activeCard[0].name);
-    setCardNumber(activeCard[0].cardNumber);
-    setYears(activeCard[0].years);
-    setMonth(activeCard[0].month);
-    setCvc(activeCard[0].cvc);
+  useEffect(() => {
+    console.log("activecard", activeCard);
+    if (activeCard && activeCard.length > 0) {
+      setName(activeCard[0].name);
+      setCardNumber(activeCard[0].cardNumber);
+      setYears(activeCard[0].years);
+      setMonth(activeCard[0].month);
+      setCvc(activeCard[0].cvc);
+    }
+  }, [activeCard]);
+
+
+  const  handleActiveAdres = (adres: Address) => {
+    setIsAddressActive(adres._id);
+    
+    console.log("isadressactive", isAddressActive);
+    console.log("all adress",address)
+
   }
-}, [activeCard]);
-
-
-
 
 
 
 
 
   return (
-    <div className=' h-[700px]  flex my-5 justify-center'>
-      <div className='sm:border border-none flex text-gray-500 flex-col items-center   w-[400px] sm:w-[600px]'>
+    <div className=' h-auto  flex my-5 justify-center'>
+      <div className='sm:border  border-none flex text-gray-500 flex-col items-center   w-[400px] sm:w-[600px]'>
         {isCvcActive ? (
           <CardBack bgColor={bgColorCard} cvc={cvc} />
         ) : (
@@ -244,7 +286,7 @@ useEffect(() => {
             )}
             <div className='h-full flex items-center justify-center'>
               <div
- 
+
                 className='text-6xl top-10 left-10'>
                 {cardNumber ? (
                   <p className='text-lg'>
@@ -341,34 +383,56 @@ useEffect(() => {
               />
             </div>
           </div>
+          <div className='adresData flex-col sm:w-full   w-screen flex gap-2 mt-10'>
+            {address.map((adres, index) => (
+              <div
+              className={`flex justify-start px-2  border h-10  relative gap-2 ${isAddressActive === adres._id && "bg-gray-200" }`}
+
+                key={index} >
+                <div>{adres.addressName}</div>,
+                <div>{adres.neighborhood}</div>,
+                <div>{adres.street}</div>,
+                
+                <div>{adres.addressDetails}</div>
+                <div
+                  onClick={() => handleActiveAdres(adres)}
+                  className={"border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full"
+                    }
+                >
+                  Seç
+                </div>
+              </div>
+              
+            ))}
+          </div>
+
           <div className="cardData flex-col flex gap-2 ">
             <div className='text-center  mt-10'>
               Kayıtlı Kartlar
             </div>
             {cardData.map((card, index) => (
- <div className={`flex justify-around border  h-10 relative gap-5 ${isCardActive === card._id && "bg-gray-200"}`} key={index}>
-    {card.cardNumber && (
-      <div className='w-40 absolute left-0 h-full'>
-        {card.cardNumber.startsWith('4') ? (
-          <img className='h-full w-9 border rounded-md' src={Visa} alt='' />
-        ) : (
-          <img className='h-full w-9 border rounded-md' src={MasterCard} alt='' />
-        )}
-      </div>
-    )}
+              <div className={`flex justify-around border  h-10 relative gap-5 ${isCardActive === card._id && "bg-gray-200"}`} key={index}>
+                {card.cardNumber && (
+                  <div className='w-40 absolute left-0 h-full'>
+                    {card.cardNumber.startsWith('4') ? (
+                      <img className='h-full w-9 border rounded-md' src={Visa} alt='' />
+                    ) : (
+                      <img className='h-full w-9 border rounded-md' src={MasterCard} alt='' />
+                    )}
+                  </div>
+                )}
 
-    <div className='w-full  flex justify-center pl-10 items-center'> <p className=''>{card.cardNumber}</p></div>
-    <div className='w-full flex justify-center pr-10 items-center'><p className=''>{card.name}</p></div>
-    <div 
-      onClick={()=> handleActiveCard(card)} 
-      className={`border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full ${
-        activeCard.some(active => active.cardNumber === card.cardNumber) ? 'bg-gray-300' : ''
-      }`}
-    >
-      Seç
-    </div>
-  </div>
-))}
+                <div className='w-full  flex justify-center pl-10 items-center'> <p className=''>{card.cardNumber}</p></div>
+                <div className='w-full flex justify-center pr-10 items-center'><p className=''>{card.name}</p></div>
+                <div
+                  onClick={() => handleActiveCard(card)}
+                  className={`border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full 
+                    }`}
+                >
+                  Seç
+                </div>
+              </div>
+            ))}
 
           </div>
 
