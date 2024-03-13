@@ -357,8 +357,8 @@ useEffect(() => {
       </div>
     )}
 
-    <div className='w-40 flex justify-center pl-8 items-center'> <p className=''>{card.cardNumber}</p></div>
-    <div className='w-40 flex justify-center pr-8 items-center'><p className=''>{card.name}</p></div>
+    <div className='w-full  flex justify-center pl-10 items-center'> <p className=''>{card.cardNumber}</p></div>
+    <div className='w-full flex justify-center pr-10 items-center'><p className=''>{card.name}</p></div>
     <div 
       onClick={()=> handleActiveCard(card)} 
       className={`border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full ${
