@@ -4,6 +4,8 @@ import Mastercard from "../../assets/logo/masterpass.png";
 import { addCard } from '../../reducers/creditCardSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormData {
   cardNumber: string;
@@ -16,7 +18,7 @@ interface FormData {
 }
 
 const OdemeYontemi: React.FC = () => {
-
+  const notify = () => toast("Kayıtlı Kartları Ödemeler Sayafasında görebilirsiniz  !");
 
   interface ExtendedImportMeta extends ImportMeta {
     env: {
@@ -60,6 +62,16 @@ const OdemeYontemi: React.FC = () => {
         .then(() => { 
           dispatch(addCard(formData));
           console.log('formData kaydedildi:', formData);
+          notify();
+          setFormData({  
+            cardNumber: "",
+            name:"",
+            month: "",
+            years: "",
+            cvc: "",
+            cardName: "",
+            activeUserEmail: activeUser,
+          });
         })
         .catch(error => {
           console.error('formData kaydedilirken bir hata oluştu:', error);
