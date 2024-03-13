@@ -346,7 +346,7 @@ useEffect(() => {
               Kayıtlı Kartlar
             </div>
             {cardData.map((card, index) => (
- <div className={`flex justify-around border h-10 relative gap-5 ${isCardActive === card._id && "bg-gray-200"}`} key={index}>
+ <div className={`flex justify-around border  h-10 relative gap-5 ${isCardActive === card._id && "bg-gray-200"}`} key={index}>
     {card.cardNumber && (
       <div className='w-40 absolute left-0 h-full'>
         {card.cardNumber.startsWith('4') ? (
@@ -357,8 +357,8 @@ useEffect(() => {
       </div>
     )}
 
-    <div className='w-40 flex justify-center items-center'> <p className=''>{card.cardNumber}</p></div>
-    <div className='w-40 flex justify-center items-center'><p className=''>{card.name}</p></div>
+    <div className='w-40 flex justify-center pl-8 items-center'> <p className=''>{card.cardNumber}</p></div>
+    <div className='w-40 flex justify-center pr-8 items-center'><p className=''>{card.name}</p></div>
     <div 
       onClick={()=> handleActiveCard(card)} 
       className={`border-l p-1 cursor-pointer hover:bg-red-400 bg-red-500 text-white absolute right-0 h-full ${
